@@ -1,0 +1,163 @@
+/* ==========================================================================
+   Layout - container, sections, section titles and layout primitives
+   ========================================================================== */
+
+/* Fluid container: side margins proportional to the viewport (about 6%),
+   16px on phones, so wide screens are used instead of a narrow column. */
+.ds-container {
+  width: 100%;
+  max-width: var(--ds-container-max);
+  margin-inline: auto;
+  padding-inline: var(--ds-gutter);
+}
+
+.ds-container--narrow {
+  max-width: 60rem;
+}
+
+.ds-main {
+  display: block;
+  padding-block: var(--ds-space-7) var(--ds-space-9);
+}
+
+/* ---- Sections ----------------------------------------------------------------
+   Home page bands alternate white / linen; one band may use the key colour. */
+.ds-section {
+  padding-block: var(--ds-space-9);
+}
+
+.ds-section--linen { background: var(--ds-linen); }
+.ds-section--tint { background: var(--ds-key-5); }
+
+.ds-section--key {
+  background: var(--ds-key);
+  color: var(--ds-white);
+}
+
+.ds-section--key :is(h1, h2, h3, h4, p) {
+  color: var(--ds-white);
+}
+
+@media (max-width: 767.98px) {
+  .ds-section {
+    padding-block: var(--ds-space-7);
+  }
+}
+
+/* Section title: a DBIM icon beside the H2, both in the key colour.
+   <div class="ds-section-title">
+     <span class="ds-icon ds-i-documents ds-icon--lg" aria-hidden="true"></span>
+     <h2>Recent Documents</h2>
+     <a class="ds-section-title__more" href="…">View all</a>
+   </div> */
+.ds-section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-4);
+  margin-bottom: var(--ds-space-6);
+  color: var(--ds-key);
+  --ds-icon-size: 2.5rem;
+}
+
+.ds-section-title :is(h1, h2, h3) {
+  margin: 0;
+  color: inherit;
+  font-size: var(--ds-text-h2);
+  font-weight: var(--ds-weight-bold);
+}
+
+.ds-section-title__more {
+  margin-left: auto;
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  white-space: nowrap;
+}
+
+.ds-section--key .ds-section-title,
+.ds-section--key .ds-section-title__more {
+  color: var(--ds-white);
+}
+
+@media (max-width: 767.98px) {
+  .ds-section-title {
+    gap: var(--ds-space-3);
+    margin-bottom: var(--ds-space-4);
+    --ds-icon-size: 2rem;
+  }
+}
+
+/* ---- Primitives ---------------------------------------------------------------- */
+
+/* Vertical rhythm: children separated by --ds-stack-gap */
+.ds-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-stack-gap, var(--ds-space-4));
+}
+
+.ds-stack--sm { --ds-stack-gap: var(--ds-space-2); }
+.ds-stack--lg { --ds-stack-gap: var(--ds-space-7); }
+
+/* A wrapping row: buttons, badges, filters */
+.ds-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-cluster-gap, var(--ds-space-3));
+}
+
+.ds-cluster--end { justify-content: flex-end; }
+.ds-cluster--between { justify-content: space-between; }
+
+/* Responsive grid: 1 column on phones, up to --ds-cols on desktop.
+   <ul class="ds-grid ds-grid--3">…</ul> */
+.ds-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--ds-cols, 1), minmax(0, 1fr));
+  gap: var(--ds-grid-gap, var(--ds-space-6));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 576px) {
+  .ds-grid--2, .ds-grid--3, .ds-grid--4, .ds-grid--5 { --ds-cols: 2; }
+}
+
+@media (min-width: 992px) {
+  .ds-grid--3 { --ds-cols: 3; }
+  .ds-grid--4 { --ds-cols: 4; }
+  .ds-grid--5 { --ds-cols: 4; }
+}
+
+@media (min-width: 1400px) {
+  .ds-grid--5 { --ds-cols: 5; }
+}
+
+/* Cards that fill the row from a minimum width */
+.ds-grid--auto {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--ds-min, 16rem)), 1fr));
+}
+
+/* Content with a side column (content template, forms with help) */
+.ds-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ds-space-7);
+  align-items: start;
+}
+
+@media (min-width: 992px) {
+  .ds-split {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem);
+  }
+
+  .ds-split--start {
+    grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr);
+  }
+}
+
+.ds-sticky {
+  position: sticky;
+  top: calc(var(--ds-header-offset) + var(--ds-space-4));
+}

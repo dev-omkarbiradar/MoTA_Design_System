@@ -1,0 +1,770 @@
+/* ==========================================================================
+   Forms - fields, inputs, choices, uploads, captcha, error summary, search
+   --------------------------------------------------------------------------
+   Every control has a visible <label>. Required fields carry a red asterisk
+   and the "required" attribute; errors are written in words next to the field
+   (aria-describedby) and listed in an error summary on submit (WCAG 3.3.1).
+   Control borders use Grey 02 for 3:1 contrast (WCAG 1.4.11).
+   ========================================================================== */
+
+.ds-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-5);
+}
+
+/* Two columns from 768px; .ds-span-2 makes a field full width */
+.ds-form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ds-space-5) var(--ds-space-4);
+}
+
+@media (min-width: 768px) {
+  .ds-form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ds-form-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ds-form-grid > .ds-span-2 { grid-column: span 2; }
+  .ds-form-grid > .ds-span-all { grid-column: 1 / -1; }
+}
+
+.ds-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-3);
+  padding-top: var(--ds-space-2);
+}
+
+.ds-form-note {
+  margin: 0;
+  color: var(--ds-muted);
+  font-size: var(--ds-text-sm);
+}
+
+/* ---- Field ------------------------------------------------------------------- */
+.ds-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.ds-label {
+  color: var(--ds-ink);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  line-height: 1.4;
+}
+
+.ds-req {
+  margin-left: 0.125rem;
+  color: var(--ds-error-text);
+  font-weight: var(--ds-weight-bold);
+  text-decoration: none;
+}
+
+.ds-optional {
+  color: var(--ds-muted);
+  font-weight: var(--ds-weight-regular);
+}
+
+.ds-hint {
+  margin: 0;
+  color: var(--ds-muted);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.ds-field-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.375rem;
+  margin: 0;
+  color: var(--ds-error-text);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+  line-height: 1.4;
+}
+
+.ds-field-error::before {
+  content: '';
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.1rem;
+  background-color: currentColor;
+  -webkit-mask: var(--ds-icon-alert) center / contain no-repeat;
+  mask: var(--ds-icon-alert) center / contain no-repeat;
+}
+
+:root {
+  --ds-icon-alert: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-1-5h2v2h-2zm0-8h2v6h-2z'/%3E%3C/svg%3E");
+  --ds-select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23150202' d='M12 15.4 6.6 10 8 8.6l4 4 4-4 1.4 1.4z'/%3E%3C/svg%3E");
+}
+
+/* Character counter under a textarea */
+.ds-counter {
+  align-self: flex-end;
+  color: var(--ds-muted);
+  font-size: var(--ds-text-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Text inputs, selects, textareas --------------------------------------------- */
+.ds-input,
+.ds-select,
+.ds-textarea {
+  display: block;
+  width: 100%;
+  min-height: var(--ds-control-h);
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--ds-grey-2);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+  font-family: inherit;
+  font-size: var(--ds-text-md);
+  line-height: 1.4;
+  transition: border-color var(--ds-duration) ease, box-shadow var(--ds-duration) ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.ds-input::placeholder,
+.ds-textarea::placeholder {
+  color: var(--ds-muted);
+  opacity: 1;
+}
+
+.ds-input:hover,
+.ds-select:hover,
+.ds-textarea:hover {
+  border-color: var(--ds-ink-2);
+}
+
+.ds-input:focus,
+.ds-select:focus,
+.ds-textarea:focus {
+  border-color: var(--ds-key);
+  outline: none;
+  box-shadow: var(--ds-focus-ring);
+}
+
+.ds-textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.ds-select {
+  padding-right: 2.5rem;
+  background-image: var(--ds-select-arrow);
+  background-position: right 0.625rem center;
+  background-repeat: no-repeat;
+  background-size: 1.25rem;
+  cursor: pointer;
+}
+
+.ds-select[multiple] {
+  padding-right: 0.75rem;
+  background-image: none;
+}
+
+.ds-input--sm,
+.ds-select--sm {
+  min-height: var(--ds-control-h-sm);
+  font-size: var(--ds-text-sm);
+}
+
+.ds-input:disabled,
+.ds-select:disabled,
+.ds-textarea:disabled {
+  border-color: var(--ds-grey-1);
+  background-color: var(--ds-surface-2);
+  color: var(--ds-muted);
+  cursor: not-allowed;
+}
+
+.ds-input[readonly],
+.ds-textarea[readonly] {
+  border-style: dashed;
+  background-color: var(--ds-tint-soft);
+}
+
+.ds-input[aria-invalid='true'],
+.ds-select[aria-invalid='true'],
+.ds-textarea[aria-invalid='true'] {
+  border-color: var(--ds-error-text);
+  border-width: 2px;
+  padding-inline: calc(0.75rem - 1px);
+}
+
+.ds-input[aria-invalid='true']:focus,
+.ds-select[aria-invalid='true']:focus,
+.ds-textarea[aria-invalid='true']:focus {
+  box-shadow: 0 0 0 3px rgb(198 40 40 / 18%);
+}
+
+/* Fixed-width inputs for short values (PIN code, OTP, year) */
+.ds-input--w4 { max-width: 6rem; }
+.ds-input--w10 { max-width: 12rem; }
+.ds-input--w20 { max-width: 20rem; }
+
+/* ---- Input group: icon, prefix, suffix or button inside the box -------------------
+   <div class="ds-input-group">
+     <span class="ds-input-group__addon">+91</span>
+     <input class="ds-input" …>
+     <button class="ds-input-group__btn" aria-label="Show password">…</button>
+   </div> */
+.ds-input-group {
+  display: flex;
+  align-items: stretch;
+  min-height: var(--ds-control-h);
+  border: 1px solid var(--ds-grey-2);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-surface);
+  transition: border-color var(--ds-duration) ease, box-shadow var(--ds-duration) ease;
+}
+
+.ds-input-group:focus-within {
+  border-color: var(--ds-key);
+  box-shadow: var(--ds-focus-ring);
+}
+
+.ds-input-group:has([aria-invalid='true']) {
+  border-color: var(--ds-error-text);
+}
+
+.ds-input-group > .ds-input,
+.ds-input-group > .ds-select {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: calc(var(--ds-control-h) - 2px);
+  border: 0;
+  background-color: transparent;
+  box-shadow: none !important;
+}
+
+.ds-input-group__addon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  padding: 0 0.75rem;
+  color: var(--ds-muted);
+  font-size: var(--ds-text-sm);
+  --ds-icon-size: 1.25rem;
+}
+
+.ds-input-group__addon + .ds-input {
+  padding-left: 0;
+}
+
+.ds-input-group__addon--boxed {
+  border-right: 1px solid var(--ds-line);
+  background: var(--ds-surface-2);
+  color: var(--ds-ink-2);
+}
+
+.ds-input-group__addon--boxed + .ds-input {
+  padding-left: 0.75rem;
+}
+
+.ds-input-group__btn {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.375rem;
+  margin: 0.125rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--ds-ink-2);
+  --ds-icon-size: 1.375rem;
+}
+
+.ds-input-group__btn:hover {
+  background: var(--ds-surface-2);
+  color: var(--ds-ink);
+}
+
+/* ---- Checkboxes and radios ---------------------------------------------------------------
+   Native controls in the key colour; the whole label is the click target.
+   <label class="ds-check"><input type="checkbox"> I agree to the terms</label> */
+.ds-check,
+.ds-radio {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  min-height: 1.5rem;
+  color: var(--ds-ink);
+  font-size: var(--ds-text-md);
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.ds-check input,
+.ds-radio input {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0.125rem 0 0;
+  accent-color: var(--ds-key);
+  cursor: pointer;
+}
+
+.ds-check input:disabled,
+.ds-radio input:disabled {
+  cursor: not-allowed;
+}
+
+.ds-check:has(input:disabled),
+.ds-radio:has(input:disabled) {
+  color: var(--ds-muted);
+  cursor: not-allowed;
+}
+
+.ds-choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+
+.ds-choices--inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--ds-space-3) var(--ds-space-6);
+}
+
+/* Choice cards: a radio or checkbox inside a bordered tile */
+.ds-choice-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-4);
+  border: 1px solid var(--ds-grey-1);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-surface);
+  cursor: pointer;
+  transition: border-color var(--ds-duration) ease, background-color var(--ds-duration) ease;
+}
+
+.ds-choice-card:hover {
+  border-color: var(--ds-key-3);
+}
+
+.ds-choice-card:has(input:checked) {
+  border-color: var(--ds-key);
+  background: var(--ds-tint-soft);
+  box-shadow: inset 0 0 0 1px var(--ds-key);
+}
+
+.ds-choice-card input {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.125rem;
+  accent-color: var(--ds-key);
+}
+
+.ds-choice-card strong {
+  display: block;
+}
+
+.ds-choice-card span {
+  color: var(--ds-muted);
+  font-size: var(--ds-text-sm);
+}
+
+/* Switch: <label class="ds-switch"><input type="checkbox" role="switch"> Email alerts</label> */
+.ds-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-3);
+  cursor: pointer;
+}
+
+.ds-switch input {
+  position: relative;
+  flex: none;
+  width: 2.5rem;
+  height: 1.5rem;
+  margin: 0;
+  border: 1px solid var(--ds-grey-2);
+  border-radius: var(--ds-radius-pill);
+  background: var(--ds-grey-1);
+  transition: background-color var(--ds-duration) ease, border-color var(--ds-duration) ease;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.ds-switch input::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: var(--ds-white);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 30%);
+  transition: transform var(--ds-duration) ease;
+}
+
+.ds-switch input:checked {
+  border-color: var(--ds-key);
+  background: var(--ds-key);
+}
+
+.ds-switch input:checked::after {
+  transform: translateX(1rem);
+}
+
+/* ---- Fieldset ------------------------------------------------------------------------------ */
+.ds-fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.ds-fieldset > legend {
+  margin-bottom: var(--ds-space-3);
+  padding: 0;
+  color: var(--ds-ink);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+}
+
+/* A titled block of a long form (application sections) */
+.ds-form-section {
+  padding: var(--ds-space-6);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+}
+
+.ds-form-section > legend,
+.ds-form-section__title {
+  float: left;
+  width: 100%;
+  margin: 0 0 var(--ds-space-5);
+  padding: 0 0 var(--ds-space-3);
+  border-bottom: 1px solid var(--ds-line);
+  color: var(--ds-key);
+  font-size: var(--ds-text-h3);
+  font-weight: var(--ds-weight-bold);
+}
+
+.ds-form-section > legend + * {
+  clear: both;
+}
+
+/* ---- File upload ------------------------------------------------------------------------------
+   <label class="ds-file">
+     <input type="file" accept=".pdf" class="ds-sr-only">
+     <span class="ds-icon ds-i-upload ds-icon--lg" aria-hidden="true"></span>
+     <span class="ds-file__title">Choose a file or drag it here</span>
+     <span class="ds-file__hint">PDF, up to 5 MB</span>
+   </label> */
+.ds-file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-6) var(--ds-space-4);
+  border: 2px dashed var(--ds-key-3);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-tint-soft);
+  color: var(--ds-key);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color var(--ds-duration) ease, border-color var(--ds-duration) ease;
+}
+
+.ds-file:hover,
+.ds-file[data-dragover='true'] {
+  border-color: var(--ds-key);
+  background: var(--ds-key-5);
+}
+
+.ds-file:focus-within {
+  outline: var(--ds-focus-outline);
+  outline-offset: 2px;
+}
+
+.ds-file__title {
+  color: var(--ds-ink);
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-file__hint {
+  color: var(--ds-muted);
+  font-size: var(--ds-text-sm);
+}
+
+.ds-file__name {
+  margin-top: var(--ds-space-2);
+  color: var(--ds-key);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  overflow-wrap: anywhere;
+}
+
+/* ---- Captcha with a text alternative (WCAG 1.1.1, GIGW 3.0) ------------------------------------ */
+.ds-captcha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-2);
+}
+
+.ds-captcha__image {
+  flex: none;
+  height: var(--ds-control-h);
+  padding: 0 var(--ds-space-2);
+  border: 1px solid var(--ds-grey-1);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-surface);
+}
+
+.ds-captcha__image img,
+.ds-captcha__image svg {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+
+.ds-captcha__question {
+  flex: 1 1 100%;
+  margin: 0;
+  padding: var(--ds-space-2) var(--ds-space-3);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-key-5);
+  color: var(--ds-ink);
+  font-weight: var(--ds-weight-medium);
+}
+
+.ds-captcha .ds-input {
+  flex: 1 1 10rem;
+  width: auto;
+}
+
+.ds-captcha__switch {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ds-key);
+  font-size: var(--ds-text-sm);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+/* ---- Error summary: shown above the form after a failed submit ------------------------------------
+   Focus moves here; each item links to its field. */
+.ds-error-summary {
+  padding: var(--ds-space-4) var(--ds-space-5);
+  border: 2px solid var(--ds-error-text);
+  border-left-width: 6px;
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-surface);
+}
+
+.ds-error-summary__title {
+  margin: 0 0 var(--ds-space-2);
+  color: var(--ds-error-text);
+  font-size: var(--ds-text-h4);
+  font-weight: var(--ds-weight-bold);
+}
+
+.ds-error-summary ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.ds-error-summary a {
+  color: var(--ds-error-text);
+  font-weight: var(--ds-weight-semibold);
+}
+
+/* ---- Search box -------------------------------------------------------------------------------------
+   Rounded field with a leading icon, optional shortcut badge and clear button. */
+.ds-search {
+  position: relative;
+  min-width: 0;
+}
+
+.ds-search__box {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  height: var(--ds-control-h);
+  padding: 0 0.375rem 0 0.625rem;
+  border: 1px solid var(--ds-grey-2);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-surface);
+  box-shadow: var(--ds-shadow-xs);
+  transition: border-color var(--ds-duration) ease, box-shadow var(--ds-duration) ease;
+}
+
+.ds-search__box:hover {
+  border-color: var(--ds-ink-2);
+}
+
+.ds-search__box:focus-within {
+  border-color: var(--ds-key);
+  box-shadow: var(--ds-focus-ring);
+}
+
+.ds-search__icon {
+  flex: none;
+  color: var(--ds-muted);
+  --ds-icon-size: 1.25rem;
+}
+
+.ds-search__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ds-ink);
+  font-size: 0.9375rem;
+}
+
+.ds-search__input::placeholder {
+  color: var(--ds-muted);
+  opacity: 1;
+}
+
+.ds-search__input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.ds-search__input:focus-visible {
+  outline: 0;
+}
+
+.ds-search__kbd {
+  flex: none;
+  padding: 0.125rem 0.375rem;
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-surface-2);
+  color: var(--ds-muted);
+  font-family: inherit;
+  font-size: 0.6875rem;
+  font-weight: var(--ds-weight-medium);
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+@media (max-width: 1439.98px) {
+  .ds-search__kbd { display: none; }
+}
+
+.ds-search__clear {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--ds-muted);
+  --ds-icon-size: 1.125rem;
+}
+
+.ds-search__clear:hover {
+  background: var(--ds-surface-2);
+  color: var(--ds-ink);
+}
+
+/* Suggestions under the search box (role="listbox") */
+.ds-search__results {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  left: 0;
+  z-index: var(--ds-z-dropdown);
+  max-height: 25rem;
+  margin: 0;
+  padding: var(--ds-space-2) 0;
+  overflow-y: auto;
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-surface);
+  box-shadow: var(--ds-shadow-dropdown);
+  list-style: none;
+}
+
+.ds-search__option {
+  display: block;
+  padding: var(--ds-space-2) var(--ds-space-4);
+  color: var(--ds-ink);
+  font-size: var(--ds-text-sm);
+  text-decoration: none;
+}
+
+.ds-search__option small {
+  display: block;
+  color: var(--ds-ink-2);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ds-search__option:hover,
+.ds-search__option[aria-selected='true'] {
+  background: var(--ds-key-5);
+  color: var(--ds-ink);
+}
+
+/* ---- Filter bar: search on the left, sort / filter / page size on the right ---------------- */
+.ds-filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  margin-bottom: var(--ds-space-6);
+}
+
+.ds-filterbar__search {
+  flex: 0 1 23rem;
+  min-width: min(100%, 16rem);
+}
+
+.ds-filterbar__controls {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--ds-space-2);
+}
+
+.ds-filterbar__controls .ds-input-group {
+  flex: 0 1 15rem;
+}
+
+.ds-filterbar__controls .ds-input-group__addon {
+  color: var(--ds-key-2);
+}
+
+@media (max-width: 991.98px) {
+  .ds-filterbar__search,
+  .ds-filterbar__controls {
+    flex: 1 1 100%;
+  }
+
+  .ds-filterbar__controls .ds-input-group {
+    flex: 1 1 12rem;
+  }
+}

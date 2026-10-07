@@ -1,0 +1,1351 @@
+/* ==========================================================================
+   Application shell - dashboards, back offices and admin panels
+   --------------------------------------------------------------------------
+   The NISG SARAL portal layout, in the DBIM colour theme:
+   a flat white sidebar that collapses to an icon rail (a drawer below
+   1200px), a top bar with search, icon buttons and the account menu, and a
+   centred content column (max 1440px) of cards.
+
+   <div class="ds-app" data-collapsed="false">
+     <aside class="ds-app__side" id="app-side">…</aside>
+     <div class="ds-app__scrim" data-ds-app-close></div>
+     <div class="ds-app__main">
+       <header class="ds-app__bar">…</header>
+       <main class="ds-app__content" id="main" tabindex="-1">…</main>
+       <footer class="ds-app__footer">…</footer>
+     </div>
+   </div>
+   ========================================================================== */
+
+:root {
+  /* Hues: the same kind of thing has the same colour everywhere
+     (view blue, edit amber, delete red, approve green, reports cyan …).
+     -fg on -bg is at least 4.5:1; the plain hue is for icons (3:1). */
+  --ds-hue-blue: #2563eb;
+  --ds-hue-blue-bg: #eff6ff;
+  --ds-hue-blue-fg: #1d4ed8;
+  --ds-hue-green: #16a34a;
+  --ds-hue-green-bg: #ecfdf3;
+  --ds-hue-green-fg: #15803d;
+  --ds-hue-amber: #d97706;
+  --ds-hue-amber-bg: #fffbeb;
+  --ds-hue-amber-fg: #a14f06;
+  --ds-hue-red: #dc2626;
+  --ds-hue-red-bg: #fef2f2;
+  --ds-hue-red-fg: #b91c1c;
+  --ds-hue-purple: #7c3aed;
+  --ds-hue-purple-bg: #f5f3ff;
+  --ds-hue-purple-fg: #6d28d9;
+  --ds-hue-orange: #ea580c;
+  --ds-hue-orange-bg: #fff7ed;
+  --ds-hue-orange-fg: #c2410c;
+  --ds-hue-pink: #db2777;
+  --ds-hue-pink-bg: #fdf2f8;
+  --ds-hue-pink-fg: #be185d;
+  --ds-hue-cyan: #0891b2;
+  --ds-hue-cyan-bg: #ecfeff;
+  --ds-hue-cyan-fg: #0e7490;
+
+  /* Application neutrals */
+  --ds-app-heading: #1f2329;
+  --ds-app-body: #4b5563;
+  --ds-app-muted: #6b7280;
+  --ds-app-line: #e5e7eb;
+  --ds-app-line-strong: #d1d5db;
+  --ds-app-hover: #f3f4f6;
+  --ds-app-subtle: #f9fafb;
+  --ds-app-shadow: 0 2px 6px rgb(31 35 41 / 8%);
+  --ds-app-shadow-lg: 0 10px 30px -8px rgb(31 35 41 / 22%);
+}
+
+/* Tone classes for icon tiles, badges and avatars */
+.ds-tone-key { background: var(--ds-tint); color: var(--ds-key); }
+.ds-tone-blue { background: var(--ds-hue-blue-bg); color: var(--ds-hue-blue-fg); }
+.ds-tone-green { background: var(--ds-hue-green-bg); color: var(--ds-hue-green-fg); }
+.ds-tone-amber { background: var(--ds-hue-amber-bg); color: var(--ds-hue-amber-fg); }
+.ds-tone-red { background: var(--ds-hue-red-bg); color: var(--ds-hue-red-fg); }
+.ds-tone-purple { background: var(--ds-hue-purple-bg); color: var(--ds-hue-purple-fg); }
+.ds-tone-orange { background: var(--ds-hue-orange-bg); color: var(--ds-hue-orange-fg); }
+.ds-tone-pink { background: var(--ds-hue-pink-bg); color: var(--ds-hue-pink-fg); }
+.ds-tone-cyan { background: var(--ds-hue-cyan-bg); color: var(--ds-hue-cyan-fg); }
+.ds-tone-gray { background: var(--ds-app-hover); color: var(--ds-app-body); }
+
+/* Coloured icon (no background) */
+.ds-hue-key { color: var(--ds-key); }
+.ds-hue-blue { color: var(--ds-hue-blue); }
+.ds-hue-green { color: var(--ds-hue-green); }
+.ds-hue-amber { color: var(--ds-hue-amber); }
+.ds-hue-red { color: var(--ds-hue-red); }
+.ds-hue-purple { color: var(--ds-hue-purple); }
+.ds-hue-orange { color: var(--ds-hue-orange); }
+.ds-hue-pink { color: var(--ds-hue-pink); }
+.ds-hue-cyan { color: var(--ds-hue-cyan); }
+
+/* ---- Shell ------------------------------------------------------------------ */
+.ds-app {
+  --ds-app-side: 16.25rem;
+  --ds-app-rail: 5.25rem;
+  --ds-app-bar: 4rem;
+
+  min-height: 100vh;
+  background: var(--ds-surface);
+  color: var(--ds-app-body);
+  font-size: 0.9375rem;
+}
+
+/* ---- Sidebar ---------------------------------------------------------------- */
+.ds-app__side {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 950;
+  display: flex;
+  flex-direction: column;
+  width: var(--ds-app-side);
+  border-right: 1px solid var(--ds-app-line);
+  background: var(--ds-surface);
+  transition: width 0.3s ease, transform 0.3s ease;
+}
+
+.ds-app__brand {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 0.625rem;
+  height: var(--ds-app-bar);
+  padding: 0 1.5rem;
+  border-bottom: 1px solid var(--ds-app-line);
+  color: var(--ds-app-heading);
+  text-decoration: none;
+}
+
+.ds-app__brand:hover {
+  color: var(--ds-app-heading);
+}
+
+.ds-app__brand img {
+  flex: none;
+  width: auto;
+  height: 2.25rem;
+}
+
+.ds-app__brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.ds-app__brand-name {
+  overflow: hidden;
+  color: var(--ds-app-heading);
+  font-size: 1.125rem;
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: 0.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-app__brand-sub {
+  overflow: hidden;
+  color: var(--ds-app-muted);
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Collapse control: inside the brand row; on the rail it floats on the edge */
+.ds-app__collapse {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: var(--ds-app-body);
+  --ds-icon-size: 1.125rem;
+}
+
+.ds-app__collapse:hover {
+  background: var(--ds-app-hover);
+  color: var(--ds-app-heading);
+}
+
+.ds-app__collapse .ds-icon {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+.ds-app__nav {
+  flex: 1 1 auto;
+  padding: 1rem 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.ds-app__nav-title {
+  margin: 1rem 1.5rem 0.375rem;
+  color: var(--ds-app-muted);
+  font-size: 0.75rem;
+  font-weight: var(--ds-weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ds-app__nav-title:first-child {
+  margin-top: 0;
+}
+
+.ds-app__nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-app__nav li {
+  position: relative;
+  margin: 0.125rem 0;
+}
+
+.ds-app__nav a,
+.ds-app__nav button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: calc(100% - 1.5rem);
+  min-height: 2.625rem;
+  margin: 0 0.75rem;
+  padding: 0.3125rem 0.875rem;
+  border: 0;
+  border-radius: var(--ds-radius-md);
+  background: transparent;
+  color: var(--ds-app-body);
+  font-size: 0.9375rem;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  --ds-icon-size: 1.375rem;
+}
+
+.ds-app__nav a:hover,
+.ds-app__nav button:hover {
+  background: var(--ds-app-hover);
+  color: var(--ds-app-heading);
+}
+
+.ds-app__nav [aria-current='page'] {
+  background: var(--ds-key-5);
+  color: var(--ds-key);
+  font-weight: var(--ds-weight-medium);
+}
+
+.ds-app__nav [aria-current='page'] .ds-icon {
+  color: var(--ds-key);
+}
+
+/* Active marker on the right edge of the sidebar */
+.ds-app__nav [aria-current='page']::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -0.75rem;
+  width: 3px;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+  background: var(--ds-key);
+}
+
+.ds-app__nav-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ds-app__nav-count {
+  flex: none;
+  min-width: 1.375rem;
+  padding: 0.0625rem 0.4375rem;
+  border-radius: var(--ds-radius-pill);
+  background: var(--ds-hue-red-fg);
+  color: var(--ds-white);
+  font-size: 0.75rem;
+  font-weight: var(--ds-weight-semibold);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Sub-menu: <details> group with dotted children */
+.ds-app__nav details > summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: calc(100% - 1.5rem);
+  min-height: 2.625rem;
+  margin: 0 0.75rem;
+  padding: 0.3125rem 0.875rem;
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-app-body);
+  list-style: none;
+  cursor: pointer;
+  white-space: nowrap;
+  --ds-icon-size: 1.375rem;
+}
+
+.ds-app__nav details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.ds-app__nav details > summary::after {
+  content: '';
+  width: 0.4375rem;
+  height: 0.4375rem;
+  margin-left: auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 0.2s ease;
+}
+
+.ds-app__nav details[open] > summary {
+  background: var(--ds-app-hover);
+  color: var(--ds-app-heading);
+}
+
+.ds-app__nav details[open] > summary::after {
+  transform: rotate(45deg);
+}
+
+.ds-app__nav details ul a {
+  padding-left: 2.85rem;
+}
+
+.ds-app__nav details ul a::before {
+  content: '';
+  position: absolute;
+  left: 1.55rem;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: var(--ds-app-muted);
+}
+
+.ds-app__nav details ul a[aria-current='page'] {
+  background: transparent;
+  color: var(--ds-app-heading);
+}
+
+.ds-app__nav details ul a[aria-current='page']::after {
+  display: none;
+}
+
+.ds-app__nav details ul a[aria-current='page']::before {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--ds-key);
+  box-shadow: 0 0 0 3px var(--ds-key-5);
+}
+
+/* Footer of the sidebar: theme swatches, then the organisation */
+.ds-app__side-row {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  border-top: 1px solid var(--ds-app-line);
+  font-size: 0.75rem;
+}
+
+.ds-app__side-row > span {
+  color: var(--ds-app-muted);
+  font-weight: var(--ds-weight-medium);
+}
+
+.ds-app__swatches {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ds-app__swatches button {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--ds-white);
+  transition: transform 0.15s ease;
+}
+
+.ds-app__swatches button:hover {
+  transform: scale(1.1);
+}
+
+.ds-app__swatches button[aria-pressed='true'] {
+  box-shadow: 0 0 0 2px var(--ds-surface), 0 0 0 4px currentColor;
+}
+
+.ds-app__org {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--ds-app-line);
+  color: var(--ds-app-body);
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.ds-app__org img {
+  flex: none;
+  width: auto;
+  max-width: 5rem;
+  height: 1.75rem;
+  object-fit: contain;
+}
+
+/* ---- Collapsed rail (desktop) ------------------------------------------------- */
+@media (min-width: 1200px) {
+  .ds-app[data-collapsed='true'] .ds-app__side {
+    width: var(--ds-app-rail);
+  }
+
+  .ds-app[data-collapsed='true'] .ds-app__brand {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .ds-app[data-collapsed='true'] :is(.ds-app__brand-text, .ds-app__nav-label, .ds-app__nav-title, .ds-app__side-row > span, .ds-app__org span) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .ds-app[data-collapsed='true'] .ds-app__collapse {
+    position: absolute;
+    top: 50%;
+    right: -0.875rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 1px solid var(--ds-app-line);
+    border-radius: 50%;
+    background: var(--ds-surface);
+    box-shadow: var(--ds-app-shadow);
+    transform: translateY(-50%);
+  }
+
+  .ds-app[data-collapsed='true'] .ds-app__collapse .ds-icon {
+    transform: none;
+  }
+
+  .ds-app[data-collapsed='true'] .ds-app__nav :is(a, button, summary) {
+    justify-content: center;
+    width: 2.75rem;
+    min-height: 2.75rem;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .ds-app[data-collapsed='true'] .ds-app__nav summary::after,
+  .ds-app[data-collapsed='true'] .ds-app__nav details ul {
+    display: none;
+  }
+
+  .ds-app[data-collapsed='true'] .ds-app__nav-count {
+    position: absolute;
+    top: 0.125rem;
+    right: 0.125rem;
+    min-width: 1.125rem;
+    padding: 0 0.25rem;
+    font-size: 0.625rem;
+  }
+
+  .ds-app[data-collapsed='true'] .ds-app__side-row,
+  .ds-app[data-collapsed='true'] .ds-app__org {
+    justify-content: center;
+    padding-inline: 0.5rem;
+  }
+
+  .ds-app[data-collapsed='true'] .ds-app__swatches {
+    flex-direction: column;
+  }
+
+  .ds-app[data-collapsed='true'] .ds-app__org img {
+    height: 1.75rem;
+  }
+}
+
+/* ---- Drawer below 1200px ---------------------------------------------------------- */
+@media (max-width: 1199.98px) {
+  .ds-app__side {
+    transform: translateX(-100%);
+  }
+
+  .ds-app[data-drawer='open'] .ds-app__side {
+    transform: none;
+    box-shadow: var(--ds-app-shadow-lg);
+  }
+
+  .ds-app__collapse {
+    display: none;
+  }
+}
+
+.ds-app__scrim {
+  display: none;
+}
+
+@media (max-width: 1199.98px) {
+  .ds-app[data-drawer='open'] .ds-app__scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 940;
+    display: block;
+    background: rgb(34 48 62 / 50%);
+  }
+}
+
+/* ---- Main column -------------------------------------------------------------------- */
+.ds-app__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 100vh;
+  transition: padding 0.3s ease;
+}
+
+@media (min-width: 1200px) {
+  .ds-app__main { padding-left: var(--ds-app-side); }
+  .ds-app[data-collapsed='true'] .ds-app__main { padding-left: var(--ds-app-rail); }
+}
+
+/* ---- Top bar -------------------------------------------------------------------------- */
+.ds-app__bar {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  border-bottom: 1px solid var(--ds-app-line);
+  background: rgb(255 255 255 / 90%);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.ds-app__bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 90rem;
+  height: var(--ds-app-bar);
+  margin: 0 auto;
+  padding: 0 1.625rem;
+}
+
+@media (max-width: 575.98px) {
+  .ds-app__bar-inner { padding: 0 1rem; }
+}
+
+.ds-app__iconbtn.ds-app__menu {
+  display: none;
+}
+
+@media (max-width: 1199.98px) {
+  .ds-app__iconbtn.ds-app__menu { display: grid; }
+}
+
+.ds-app__search {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 32rem;
+}
+
+.ds-app__search .ds-search__box {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+.ds-app__search .ds-search__box:hover {
+  border-color: var(--ds-app-line);
+}
+
+@media (max-width: 575.98px) {
+  .ds-app__search { display: none; }
+}
+
+.ds-app__tools {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+/* Bordered square icon button of the top bar */
+.ds-app__iconbtn {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid var(--ds-app-line);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-surface);
+  color: var(--ds-app-body);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  --ds-icon-size: 1.375rem;
+}
+
+.ds-app__iconbtn:hover,
+.ds-app__iconbtn[aria-expanded='true'] {
+  border-color: var(--ds-app-line-strong);
+  background: var(--ds-app-subtle);
+}
+
+.ds-app__count {
+  position: absolute;
+  top: -0.375rem;
+  right: -0.375rem;
+  display: grid;
+  place-items: center;
+  min-width: 1.125rem;
+  height: 1.125rem;
+  padding: 0 0.25rem;
+  border-radius: var(--ds-radius-pill);
+  background: var(--ds-hue-red);
+  box-shadow: 0 0 0 2px var(--ds-surface);
+  color: var(--ds-white);
+  font-size: 0.6875rem;
+  font-weight: var(--ds-weight-medium);
+  line-height: 1;
+}
+
+/* Account: name and role, then the avatar with an online dot */
+.ds-app__account {
+  margin-left: 0.25rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--ds-app-line);
+}
+
+.ds-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ds-radius-pill);
+  background: transparent;
+  text-align: right;
+}
+
+.ds-user__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.ds-user__name {
+  max-width: 12rem;
+  overflow: hidden;
+  color: var(--ds-app-heading);
+  font-size: 0.875rem;
+  font-weight: var(--ds-weight-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-user__role {
+  color: var(--ds-app-muted);
+  font-size: 0.75rem;
+}
+
+@media (max-width: 991.98px) {
+  .ds-user__text { display: none; }
+}
+
+.ds-avatar {
+  position: relative;
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--ds-key-5);
+  color: var(--ds-key);
+  font-size: 0.8125rem;
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ds-avatar--online::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: var(--ds-hue-green);
+  box-shadow: 0 0 0 2px var(--ds-surface);
+}
+
+.ds-avatar--sm {
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.75rem;
+}
+
+/* Account dropdown */
+.ds-menu {
+  width: 16rem;
+  padding: 0.5rem;
+  border: 1px solid var(--ds-app-line);
+  border-radius: var(--ds-radius-lg);
+  box-shadow: var(--ds-app-shadow-lg);
+}
+
+.ds-menu__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.ds-menu__sep {
+  height: 1px;
+  margin: 0.375rem 0;
+  background: var(--ds-app-line);
+}
+
+.ds-menu .ds-popover__option {
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-app-heading);
+  font-size: 0.9375rem;
+}
+
+.ds-menu .ds-popover__option:hover {
+  background: var(--ds-app-hover);
+  color: var(--ds-app-heading);
+}
+
+/* ---- Content ------------------------------------------------------------------------ */
+.ds-app__content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 90rem;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 1.5rem 1.625rem;
+}
+
+@media (max-width: 575.98px) {
+  .ds-app__content { padding: 1.5rem 1rem; }
+}
+
+.ds-app__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  width: 100%;
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 1rem 1.625rem;
+  border-top: 1px solid var(--ds-app-line);
+  color: var(--ds-app-muted);
+  font-size: 0.8125rem;
+}
+
+/* 12-column rows */
+.ds-row {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.ds-row > * {
+  grid-column: span 12;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .ds-row > .ds-col-md-6 { grid-column: span 6; }
+  .ds-row > .ds-col-md-4 { grid-column: span 4; }
+  .ds-row > .ds-col-md-3 { grid-column: span 3; }
+}
+
+@media (min-width: 992px) {
+  .ds-row > .ds-col-3 { grid-column: span 3; }
+  .ds-row > .ds-col-4 { grid-column: span 4; }
+  .ds-row > .ds-col-5 { grid-column: span 5; }
+  .ds-row > .ds-col-6 { grid-column: span 6; }
+  .ds-row > .ds-col-7 { grid-column: span 7; }
+  .ds-row > .ds-col-8 { grid-column: span 8; }
+  .ds-row > .ds-col-9 { grid-column: span 9; }
+}
+
+/* ---- Panel (card) -------------------------------------------------------------------------- */
+.ds-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1.5rem;
+  border: 1px solid var(--ds-app-line);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+}
+
+@media (max-width: 575.98px) {
+  .ds-panel { padding: 1.25rem; }
+}
+
+.ds-panel__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.ds-panel__head h2,
+.ds-panel__title {
+  margin: 0;
+  color: var(--ds-app-heading);
+  font-size: 1.0625rem;
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-panel__sub {
+  margin: 0.125rem 0 0;
+  color: var(--ds-app-muted);
+  font-size: 0.8125rem;
+}
+
+.ds-panel__body {
+  flex: 1 1 auto;
+}
+
+.ds-panel__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* Tables inside panels: light header, rounded frame */
+.ds-panel .ds-table-wrap {
+  border-color: var(--ds-app-line);
+  border-radius: var(--ds-radius-lg);
+}
+
+.ds-table--app thead th {
+  background: var(--ds-app-subtle);
+  color: var(--ds-app-muted);
+  font-size: 0.8125rem;
+  font-weight: var(--ds-weight-medium);
+  letter-spacing: 0;
+  text-align: left;
+  text-transform: none;
+}
+
+.ds-table--app td,
+.ds-table--app tbody th {
+  padding-block: 0.875rem;
+  border-color: var(--ds-app-line);
+  color: var(--ds-app-body);
+  vertical-align: middle;
+}
+
+.ds-table--app tbody th,
+.ds-table--app .ds-strong {
+  color: var(--ds-app-heading);
+  font-weight: var(--ds-weight-medium);
+}
+
+.ds-table--app tbody tr:hover {
+  background: rgb(249 250 251 / 60%);
+}
+
+/* ---- Welcome card -------------------------------------------------------------------------- */
+.ds-welcome {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 1.5rem;
+  border: 1px solid var(--ds-app-line);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+}
+
+.ds-welcome::before {
+  content: '';
+  position: absolute;
+  top: -6rem;
+  right: -6rem;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--ds-key-5) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ds-welcome__art {
+  position: absolute;
+  right: 1rem;
+  bottom: 0;
+  width: auto;
+  height: 9.5rem;
+  pointer-events: none;
+}
+
+.ds-welcome__body {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+@media (min-width: 576px) {
+  .ds-welcome__body { padding-right: 11rem; }
+}
+
+@media (max-width: 575.98px) {
+  .ds-welcome__art { display: none; }
+}
+
+.ds-welcome__date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  color: var(--ds-key);
+  font-size: 0.8125rem;
+  font-weight: var(--ds-weight-medium);
+  --ds-icon-size: 1rem;
+}
+
+.ds-welcome__title {
+  margin: 0.75rem 0 0;
+  color: var(--ds-app-heading);
+  font-size: 1.5rem;
+  font-weight: var(--ds-weight-semibold);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.ds-welcome__role {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0 0;
+  color: var(--ds-app-muted);
+  font-size: 0.9375rem;
+}
+
+.ds-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.375rem;
+  background: var(--ds-key-5);
+  color: var(--ds-key);
+  font-size: 0.8125rem;
+  font-weight: var(--ds-weight-medium);
+  --ds-icon-size: 0.875rem;
+}
+
+.ds-welcome__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+}
+
+/* ---- KPI card ------------------------------------------------------------------------------- */
+.ds-kpis {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 575.98px) {
+  .ds-kpis { grid-template-columns: minmax(0, 1fr); }
+}
+
+.ds-kpi {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 100%;
+  padding: 1.25rem;
+  border: 1px solid var(--ds-app-line);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.ds-kpi:hover {
+  box-shadow: var(--ds-app-shadow);
+  color: inherit;
+}
+
+.ds-icon-tile {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--ds-radius-md);
+  --ds-icon-size: 1.5rem;
+}
+
+.ds-icon-tile--sm {
+  width: 2.5rem;
+  height: 2.5rem;
+  --ds-icon-size: 1.25rem;
+}
+
+.ds-kpi__value {
+  display: block;
+  color: var(--ds-app-heading);
+  font-size: 1.5rem;
+  font-weight: var(--ds-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.ds-kpi__label {
+  display: block;
+  color: var(--ds-app-muted);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+.ds-kpi__hint {
+  display: block;
+  margin-top: 0.125rem;
+  color: var(--ds-app-muted);
+  font-size: 0.75rem;
+}
+
+/* ---- Donut chart ------------------------------------------------------------------------------
+   <figure class="ds-donut" role="img" aria-label="Applications 1,284: New 412, …">
+     <svg viewBox="0 0 42 42"><circle class="ds-donut__track" …/><circle style="--ds-donut-color:…" stroke-dasharray="32 68" stroke-dashoffset="25" …/></svg>
+     <figcaption><strong>1,284</strong><span>Applications</span></figcaption>
+   </figure>
+   Segments are circles with r="15.915" (circumference 100), so the dash
+   lengths are percentages. */
+.ds-chart {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.ds-donut {
+  position: relative;
+  flex: none;
+  width: 10.5rem;
+  height: 10.5rem;
+  margin: 0;
+}
+
+.ds-donut svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ds-donut circle {
+  fill: none;
+  stroke: var(--ds-donut-color, var(--ds-key));
+  stroke-width: 4.4;
+}
+
+.ds-donut .ds-donut__track {
+  stroke: var(--ds-app-hover);
+}
+
+.ds-donut figcaption {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+.ds-donut figcaption strong {
+  color: var(--ds-app-heading);
+  font-size: 1.5rem;
+  font-weight: var(--ds-weight-semibold);
+  line-height: 1;
+}
+
+.ds-donut figcaption span {
+  margin-top: 0.25rem;
+  color: var(--ds-app-muted);
+  font-size: 0.75rem;
+}
+
+.ds-legend {
+  display: flex;
+  flex: 1 1 12rem;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+}
+
+.ds-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.ds-legend li::before {
+  content: '';
+  flex: none;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 3px;
+  background: var(--ds-donut-color, var(--ds-key));
+}
+
+.ds-legend span {
+  flex: 1 1 auto;
+  color: var(--ds-app-body);
+}
+
+.ds-legend strong {
+  color: var(--ds-app-heading);
+  font-weight: var(--ds-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Bar rows: label, bar, value */
+.ds-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-bars li {
+  display: grid;
+  grid-template-columns: minmax(7rem, 30%) minmax(0, 1fr) 4.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.ds-bars__track {
+  height: 0.5rem;
+  overflow: hidden;
+  border-radius: var(--ds-radius-pill);
+  background: var(--ds-app-hover);
+}
+
+.ds-bars__fill {
+  display: block;
+  width: var(--ds-value, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ds-key);
+}
+
+.ds-bars__value {
+  color: var(--ds-app-heading);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--ds-weight-semibold);
+  text-align: right;
+}
+
+.ds-chart-empty {
+  display: grid;
+  place-items: center;
+  height: 10rem;
+  margin: 0;
+  border: 1px dashed var(--ds-app-line);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-app-subtle);
+  color: var(--ds-app-muted);
+  font-size: 0.875rem;
+}
+
+/* ---- People list (recent employees, assignees) ------------------------------------------------ */
+.ds-people {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-people li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.ds-people__who {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.ds-people__name {
+  display: block;
+  overflow: hidden;
+  color: var(--ds-app-heading);
+  font-weight: var(--ds-weight-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-people__meta {
+  display: block;
+  overflow: hidden;
+  color: var(--ds-app-muted);
+  font-size: 0.8125rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Soft square badge used in applications */
+.ds-badge--soft {
+  height: auto;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-weight: var(--ds-weight-medium);
+}
+
+/* Shortcut tile: icon tile, title, text, arrow */
+.ds-shortcut {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--ds-app-line);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ds-shortcut:hover {
+  border-color: var(--ds-app-line-strong);
+  box-shadow: var(--ds-app-shadow);
+  color: inherit;
+}
+
+.ds-shortcut__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ds-shortcut__title {
+  display: block;
+  color: var(--ds-app-heading);
+  font-size: 0.9375rem;
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-shortcut__desc {
+  display: block;
+  margin-top: 0.125rem;
+  color: var(--ds-app-muted);
+  font-size: 0.8125rem;
+}
+
+.ds-shortcut > .ds-icon:last-child {
+  color: var(--ds-app-muted);
+  transition: transform 0.15s ease;
+}
+
+.ds-shortcut:hover > .ds-icon:last-child {
+  color: var(--ds-app-heading);
+  transform: translateX(2px);
+}
+
+/* Segmented tabs used in applications: grey track, raised white pill */
+.ds-segment {
+  display: inline-flex;
+  gap: 0.25rem;
+  max-width: 100%;
+  padding: 0.25rem;
+  overflow-x: auto;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-app-hover);
+}
+
+.ds-segment > * {
+  flex: none;
+  padding: 0.4375rem 0.875rem;
+  border: 0;
+  border-radius: var(--ds-radius-md);
+  background: transparent;
+  color: var(--ds-app-body);
+  font-size: 0.875rem;
+  font-weight: var(--ds-weight-medium);
+  text-decoration: none;
+}
+
+.ds-segment > [aria-selected='true'],
+.ds-segment > [aria-pressed='true'],
+.ds-segment > [aria-current='page'] {
+  background: var(--ds-surface);
+  color: var(--ds-app-heading);
+  box-shadow: 0 1px 2px rgb(31 35 41 / 10%);
+}

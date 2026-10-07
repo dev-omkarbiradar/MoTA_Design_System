@@ -1,0 +1,129 @@
+/* ==========================================================================
+   Inner page header - breadcrumb, page title (H1), actions and section tabs
+   ========================================================================== */
+
+.ds-pagehead {
+  padding-block: var(--ds-space-6) 1.75rem;
+  border-bottom: 1px solid var(--ds-line);
+  background: linear-gradient(to bottom, var(--ds-key-5), var(--ds-surface));
+}
+
+.ds-pagehead__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--ds-space-3) var(--ds-space-6);
+}
+
+.ds-pagehead__title {
+  margin: 0.375rem 0 0;
+  color: var(--ds-ink);
+  font-size: var(--ds-text-h1);
+  font-weight: var(--ds-weight-bold);
+  line-height: 1.2;
+}
+
+.ds-pagehead__lead {
+  max-width: 60rem;
+  margin: var(--ds-space-2) 0 0;
+  color: var(--ds-ink-2);
+  font-size: var(--ds-text-lg);
+}
+
+.ds-pagehead__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+}
+
+/* ---- Breadcrumb ------------------------------------------------------------------
+   <nav aria-label="Breadcrumb"><ol class="ds-breadcrumb">
+     <li><a href="/">Home</a></li><li aria-current="page">Documents</li></ol></nav> */
+.ds-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-size: var(--ds-text-sm);
+  list-style: none;
+}
+
+.ds-breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ds-breadcrumb li + li::before {
+  content: '/';
+  padding-inline: 0.375rem;
+  color: var(--ds-muted);
+}
+
+.ds-breadcrumb a {
+  color: var(--ds-key);
+  text-decoration: none;
+}
+
+.ds-breadcrumb a:hover,
+.ds-breadcrumb a:focus-visible {
+  text-decoration: underline;
+}
+
+.ds-breadcrumb [aria-current='page'] {
+  color: var(--ds-muted);
+}
+
+/* ---- Section tabs: pills in a light rail; the current page is raised ------------
+   Links to sibling pages of the current section (not a tab panel). */
+.ds-sectabs {
+  display: flex;
+  gap: var(--ds-space-1);
+  margin: var(--ds-space-5) 0 0;
+  padding: var(--ds-space-1);
+  overflow-x: auto;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-tint);
+  list-style: none;
+  scrollbar-width: none;
+}
+
+.ds-sectabs::-webkit-scrollbar {
+  display: none;
+}
+
+.ds-sectabs li {
+  flex: none;
+}
+
+.ds-sectabs a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: 0.5625rem var(--ds-space-4);
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-ink);
+  font-size: 0.9375rem;
+  font-weight: var(--ds-weight-medium);
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--ds-duration) ease, box-shadow var(--ds-duration) ease;
+}
+
+.ds-sectabs a .ds-icon {
+  color: var(--ds-key);
+}
+
+.ds-sectabs a:hover {
+  background: var(--ds-tint-strong);
+  color: var(--ds-ink);
+}
+
+.ds-sectabs a[aria-current='page'] {
+  background: var(--ds-surface);
+  color: var(--ds-key);
+  font-weight: var(--ds-weight-semibold);
+  box-shadow: var(--ds-shadow-raised);
+}

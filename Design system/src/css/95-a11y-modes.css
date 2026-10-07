@@ -1,0 +1,92 @@
+/* ==========================================================================
+   Accessibility panel modes (GIGW 3.0: text resize, contrast and more)
+   --------------------------------------------------------------------------
+   mota-ds.js sets these on <html> from the accessibility panel and
+   remembers the choice in the browser. They can also be set on the server.
+     data-ds-font-scale="-1|1|2"   87.5% · 112.5% · 125% text
+     .ds-a11y-contrast              black background, white text, yellow links
+     .ds-a11y-invert                inverted colours
+     .ds-a11y-saturation            low saturation
+     .ds-a11y-links                 links highlighted and underlined
+     .ds-a11y-hide-images           images hidden
+     .ds-a11y-cursor                large cursor
+     .ds-a11y-spacing               WCAG 1.4.12 text spacing
+   ========================================================================== */
+
+html[data-ds-font-scale='-1'] { font-size: 87.5%; }
+html[data-ds-font-scale='1'] { font-size: 112.5%; }
+html[data-ds-font-scale='2'] { font-size: 125%; }
+
+html.ds-a11y-contrast body {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+html.ds-a11y-contrast body *:not(.ds-icon):not(img):not(svg):not(svg *) {
+  border-color: #fff !important;
+  background-color: #000 !important;
+  background-image: none !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+html.ds-a11y-contrast a,
+html.ds-a11y-contrast a * {
+  color: #ffd84d !important;
+}
+
+html.ds-a11y-contrast .ds-icon {
+  background-color: currentColor !important;
+}
+
+html.ds-a11y-contrast :focus-visible {
+  outline: 3px solid #ffd84d !important;
+}
+
+html.ds-a11y-invert body {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html.ds-a11y-invert body img,
+html.ds-a11y-invert body video {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html.ds-a11y-saturation body {
+  filter: saturate(0.2);
+}
+
+html.ds-a11y-links a {
+  outline: 2px dashed #ffc107 !important;
+  outline-offset: 2px;
+  background-color: #000 !important;
+  color: #ffd84d !important;
+  text-decoration: underline !important;
+}
+
+html.ds-a11y-links a * {
+  color: #ffd84d !important;
+}
+
+html.ds-a11y-hide-images :is(img, picture, video, iframe) {
+  visibility: hidden !important;
+}
+
+html.ds-a11y-hide-images [style*='background-image'] {
+  background-image: none !important;
+}
+
+html.ds-a11y-cursor,
+html.ds-a11y-cursor * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' stroke='%23fff' stroke-width='1' d='M5 2l14 10-6 1.5 3.5 7-2.5 1.2-3.4-7L5 19z'/%3E%3C/svg%3E") 6 2, auto !important;
+}
+
+html.ds-a11y-spacing body * {
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.16em !important;
+  line-height: 1.5 !important;
+}
+
+html.ds-a11y-spacing body p {
+  margin-bottom: 2em !important;
+}

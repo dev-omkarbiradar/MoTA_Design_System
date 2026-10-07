@@ -1,0 +1,749 @@
+/* ==========================================================================
+   Header - DBIM Global Header (Header 1, §5.4.1) with the Template 1 menu bar
+   --------------------------------------------------------------------------
+   Brand bar (emblem + names, search, co-branding, utility controls), then
+   the menu bar with mega menus. On scroll the brand bar moves away and the
+   menu bar stays (mota-ds.js sets --ds-masthead-top). Below 992px the menu
+   bar is replaced by a Menu button that opens the navigation drawer.
+   ========================================================================== */
+
+.ds-masthead {
+  position: sticky;
+  top: var(--ds-masthead-top, 0);
+  z-index: var(--ds-z-sticky);
+  background: var(--ds-surface);
+  transition: box-shadow var(--ds-duration) ease;
+}
+
+.ds-masthead[data-scrolled='true'] {
+  box-shadow: 0 2px 10px rgb(0 0 0 / 8%);
+}
+
+/* ---- Brand bar ------------------------------------------------------------- */
+.ds-brandbar {
+  border-bottom: 1px solid var(--ds-line);
+}
+
+.ds-brandbar__inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(0.75rem, 1.4vw, 1.5rem);
+  padding-block: clamp(0.5rem, 0.7vw, 0.75rem) clamp(0.75rem, 1.2vw, 1.25rem);
+}
+
+.ds-brandbar__inner > :not(.ds-brand) {
+  margin-bottom: clamp(0.5rem, 0.8vw, 0.875rem);
+}
+
+@media (max-width: 991.98px) {
+  .ds-brandbar__inner {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ds-space-3);
+    padding-block: 0.625rem var(--ds-space-4);
+  }
+
+  .ds-brandbar__inner > :not(.ds-brand) {
+    margin-bottom: 0;
+  }
+}
+
+/* Emblem + names. The link's accessible name is its visible text plus
+   "(home page)" in a .ds-sr-only span (WCAG 2.5.3 Label in Name). */
+.ds-brand {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: flex-end;
+  gap: 0.625rem;
+  min-width: 0;
+  color: var(--ds-ink);
+  text-decoration: none;
+}
+
+.ds-brand:hover {
+  color: var(--ds-ink);
+}
+
+.ds-brand__emblem {
+  width: auto;
+  height: clamp(4.25rem, 6.67vw, 7rem);
+}
+
+.ds-brand__text {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: clamp(0.5rem, 0.83vw, 0.875rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.ds-brand__gov,
+.ds-brand__name {
+  font-size: clamp(1.0625rem, 1.55vw, 1.625rem);
+}
+
+.ds-brand__gov { font-weight: var(--ds-weight-light); }
+.ds-brand__name { font-weight: var(--ds-weight-semibold); }
+
+@media (min-width: 992px) {
+  .ds-brand__text { white-space: nowrap; }
+}
+
+@media (max-width: 991.98px) {
+  .ds-brand {
+    flex: 1 1 0;
+  }
+
+  .ds-brand__emblem {
+    height: 4.5rem;
+  }
+
+  .ds-brand__text {
+    padding-bottom: var(--ds-space-2);
+  }
+
+  .ds-brand__gov,
+  .ds-brand__name {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .ds-brand__emblem { height: 3.75rem; }
+  .ds-brand__gov { font-size: 0.8125rem; }
+  .ds-brand__name { font-size: 1rem; }
+}
+
+/* Search slot in the brand bar */
+.ds-brandbar__search {
+  flex: 0 1 28.75rem;
+  min-width: 16rem;
+}
+
+@media (max-width: 991.98px) {
+  .ds-brandbar__search {
+    order: 3;
+    flex: 1 1 calc(100% - 7.5rem);  /* starts the second row, beside the Menu button */
+    min-width: 0;
+  }
+}
+
+/* Co-branding logos: flagship programmes or events, at most two (DBIM §5.4) */
+.ds-cobrand {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: clamp(0.625rem, 1vw, 1rem);
+}
+
+.ds-cobrand img {
+  display: block;
+  width: auto;
+  height: clamp(2.25rem, 2.86vw, 3rem);
+}
+
+@media (max-width: 1199.98px) {
+  .ds-cobrand { display: none; }
+}
+
+/* Utility controls: language, colour theme, accessibility, sign in */
+.ds-header-tools {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: clamp(0.25rem, 0.6vw, 0.5rem);
+}
+
+.ds-header-tools__sep {
+  width: 1px;
+  height: 2.5rem;
+  background: var(--ds-key);
+  opacity: 0.85;
+}
+
+.ds-header-tools .ds-btn--dark {
+  margin-left: clamp(0.5rem, 1.9vw, 2rem);
+}
+
+@media (max-width: 767.98px) {
+  .ds-header-tools .ds-header-signin {
+    display: none;
+  }
+}
+
+/* Square icon-only control (language, theme, accessibility) */
+.ds-icon-btn {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: var(--ds-control-h);
+  height: var(--ds-control-h);
+  padding: 0;
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--ds-key);
+  text-decoration: none;
+  transition: background-color var(--ds-duration) ease;
+  --ds-icon-size: 1.75rem;
+}
+
+.ds-icon-btn:hover,
+.ds-icon-btn[aria-expanded='true'] {
+  background: var(--ds-key-5);
+  color: var(--ds-key);
+}
+
+.ds-icon-btn--bordered {
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-ink-2);
+  --ds-icon-size: 1.375rem;
+}
+
+.ds-icon-btn__dot {
+  position: absolute;
+  top: 0.375rem;
+  right: 0.375rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 2px solid var(--ds-surface);
+  border-radius: 50%;
+  background: var(--ds-saffron-deep);
+}
+
+@media (max-width: 767.98px) {
+  .ds-icon-btn {
+    width: var(--ds-control-h-sm);
+    height: var(--ds-control-h-sm);
+    --ds-icon-size: 1.5rem;
+  }
+}
+
+/* "Menu" button that opens the drawer below 992px */
+.ds-menu-btn {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.375rem;
+  height: var(--ds-control-h);
+  padding: 0 0.875rem;
+  border: 1px solid var(--ds-grey-1);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+  font-size: 0.9375rem;
+  font-weight: var(--ds-weight-semibold);
+  box-shadow: var(--ds-shadow-xs);
+  --ds-icon-size: 1.375rem;
+}
+
+.ds-menu-btn:hover {
+  background: var(--ds-surface-2);
+}
+
+@media (max-width: 991.98px) {
+  .ds-menu-btn { order: 4; }
+}
+
+@media (min-width: 992px) {
+  .ds-menu-btn { display: none; }
+}
+
+/* ---- Menu bar --------------------------------------------------------------- */
+.ds-menubar {
+  position: relative;
+  background: var(--ds-surface);
+}
+
+.ds-menubar__list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: clamp(2.875rem, 3.45vw, 3.625rem);
+  max-width: 81.25rem;
+  margin: 0 0 0 -0.875rem;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-menubar__item {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+}
+
+.ds-menubar__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  height: clamp(2.125rem, 2.38vw, 2.5rem);
+  padding: 0 clamp(0.625rem, 0.83vw, 0.875rem);
+  border: 0;
+  border-radius: var(--ds-radius-md);
+  background: transparent;
+  color: var(--ds-ink);
+  font-size: clamp(1rem, 1.19vw, 1.25rem);
+  font-weight: var(--ds-weight-medium);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--ds-duration) ease;
+  --ds-icon-size: 1.125rem;
+}
+
+.ds-menubar__link:hover {
+  background: var(--ds-surface-2);
+  color: var(--ds-ink);
+}
+
+.ds-menubar__link[aria-current='page'],
+.ds-menubar__link[aria-expanded='true'],
+.ds-menubar__link.is-active {
+  background: var(--ds-line);
+  color: var(--ds-ink);
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-menubar__link[aria-expanded='true'] .ds-icon {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 991.98px) {
+  .ds-menubar { display: none; }
+}
+
+/* ---- Mega menu ----------------------------------------------------------------
+   One panel per top-level item, centred under the menu bar: groups of links
+   (with optional icon and description), an optional side column on a tint and
+   an optional featured strip. Toggled by mota-ds.js ([hidden]). */
+.ds-megamenu {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 50%;
+  z-index: var(--ds-z-dropdown);
+  display: flex;
+  width: min(77.5rem, calc(100% - 2 * var(--ds-gutter)));
+  max-height: calc(100vh - 12rem);
+  overflow: auto;
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+  box-shadow: var(--ds-shadow-panel);
+  transform: translateX(-50%);
+  animation: ds-drop-in 0.2s var(--ds-ease);
+}
+
+@keyframes ds-drop-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-0.375rem);
+  }
+}
+
+.ds-megamenu__main {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: var(--ds-space-6) var(--ds-space-8);
+  min-width: 0;
+  padding: var(--ds-space-7) 2.25rem;
+}
+
+.ds-megamenu__group {
+  flex: 1 1 15rem;
+  min-width: 0;
+}
+
+.ds-megamenu__group--wide {
+  flex: 2 1 32rem;
+}
+
+.ds-megamenu__group--wide .ds-megamenu__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--ds-space-6);
+}
+
+.ds-megamenu__aside {
+  flex: 0 0 19rem;
+  padding: var(--ds-space-7) 1.75rem;
+  border-left: 1px solid var(--ds-line);
+  background: var(--ds-surface-2);
+}
+
+.ds-megamenu__heading {
+  margin: 0 0 var(--ds-space-3);
+  padding-inline: 0.625rem;
+  color: var(--ds-muted);
+  font-size: 0.9375rem;
+  font-weight: var(--ds-weight-medium);
+}
+
+.ds-megamenu__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-megamenu__link {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-3);
+  padding: 0.625rem;
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-ink);
+  text-decoration: none;
+  transition: background-color var(--ds-duration) ease;
+}
+
+.ds-megamenu__link:hover,
+.ds-megamenu__link:focus-visible {
+  background: var(--ds-tint);
+  color: var(--ds-ink);
+}
+
+.ds-megamenu__link:hover .ds-megamenu__title,
+.ds-megamenu__link[aria-current='page'] .ds-megamenu__title {
+  color: var(--ds-key);
+}
+
+.ds-megamenu__link[aria-current='page'] .ds-megamenu__title {
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-megamenu__icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-tint);
+  color: var(--ds-key);
+}
+
+.ds-megamenu__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.ds-megamenu__title {
+  font-size: var(--ds-text-md);
+  font-weight: var(--ds-weight-medium);
+  line-height: 1.35;
+}
+
+.ds-megamenu__desc {
+  color: var(--ds-muted);
+  font-size: var(--ds-text-sm);
+  line-height: 1.4;
+}
+
+.ds-megamenu__feature {
+  display: flex;
+  flex: 1 1 100%;
+  align-items: center;
+  gap: var(--ds-space-4);
+  padding: var(--ds-space-4) var(--ds-space-5);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-tint);
+  color: var(--ds-ink);
+  text-decoration: none;
+}
+
+.ds-megamenu__feature:hover {
+  background: var(--ds-tint-strong);
+  color: var(--ds-ink);
+}
+
+/* ---- Drawer (mobile navigation; any side panel) -----------------------------
+   A native <dialog>: focus stays inside, Esc closes it, the page behind is inert.
+   <dialog class="ds-drawer" id="nav-drawer" aria-labelledby="nav-drawer-title"> */
+.ds-drawer {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(25rem, 100%);
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+  box-shadow: -4px 0 8px rgb(0 0 0 / 20%);
+  overflow-y: auto;
+}
+
+.ds-drawer--left {
+  inset: 0 auto 0 0;
+}
+
+.ds-drawer::backdrop {
+  background: rgb(0 0 0 / 60%);
+}
+
+.ds-drawer[open] {
+  animation: ds-slide-in 0.25s var(--ds-ease);
+}
+
+.ds-drawer--left[open] {
+  animation-name: ds-slide-in-left;
+}
+
+@keyframes ds-slide-in { from { transform: translateX(100%); } }
+@keyframes ds-slide-in-left { from { transform: translateX(-100%); } }
+
+.ds-drawer__head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ds-space-4);
+  border-bottom: 2px solid var(--ds-key);
+  background: var(--ds-surface);
+}
+
+.ds-drawer__head :is(h2, p) {
+  margin: 0;
+  color: var(--ds-key);
+  font-size: 1.25rem;
+  font-weight: var(--ds-weight-bold);
+}
+
+.ds-drawer__body {
+  padding: var(--ds-space-4);
+}
+
+/* Two-level navigation list inside the drawer (uses <details>) */
+.ds-navlist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-navlist > li {
+  border-bottom: 1px solid var(--ds-line);
+}
+
+.ds-navlist > li > a,
+.ds-navlist summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem var(--ds-space-4);
+  color: var(--ds-ink);
+  font-size: 1.125rem;
+  font-weight: var(--ds-weight-semibold);
+  text-decoration: none;
+  list-style: none;
+  cursor: pointer;
+}
+
+.ds-navlist summary::-webkit-details-marker {
+  display: none;
+}
+
+.ds-navlist summary::after {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform var(--ds-duration) ease;
+}
+
+.ds-navlist details[open] > summary {
+  color: var(--ds-key);
+}
+
+.ds-navlist details[open] > summary::after {
+  transform: rotate(-135deg);
+}
+
+.ds-navlist ul {
+  margin: 0 0 var(--ds-space-2);
+  padding: 0;
+  list-style: none;
+}
+
+.ds-navlist ul a {
+  display: block;
+  padding: 0.625rem var(--ds-space-4) 0.625rem var(--ds-space-7);
+  color: var(--ds-ink);
+  text-decoration: none;
+}
+
+.ds-navlist a[aria-current='page'] {
+  background: var(--ds-key-5);
+  color: var(--ds-key);
+  font-weight: var(--ds-weight-semibold);
+}
+
+/* ---- Popover (language, colour theme, accessibility, user menu) ------------------
+   <div class="ds-popover-anchor">
+     <button class="ds-icon-btn" aria-expanded="false" aria-controls="lang" data-ds-popover>…</button>
+     <div class="ds-popover" id="lang" hidden>…</div>
+   </div> */
+.ds-popover-anchor {
+  position: relative;
+  display: inline-flex;
+}
+
+.ds-popover {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: var(--ds-z-dropdown);
+  min-width: 11.25rem;
+  padding: var(--ds-space-2);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-surface);
+  box-shadow: var(--ds-shadow-dropdown);
+  color: var(--ds-ink);
+  text-align: left;
+}
+
+.ds-popover--start {
+  right: auto;
+  left: 0;
+}
+
+.ds-popover__title {
+  margin: 0 0 var(--ds-space-2);
+  padding: 0 var(--ds-space-2);
+  color: var(--ds-key);
+  font-size: var(--ds-text-md);
+  font-weight: var(--ds-weight-bold);
+}
+
+.ds-popover__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-popover__option {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  width: 100%;
+  padding: 0.375rem var(--ds-space-2);
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--ds-ink);
+  font-size: var(--ds-text-sm);
+  text-align: left;
+  text-decoration: none;
+}
+
+.ds-popover__option:hover,
+.ds-popover__option[aria-pressed='true'],
+.ds-popover__option[aria-current='true'] {
+  background: var(--ds-key-5);
+  color: var(--ds-key);
+}
+
+.ds-popover__option[aria-pressed='true'],
+.ds-popover__option[aria-current='true'] {
+  font-weight: var(--ds-weight-semibold);
+}
+
+/* Colour theme swatches */
+.ds-swatch {
+  display: inline-flex;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 1px solid var(--ds-grey-1);
+  border-radius: var(--ds-radius-sm);
+}
+
+.ds-swatch span {
+  width: 0.875rem;
+  height: 1.5rem;
+}
+
+/* Accessibility panel: a grid of toggle tiles */
+.ds-a11y-panel {
+  width: 20rem;
+  padding: var(--ds-space-4);
+}
+
+.ds-a11y-panel__group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-3);
+}
+
+.ds-a11y-panel__label {
+  margin: 0 0 var(--ds-space-2);
+  color: var(--ds-muted);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ds-a11y-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-1);
+  padding: var(--ds-space-2) var(--ds-space-1);
+  border: 1px solid var(--ds-key-4);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-surface);
+  color: var(--ds-key);
+  font-size: var(--ds-text-xs);
+  line-height: 1.3;
+  text-align: center;
+  --ds-icon-size: 1.5rem;
+}
+
+.ds-a11y-tile:hover {
+  background: var(--ds-key-5);
+}
+
+.ds-a11y-tile[aria-pressed='true'] {
+  border-color: var(--ds-key);
+  background: var(--ds-key);
+  color: var(--ds-white);
+}
+
+@media (max-width: 767.98px) {
+  .ds-a11y-panel {
+    position: fixed;
+    inset: auto 0 0;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: var(--ds-radius-md) var(--ds-radius-md) 0 0;
+  }
+}
+
+/* ---- Scroll progress: a thin tricolour line under the header -------------------- */
+.ds-scroll-progress {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  height: 4px;
+  background: linear-gradient(to right, var(--ds-saffron-deep) 0%, #ffffff 50%, var(--ds-india-green-deep) 100%);
+  box-shadow: inset 0 1px 0 rgb(0 0 0 / 8%);
+  clip-path: inset(0 calc((1 - var(--ds-scroll, 0)) * 100%) 0 0);
+  pointer-events: none;
+}

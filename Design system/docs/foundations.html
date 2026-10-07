@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en" data-ds-colour="forest-green">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foundations | MoTA Design System</title>
+  <link rel="icon" href="../dist/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../dist/css/mota-ds.min.css">
+  <link rel="stylesheet" href="../dist/css/mota-ds-icons.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body class="doc-body">
+  <a class="ds-skip-link" href="#main">Skip to main content</a>
+  <header class="doc-top">
+    <div class="ds-container doc-top__inner">
+      <a class="doc-brand" href="../index.html">
+        <img src="../dist/img/emblem.svg" alt="" width="25" height="40">
+        <span><strong>MoTA Design System</strong><span>v1.0 · DBIM v3.0</span></span>
+      </a>
+      <nav aria-label="Documentation"><ul class="doc-nav"><li><a href="../index.html">Overview</a></li><li><a href="foundations.html" aria-current="page">Foundations</a></li><li><a href="components.html">Components</a></li><li><a href="../index.html#templates">Templates</a></li><li><a href="accessibility.html">Accessibility &amp; GIGW</a></li><li><a href="integration.html">Using it in your app</a></li></ul></nav>
+      <div class="doc-themes" role="group" aria-label="Preview colour theme"><button type="button" data-doc-theme="forest-green" style="background:#0f5757" title="Forest Green"><span class="ds-sr-only">Forest Green</span></button><button type="button" data-doc-theme="classic-blue" style="background:#162f6a" title="Classic Blue"><span class="ds-sr-only">Classic Blue</span></button><button type="button" data-doc-theme="midnight-purple" style="background:#29136c" title="Midnight Purple"><span class="ds-sr-only">Midnight Purple</span></button><button type="button" data-doc-theme="burgundy" style="background:#6c1340" title="Burgundy"><span class="ds-sr-only">Burgundy</span></button><button type="button" data-doc-theme="chrome-yellow" style="background:#5d3e00" title="Chrome Yellow"><span class="ds-sr-only">Chrome Yellow</span></button><button type="button" data-doc-theme="cinnamon-red" style="background:#771d1d" title="Cinnamon Red"><span class="ds-sr-only">Cinnamon Red</span></button></div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="ds-container doc-layout">
+      <nav class="doc-toc" aria-label="On this page"><p>On this page</p><ul></ul></nav>
+      <div class="doc-content">
+        <h1 class="doc-page-title">Foundations</h1>
+        <p class="doc-page-lead">Colour, type, spacing, shape, layout and icons: the tokens every component is built from.</p>
+
+        <section class="doc-section" id="colour-themes">
+          <h2>Colour themes</h2>
+          <p>DBIM v3.0 defines six primary colour groups. A website uses one group throughout; the Ministry's portal uses <strong>Forest Green</strong>. Set the group once on the <code>&lt;html&gt;</code> element and every component follows. Select a theme below to preview this documentation in it.</p>
+<pre class="doc-pre"><code>&lt;html lang="en" data-ds-colour="forest-green"&gt;   &lt;!-- forest-green | classic-blue | midnight-purple | burgundy | chrome-yellow | cinnamon-red --&gt;</code></pre>
+          <ul class="doc-themes-grid"><li><button class="doc-theme-card" type="button" data-doc-theme="forest-green"><span class="doc-theme-card__bands" aria-hidden="true"><span style="background:#0f5757"></span><span style="background:#2d8686"></span><span style="background:#75bdbd"></span><span style="background:#a6d9d9"></span><span style="background:#d9f2f2"></span></span><span class="doc-theme-card__name">Forest Green<code>forest-green</code></span></button></li><li><button class="doc-theme-card" type="button" data-doc-theme="classic-blue"><span class="doc-theme-card__bands" aria-hidden="true"><span style="background:#162f6a"></span><span style="background:#214aab"></span><span style="background:#5279d7"></span><span style="background:#a3bbf3"></span><span style="background:#d2dfff"></span></span><span class="doc-theme-card__name">Classic Blue<code>classic-blue</code></span></button></li><li><button class="doc-theme-card" type="button" data-doc-theme="midnight-purple"><span class="doc-theme-card__bands" aria-hidden="true"><span style="background:#29136c"></span><span style="background:#4729a3"></span><span style="background:#8b70db"></span><span style="background:#bdadeb"></span><span style="background:#eeebfa"></span></span><span class="doc-theme-card__name">Midnight Purple<code>midnight-purple</code></span></button></li><li><button class="doc-theme-card" type="button" data-doc-theme="burgundy"><span class="doc-theme-card__bands" aria-hidden="true"><span style="background:#6c1340"></span><span style="background:#a32966"></span><span style="background:#db70a6"></span><span style="background:#ebadcc"></span><span style="background:#faebf2"></span></span><span class="doc-theme-card__name">Burgundy<code>burgundy</code></span></button></li><li><button class="doc-theme-card" type="button" data-doc-theme="chrome-yellow"><span class="doc-theme-card__bands" aria-hidden="true"><span style="background:#5d3e00"></span><span style="background:#916100"></span><span style="background:#dda73a"></span><span style="background:#f4d390"></span><span style="background:#ffeecc"></span></span><span class="doc-theme-card__name">Chrome Yellow<code>chrome-yellow</code></span></button></li><li><button class="doc-theme-card" type="button" data-doc-theme="cinnamon-red"><span class="doc-theme-card__bands" aria-hidden="true"><span style="background:#771d1d"></span><span style="background:#a72626"></span><span style="background:#d75151"></span><span style="background:#faaaaa"></span><span style="background:#fcdada"></span></span><span class="doc-theme-card__name">Cinnamon Red<code>cinnamon-red</code></span></button></li></ul>
+          <p class="ds-mt-4">Users can also choose a theme from the header (the colour theme control). Their choice is kept in the browser. To fix the theme for an application, leave that control out of the header.</p>
+        </section>
+
+        <section class="doc-section" id="key-colours">
+          <h2>Key colour and shades</h2>
+          <p>Values update with the theme you select. Use tokens, never the hex values, so pages follow the theme.</p>
+          <ul class="doc-swatches"><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-key); color:#fff">Aa</div><div class="doc-swatch__meta"><strong>Key colour</strong><code>--ds-key</code> · <code data-doc-hex="--ds-key"></code><br>Headings, links, primary buttons, icons, the footer</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-key-2); color:#fff">Aa</div><div class="doc-swatch__meta"><strong>Shade 2</strong><code>--ds-key-2</code> · <code data-doc-hex="--ds-key-2"></code><br>Scroll rails, borders; never behind text</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-key-3); color:var(--ds-key-ink)">Aa</div><div class="doc-swatch__meta"><strong>Shade 3</strong><code>--ds-key-3</code> · <code data-doc-hex="--ds-key-3"></code><br>Decorative fills, persona circles</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-key-4); color:var(--ds-key)">Aa</div><div class="doc-swatch__meta"><strong>Shade 4</strong><code>--ds-key-4</code> · <code data-doc-hex="--ds-key-4"></code><br>Soft buttons, link cards, table headers</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-key-5); color:var(--ds-key)">Aa</div><div class="doc-swatch__meta"><strong>Shade 5</strong><code>--ds-key-5</code> · <code data-doc-hex="--ds-key-5"></code><br>Light bands, hover, selected rows</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-tint); color:var(--ds-key)">Aa</div><div class="doc-swatch__meta"><strong>Tint</strong><code>--ds-tint</code> · <code data-doc-hex="--ds-tint"></code><br>Icon wells, menu hover</div></li></ul>
+          <div class="doc-note">
+            <div class="doc-do"><h4>Do</h4><ul><li>Use <code>--ds-key</code> for text and icons on white or on shades 4 and 5: at least 4.5:1 in every theme.</li><li>Use white text on <code>--ds-key</code> only.</li></ul></div>
+            <div class="doc-dont"><h4>Don't</h4><ul><li>Put text on shades 2 or 3 except <code>--ds-key-ink</code>.</li><li>Introduce new brand colours, gradients or tints outside the tokens.</li></ul></div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="neutrals">
+          <h2>Neutrals</h2>
+          <p>From the DBIM functional palette. The "black" is Deep Earthy Brown <code>#150202</code>, which is softer than pure black.</p>
+          <ul class="doc-swatches"><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-ink); color:#fff; box-shadow: inset 0 -1px 0 var(--ds-line)">Aa</div><div class="doc-swatch__meta"><strong>Ink</strong><code>--ds-ink</code> · <code>#150202</code><br>Body text and headings</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-ink-2); color:#fff; box-shadow: inset 0 -1px 0 var(--ds-line)">Aa</div><div class="doc-swatch__meta"><strong>Ink 2</strong><code>--ds-ink-2</code> · <code>#3d4043</code><br>Secondary text</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-muted); color:#fff; box-shadow: inset 0 -1px 0 var(--ds-line)">Aa</div><div class="doc-swatch__meta"><strong>Muted</strong><code>--ds-muted</code> · <code>#606060</code><br>Meta text, placeholders</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-grey-2); color:#fff; box-shadow: inset 0 -1px 0 var(--ds-line)">Aa</div><div class="doc-swatch__meta"><strong>Grey 02</strong><code>--ds-grey-2</code> · <code>#8e8e8e</code><br>Input borders, disabled text</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-grey-1); color:#150202; box-shadow: inset 0 -1px 0 var(--ds-line)">Aa</div><div class="doc-swatch__meta"><strong>Grey 01</strong><code>--ds-grey-1</code> · <code>#c6c6c6</code><br>Control outlines, ticker</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-line); color:#150202; box-shadow: inset 0 -1px 0 var(--ds-line)">Aa</div><div class="doc-swatch__meta"><strong>Linen</strong><code>--ds-line</code> · <code>#ebeaea</code><br>Dividers, light bands</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-surface-3); color:#150202; box-shadow: inset 0 -1px 0 var(--ds-line)">Aa</div><div class="doc-swatch__meta"><strong>App background</strong><code>--ds-surface-3</code> · <code>#f5f7f7</code><br>Dashboards</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-surface); color:#150202; box-shadow: inset 0 -1px 0 var(--ds-line)">Aa</div><div class="doc-swatch__meta"><strong>White</strong><code>--ds-surface</code> · <code>#ffffff</code><br>Page and card background</div></li></ul>
+        </section>
+
+        <section class="doc-section" id="status">
+          <h2>Status colours</h2>
+          <p>For alerts, badges and validation. Always pair a status colour with a word or an icon: colour must not be the only way information is given (WCAG 1.4.1).</p>
+          <ul class="doc-swatches"><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-success-bg); color:var(--ds-success-fg); border-left: 6px solid var(--ds-success)">Success</div><div class="doc-swatch__meta"><strong>Success</strong><code>--ds-success</code> · <code>#198754</code><br><code>--ds-success-bg</code> / <code>--ds-success-fg</code> for text<br>Approved, submitted, open</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-warning-bg); color:var(--ds-warning-fg); border-left: 6px solid var(--ds-warning)">Warning</div><div class="doc-swatch__meta"><strong>Warning</strong><code>--ds-warning</code> · <code>#ffc107</code><br><code>--ds-warning-bg</code> / <code>--ds-warning-fg</code> for text<br>Due soon, needs attention</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-danger-bg); color:var(--ds-danger-fg); border-left: 6px solid var(--ds-danger)">Danger</div><div class="doc-swatch__meta"><strong>Danger</strong><code>--ds-danger</code> · <code>#dc3545</code><br><code>--ds-danger-bg</code> / <code>--ds-danger-fg</code> for text<br>Errors, rejected, destructive</div></li><li class="doc-swatch"><div class="doc-swatch__chip" style="background:var(--ds-info-bg); color:var(--ds-info-fg); border-left: 6px solid var(--ds-info)">Information</div><div class="doc-swatch__meta"><strong>Information</strong><code>--ds-info</code> · <code>#0d6efd</code><br><code>--ds-info-bg</code> / <code>--ds-info-fg</code> for text<br>Neutral notices</div></li></ul>
+        </section>
+
+        <section class="doc-section" id="typography">
+          <h2>Typography</h2>
+          <p><strong>Noto Sans</strong> for every script (DBIM §4.1), self-hosted in <code>dist/fonts</code>. One family covers English, Hindi and Marathi; Odia uses Noto Sans Oriya. Allura is used only for the footer tagline.</p>
+          <div class="doc-example" data-no-code>
+            <div class="doc-type-row"><span>H1 · 36 / 28px · Bold<br>--ds-text-h1</span><span style="font-size:var(--ds-text-h1);font-weight:700">Ministry of Tribal Affairs</span></div><div class="doc-type-row"><span>H2 · 24 / 22px · Bold<br>--ds-text-h2</span><span style="font-size:var(--ds-text-h2);font-weight:700">Recent Documents</span></div><div class="doc-type-row"><span>H3 · 20 / 18px · Bold<br>--ds-text-h3</span><span style="font-size:var(--ds-text-h3);font-weight:700">Eligibility and benefits</span></div><div class="doc-type-row"><span>Lead · 18 / 16px<br>--ds-text-lg</span><span style="font-size:var(--ds-text-lg)">Introductory paragraphs that summarise a page.</span></div><div class="doc-type-row"><span>P1 · 16px<br>--ds-text-md</span><span style="font-size:var(--ds-text-md)">Body text for paragraphs, lists and form inputs.</span></div><div class="doc-type-row"><span>P2 · 14px<br>--ds-text-sm</span><span style="font-size:var(--ds-text-sm)">Secondary text, labels, table cells and meta information.</span></div><div class="doc-type-row"><span>Small · 12px<br>--ds-text-xs</span><span style="font-size:var(--ds-text-xs);font-weight:600;letter-spacing:.04em">CAPTIONS, BADGES AND TABLE HEADINGS</span></div>
+            <div class="doc-type-row"><span>Hindi</span><span lang="hi" style="font-size:1.25rem">जनजातीय कार्य मंत्रालय, भारत सरकार</span></div>
+            <div class="doc-type-row"><span>Odia</span><span lang="or" style="font-size:1.25rem">ଆଦିବାସୀ ବ୍ୟାପାର ମନ୍ତ୍ରଣାଳୟ</span></div>
+            <div class="doc-type-row"><span>Script (footer)</span><span style="font-family:var(--ds-font-script);font-size:2.25rem">People | Land | Culture | Future</span></div>
+          </div>
+          <div class="doc-note">
+            <div class="doc-do"><h4>Do</h4><ul><li>Left-align body text (DBIM §4.1.1).</li><li>Keep line length near 70 characters with <code>.ds-prose</code>.</li><li>Use one H1 per page, then H2 and H3 in order.</li></ul></div>
+            <div class="doc-dont"><h4>Don't</h4><ul><li>Justify text, set body text below 14px or anything below 12px.</li><li>Use all capitals for sentences; keep them for short labels.</li></ul></div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="spacing">
+          <h2>Spacing</h2>
+          <p>A 4px scale. Use <code>var(--ds-space-1)</code> … <code>var(--ds-space-10)</code> in your own styles, and <code>gap</code> on flex and grid layouts instead of margins between siblings.</p>
+          <div class="doc-example" data-no-code><div class="doc-scale"><div><i style="width:var(--ds-space-1);height:var(--ds-space-1)"></i>1<br>4px</div><div><i style="width:var(--ds-space-2);height:var(--ds-space-2)"></i>2<br>8px</div><div><i style="width:var(--ds-space-3);height:var(--ds-space-3)"></i>3<br>12px</div><div><i style="width:var(--ds-space-4);height:var(--ds-space-4)"></i>4<br>16px</div><div><i style="width:var(--ds-space-5);height:var(--ds-space-5)"></i>5<br>20px</div><div><i style="width:var(--ds-space-6);height:var(--ds-space-6)"></i>6<br>24px</div><div><i style="width:var(--ds-space-7);height:var(--ds-space-7)"></i>7<br>32px</div><div><i style="width:var(--ds-space-8);height:var(--ds-space-8)"></i>8<br>40px</div><div><i style="width:var(--ds-space-9);height:var(--ds-space-9)"></i>9<br>48px</div><div><i style="width:var(--ds-space-10);height:var(--ds-space-10)"></i>10<br>64px</div></div></div>
+        </section>
+
+        <section class="doc-section" id="shape">
+          <h2>Corners and elevation</h2>
+          <p>DBIM elements (buttons, alerts, tables, segmented tabs) keep sharp 2 to 4px corners. The newer surfaces (cards, panels, menus, search) use 8 to 12px. Shadows mark things that float or can be picked up; most surfaces have none.</p>
+          <div class="doc-example doc-example--tint" data-no-code>
+            <div class="ds-grid ds-grid--auto" style="--ds-min: 9rem">
+              <div class="ds-p-4" style="background:#fff;border:1px solid var(--ds-line);border-radius:var(--ds-radius-xs)"><strong>xs · 2px</strong><br><span class="ds-text-xs ds-text-muted">Tabs, tiles</span></div>
+              <div class="ds-p-4" style="background:#fff;border:1px solid var(--ds-line);border-radius:var(--ds-radius-sm)"><strong>sm · 4px</strong><br><span class="ds-text-xs ds-text-muted">Buttons, inputs</span></div>
+              <div class="ds-p-4" style="background:#fff;border:1px solid var(--ds-line);border-radius:var(--ds-radius-md)"><strong>md · 8px</strong><br><span class="ds-text-xs ds-text-muted">Search, menus</span></div>
+              <div class="ds-p-4" style="background:#fff;border:1px solid var(--ds-line);border-radius:var(--ds-radius-lg)"><strong>lg · 12px</strong><br><span class="ds-text-xs ds-text-muted">Cards, panels</span></div>
+              <div class="ds-p-4" style="background:#fff;border-radius:var(--ds-radius-lg);box-shadow:var(--ds-shadow-card)"><strong>Card shadow</strong><br><span class="ds-text-xs ds-text-muted">Service tiles</span></div>
+              <div class="ds-p-4" style="background:#fff;border-radius:var(--ds-radius-sm);box-shadow:var(--ds-shadow-dropdown)"><strong>Dropdown</strong><br><span class="ds-text-xs ds-text-muted">Popovers</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="layout">
+          <h2>Layout and breakpoints</h2>
+          <p>Content sits in <code>.ds-container</code>: full width with side margins of about 6% of the screen (16px on phones), up to 1920px. Build rows with <code>.ds-grid</code>, <code>.ds-split</code>, <code>.ds-stack</code> and <code>.ds-cluster</code>.</p>
+          <div class="ds-table-wrap">
+            <table class="ds-table">
+              <caption class="ds-sr-only">Breakpoints</caption>
+              <thead><tr><th scope="col">Width</th><th scope="col">Device</th><th scope="col">What changes</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">below 576px</th><td>Phones</td><td>Single columns; pagination shows Previous and Next only</td></tr>
+                <tr><th scope="row">576px</th><td>Large phones</td><td><code>.ds-grid</code> goes to two columns</td></tr>
+                <tr><th scope="row">768px</th><td>Tablets</td><td>Desktop type scale; forms go to two columns; stacked tables become tables</td></tr>
+                <tr><th scope="row">992px</th><td>Laptops</td><td>Menu bar replaces the Menu button; side columns appear; app sidebar is fixed</td></tr>
+                <tr><th scope="row">1200px</th><td>Desktops</td><td>Co-branding logos appear; dashboard rows split</td></tr>
+                <tr><th scope="row">1400px</th><td>Wide screens</td><td>Five-column grids; search shortcut hint</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="doc-example doc-example--tint">
+            <div class="ds-grid ds-grid--4">
+              <div class="ds-p-4 ds-bg-tint ds-rounded ds-text-center">1</div>
+              <div class="ds-p-4 ds-bg-tint ds-rounded ds-text-center">2</div>
+              <div class="ds-p-4 ds-bg-tint ds-rounded ds-text-center">3</div>
+              <div class="ds-p-4 ds-bg-tint ds-rounded ds-text-center">4</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="icons">
+          <h2>Icons</h2>
+          <p>The DBIM Visual Components Library, line style. Icons are drawn with a CSS mask, so they take the colour of the text around them and follow the theme and the high-contrast mode. Decorative icons get <code>aria-hidden="true"</code>; an icon-only button gets an <code>aria-label</code>.</p>
+<pre class="doc-pre"><code>&lt;span class="ds-icon ds-i-download" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;span class="ds-icon ds-icon--lg ds-i-schemes" aria-hidden="true"&gt;&lt;/span&gt;   &lt;!-- --sm 16 · default 20 · --md 24 · --lg 32 · --xl 48 --&gt;</code></pre>
+          <p>The <strong>core</strong> icons are embedded in <code>mota-ds-icons.css</code>. For the full library add <code>mota-ds-icons-all.css</code>, which loads each icon from <code>dist/icons/</code> when it is used. Select an icon to copy its markup.</p>
+          <div class="ds-cluster ds-mt-4">
+            <div class="ds-search" style="flex: 1 1 18rem">
+              <label class="ds-sr-only" for="icon-filter">Find an icon</label>
+              <div class="ds-search__box"><span class="ds-icon ds-i-search ds-search__icon" aria-hidden="true"></span><input class="ds-search__input" id="icon-filter" type="search" placeholder="Find an icon, for example calendar"></div>
+            </div>
+            <label class="ds-switch"><input type="checkbox" role="switch" id="icon-core"> Core icons only</label>
+            <span class="ds-text-sm ds-text-muted" id="icon-count" aria-live="polite"></span>
+          </div>
+          <ul class="doc-icons" id="icon-gallery" data-base="../dist/icons/"></ul>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="doc-footer">
+    <div class="ds-container">
+      <p>MoTA Design System v1.0.0 · Ministry of Tribal Affairs, Government of India</p>
+      <p>Built on DBIM v3.0 · GIGW 3.0 · WCAG 2.1 AA</p>
+    </div>
+  </footer>
+  <script src="icons-data.js"></script>
+  <script src="docs.js"></script>
+  <script src="../dist/js/mota-ds.js"></script>
+</body>
+</html>

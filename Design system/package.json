@@ -1,0 +1,19 @@
+{
+  "name": "@mota/design-system",
+  "version": "1.0.0",
+  "description": "MoTA Design System: framework-free HTML, CSS and JavaScript for Ministry of Tribal Affairs web applications (DBIM v3.0, GIGW 3.0, WCAG 2.1 AA).",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "style": "dist/css/mota-ds.min.css",
+  "main": "dist/js/mota-ds.js",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

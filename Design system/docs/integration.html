@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en" data-ds-colour="forest-green">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Using it in your app | MoTA Design System</title>
+  <link rel="icon" href="../dist/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../dist/css/mota-ds.min.css">
+  <link rel="stylesheet" href="../dist/css/mota-ds-icons.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body class="doc-body">
+  <a class="ds-skip-link" href="#main">Skip to main content</a>
+  <header class="doc-top">
+    <div class="ds-container doc-top__inner">
+      <a class="doc-brand" href="../index.html">
+        <img src="../dist/img/emblem.svg" alt="" width="25" height="40">
+        <span><strong>MoTA Design System</strong><span>v1.0 · DBIM v3.0</span></span>
+      </a>
+      <nav aria-label="Documentation"><ul class="doc-nav"><li><a href="../index.html">Overview</a></li><li><a href="foundations.html">Foundations</a></li><li><a href="components.html">Components</a></li><li><a href="../index.html#templates">Templates</a></li><li><a href="accessibility.html">Accessibility &amp; GIGW</a></li><li><a href="integration.html" aria-current="page">Using it in your app</a></li></ul></nav>
+      <div class="doc-themes" role="group" aria-label="Preview colour theme"><button type="button" data-doc-theme="forest-green" style="background:#0f5757" title="Forest Green"><span class="ds-sr-only">Forest Green</span></button><button type="button" data-doc-theme="classic-blue" style="background:#162f6a" title="Classic Blue"><span class="ds-sr-only">Classic Blue</span></button><button type="button" data-doc-theme="midnight-purple" style="background:#29136c" title="Midnight Purple"><span class="ds-sr-only">Midnight Purple</span></button><button type="button" data-doc-theme="burgundy" style="background:#6c1340" title="Burgundy"><span class="ds-sr-only">Burgundy</span></button><button type="button" data-doc-theme="chrome-yellow" style="background:#5d3e00" title="Chrome Yellow"><span class="ds-sr-only">Chrome Yellow</span></button><button type="button" data-doc-theme="cinnamon-red" style="background:#771d1d" title="Cinnamon Red"><span class="ds-sr-only">Cinnamon Red</span></button></div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="ds-container doc-layout">
+      <nav class="doc-toc" aria-label="On this page"><p>On this page</p><ul></ul></nav>
+      <div class="doc-content">
+        <h1 class="doc-page-title">Using it in your app</h1>
+        <p class="doc-page-lead">Add the design system to an ASP.NET, Angular, Java or plain HTML application, theme it and keep it secure.</p>
+
+        <section class="doc-section" id="install">
+          <h2>Install</h2>
+          <p>Copy the <code>dist</code> folder into your application. It needs no build tools, packages or internet access. Then load the files in the page layout:</p>
+<pre class="doc-pre"><code>&lt;html lang="en" data-ds-colour="forest-green"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;link rel="stylesheet" href="/lib/mota-ds/css/mota-ds.min.css"&gt;
+  &lt;link rel="stylesheet" href="/lib/mota-ds/css/mota-ds-icons.css"&gt;
+  &lt;!-- your own styles after these --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a class="ds-skip-link" href="#main"&gt;Skip to main content&lt;/a&gt;
+  …
+  &lt;main id="main" tabindex="-1"&gt;…&lt;/main&gt;
+  …
+  &lt;script src="/lib/mota-ds/js/mota-ds.js" defer&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          <p>Keep the folder structure inside <code>dist</code>: the stylesheets find the fonts and images by relative path (<code>../fonts</code>, <code>../img</code>).</p>
+        </section>
+
+        <section class="doc-section" id="aspnet-core">
+          <h2>ASP.NET Core (MVC and Razor Pages)</h2>
+          <ol>
+            <li>Copy <code>dist</code> to <code>wwwroot/lib/mota-ds</code>.</li>
+            <li>Load the files in <code>Views/Shared/_Layout.cshtml</code> (or <code>Pages/Shared/_Layout.cshtml</code>) with <code>asp-append-version</code> for cache busting.</li>
+            <li>Move the header and footer from <code>templates/home.html</code> into partial views, for example <code>_Header.cshtml</code> and <code>_Footer.cshtml</code>.</li>
+          </ol>
+<pre class="doc-pre"><code>&lt;link rel="stylesheet" href="~/lib/mota-ds/css/mota-ds.min.css" asp-append-version="true" /&gt;
+&lt;link rel="stylesheet" href="~/lib/mota-ds/css/mota-ds-icons.css" asp-append-version="true" /&gt;
+…
+&lt;partial name="_Header" /&gt;
+&lt;main id="main" tabindex="-1" class="ds-main"&gt;
+  &lt;div class="ds-container"&gt;@RenderBody()&lt;/div&gt;
+&lt;/main&gt;
+&lt;partial name="_Footer" /&gt;
+&lt;script src="~/lib/mota-ds/js/mota-ds.js" asp-append-version="true" defer&gt;&lt;/script&gt;</code></pre>
+          <p>Validation messages: give <code>asp-validation-for</code> spans the class <code>ds-field-error</code>, and the summary <code>ds-error-summary</code>. Tag helpers add <code>aria-invalid</code> through the <code>input-validation-error</code> class; map it in your stylesheet:</p>
+<pre class="doc-pre"><code>.input-validation-error { border-color: var(--ds-error-text); border-width: 2px; }
+.field-validation-valid { display: none; }</code></pre>
+        </section>
+
+        <section class="doc-section" id="webforms">
+          <h2>ASP.NET Web Forms</h2>
+          <p>Add the files to <code>Site.Master</code>. Server controls take the classes through <code>CssClass</code>:</p>
+<pre class="doc-pre"><code>&lt;link rel="stylesheet" href="&lt;%= ResolveUrl("~/lib/mota-ds/css/mota-ds.min.css") %&gt;" /&gt;
+…
+&lt;asp:Label runat="server" AssociatedControlID="txtName" CssClass="ds-label" Text="Full name" /&gt;
+&lt;asp:TextBox runat="server" ID="txtName" CssClass="ds-input" /&gt;
+&lt;asp:RequiredFieldValidator runat="server" ControlToValidate="txtName" CssClass="ds-field-error" Display="Dynamic"
+     ErrorMessage="Enter your full name" /&gt;
+&lt;asp:Button runat="server" Text="Submit application" CssClass="ds-btn" /&gt;
+&lt;asp:GridView runat="server" CssClass="ds-table" GridLines="None" UseAccessibleHeader="true" /&gt;</code></pre>
+          <p>Content updated by an <code>UpdatePanel</code> keeps working: the script listens on the whole page and sets up new carousels and counters automatically.</p>
+        </section>
+
+        <section class="doc-section" id="blazor">
+          <h2>Blazor</h2>
+          <p>Reference the files in <code>App.razor</code> (or <code>wwwroot/index.html</code>). Write components that output the same markup; the script works with re-rendered content. Call JavaScript only for the helpers:</p>
+<pre class="doc-pre"><code>await JS.InvokeVoidAsync("MotaDS.toast", "Application saved", new { type = "success" });
+await JS.InvokeVoidAsync("MotaDS.openDialog", "confirm-delete");</code></pre>
+        </section>
+
+        <section class="doc-section" id="angular">
+          <h2>Angular</h2>
+          <ol>
+            <li>Copy <code>dist</code> to <code>src/assets/mota-ds</code> (or <code>public/mota-ds</code> in newer projects).</li>
+            <li>Register the styles and the script in <code>angular.json</code>.</li>
+            <li>Use the classes in component templates. Keep component styles for layout only, and use the tokens (<code>var(--ds-key)</code>).</li>
+          </ol>
+<pre class="doc-pre"><code>"styles": [
+  "src/assets/mota-ds/css/mota-ds.min.css",
+  "src/assets/mota-ds/css/mota-ds-icons.css",
+  "src/styles.scss"
+],
+"scripts": ["src/assets/mota-ds/js/mota-ds.js"]</code></pre>
+<pre class="doc-pre"><code>// Use the helpers from a component or service
+declare const MotaDS: { toast(message: string, options?: { type?: string }): void; openDialog(id: string): void };
+
+save() {
+  this.api.save(this.form.value).subscribe(() =&gt; MotaDS.toast('Application saved', { type: 'success' }));
+}</code></pre>
+          <p>Reactive forms: bind <code>[attr.aria-invalid]="control.invalid &amp;&amp; control.touched"</code> on the input and show the message in a <code>&lt;p class="ds-field-error" [id]="…"&gt;</code> linked with <code>aria-describedby</code>. With Angular Material or PrimeNG, load the design system first and set the library's primary colour to <code>var(--ds-key)</code>.</p>
+        </section>
+
+        <section class="doc-section" id="other">
+          <h2>Java (JSP, Thymeleaf), PHP and others</h2>
+          <p>Serve <code>dist</code> as static files and load it in the common layout as shown under Install. Nothing else is needed.</p>
+        </section>
+
+        <section class="doc-section" id="theming">
+          <h2>Colour theme and customisation</h2>
+          <p>Set the theme on <code>&lt;html data-ds-colour="…"&gt;</code>. To adjust anything else, override tokens in a stylesheet loaded after the design system, never by editing it:</p>
+<pre class="doc-pre"><code>:root {
+  --ds-container-max: 90rem;   /* narrower pages */
+  --ds-footer-art: url('/images/our-artwork.webp');
+}</code></pre>
+          <p>Every message of the script can be translated before it loads:</p>
+<pre class="doc-pre"><code>&lt;script&gt;
+  window.MotaDSConfig = { strings: { showPassword: 'पासवर्ड दिखाएँ', errorSummary: 'कृपया ये त्रुटियाँ ठीक करें' } };
+&lt;/script&gt;
+&lt;script src="/lib/mota-ds/js/mota-ds.js" defer&gt;&lt;/script&gt;</code></pre>
+        </section>
+
+        <section class="doc-section" id="security">
+          <h2>Security and hosting</h2>
+          <ul>
+            <li>Everything is self-hosted: no CDN, web fonts service or analytics. This is a GIGW and CERT-In audit expectation.</li>
+            <li>The script needs no <code>eval</code> and no inline code, so this Content-Security-Policy works: <code>default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'; script-src 'self'</code>. (Templates use a few inline <code>style</code> attributes for examples; move them to your stylesheet.)</li>
+            <li>Preferences (theme, text size, collapsed sidebar) are stored only in the user's browser, never sent to a server.</li>
+            <li>Serve <code>dist</code> with long cache lifetimes and change the file name or add a version query on every release.</li>
+          </ul>
+        </section>
+
+        <section class="doc-section" id="javascript">
+          <h2>Script reference</h2>
+          <div class="ds-table-wrap">
+            <table class="ds-table">
+              <caption class="ds-sr-only">Data attributes and functions of mota-ds.js</caption>
+              <thead><tr><th scope="col">Attribute or function</th><th scope="col">What it does</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><code>data-ds-popover</code>, <code>data-ds-megamenu</code></th><td>On a button with <code>aria-controls</code>: opens and closes the panel; Esc and clicks outside close it.</td></tr>
+                <tr><th scope="row"><code>data-ds-open="id"</code>, <code>data-ds-close</code></th><td>Open a <code>&lt;dialog&gt;</code> (dialogs and drawers); close the dialog the button is in.</td></tr>
+                <tr><th scope="row"><code>role="tablist"</code></th><td>ARIA tabs with arrow-key, Home and End support.</td></tr>
+                <tr><th scope="row"><code>data-ds-validate</code></th><td>On a form: validates on submit, writes errors and the error summary.</td></tr>
+                <tr><th scope="row"><code>data-ds-counter</code></th><td>On a textarea with <code>maxlength</code>: characters left.</td></tr>
+                <tr><th scope="row"><code>data-ds-password-toggle</code></th><td>Show or hide a password.</td></tr>
+                <tr><th scope="row"><code>data-ds-strength-for="id"</code></th><td>Password strength meter for the input with that id.</td></tr>
+                <tr><th scope="row"><code>data-ds-sortable</code></th><td>On a table: <code>.ds-sort</code> buttons sort the rows.</td></tr>
+                <tr><th scope="row"><code>data-ds-carousel</code>, <code>data-ds-ticker-toggle</code></th><td>Banner carousel; pause button of the ticker.</td></tr>
+                <tr><th scope="row"><code>data-ds-a11y="…"</code>, <code>data-ds-colour-option="…"</code></th><td>Accessibility panel options; colour theme choice.</td></tr>
+                <tr><th scope="row"><code>data-ds-app-toggle</code>, <code>data-ds-app-close</code></th><td>Collapse the application sidebar (desktop) or open and close it (phones).</td></tr>
+                <tr><th scope="row"><code>data-ds-search-shortcut</code></th><td>Ctrl K or / focuses this search box.</td></tr>
+                <tr><th scope="row"><code>&lt;body data-ds-external-notice&gt;</code></th><td>Shows a notice before opening links to other websites.</td></tr>
+                <tr><th scope="row"><code>MotaDS.toast(message, options)</code></th><td>Shows a toast. Options: <code>type</code> (success, error, warning), <code>timeout</code> in ms (0 keeps it), <code>action</code> and <code>onAction</code>.</td></tr>
+                <tr><th scope="row"><code>MotaDS.openDialog(id)</code>, <code>closeDialog(id)</code></th><td>Open or close a dialog from code.</td></tr>
+                <tr><th scope="row"><code>MotaDS.validate(form)</code></th><td>Validates a form from code; returns true when valid.</td></tr>
+                <tr><th scope="row"><code>MotaDS.setColour(name)</code>, <code>MotaDS.init(root)</code></th><td>Change the theme; set up components inside an element (rarely needed).</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="doc-footer">
+    <div class="ds-container">
+      <p>MoTA Design System v1.0.0 · Ministry of Tribal Affairs, Government of India</p>
+      <p>Built on DBIM v3.0 · GIGW 3.0 · WCAG 2.1 AA</p>
+    </div>
+  </footer>
+  <script src="docs.js"></script>
+  <script src="../dist/js/mota-ds.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+/* ==========================================================================
+   Print - pages print as plain documents with the page address
+   ========================================================================== */
+
+@media print {
+  .ds-skip-link,
+  .ds-menubar,
+  .ds-header-tools,
+  .ds-brandbar__search,
+  .ds-cobrand,
+  .ds-menu-btn,
+  .ds-scroll-progress,
+  .ds-ticker,
+  .ds-carousel__nav,
+  .ds-carousel__controls,
+  .ds-sectabs,
+  .ds-filterbar,
+  .ds-pager,
+  .ds-footer__band,
+  .ds-footer__social,
+  .ds-footer__badges,
+  .ds-back-to-top,
+  .ds-toasts,
+  .ds-app__side,
+  .ds-app__bar,
+  .ds-no-print {
+    display: none !important;
+  }
+
+  .ds-masthead {
+    position: static;
+    box-shadow: none;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+  }
+
+  .ds-pagehead,
+  .ds-footer__main,
+  .ds-footer__meta {
+    background: none !important;
+    color: #000 !important;
+  }
+
+  .ds-footer__main * {
+    color: #000 !important;
+  }
+
+  .ds-footer__identity img {
+    filter: none;
+  }
+
+  .ds-app {
+    display: block;
+  }
+
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+
+  .ds-card,
+  .ds-panel,
+  .ds-table tr,
+  .ds-docrow {
+    break-inside: avoid;
+  }
+}

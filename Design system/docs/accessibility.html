@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" data-ds-colour="forest-green">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accessibility and GIGW 3.0 | MoTA Design System</title>
+  <link rel="icon" href="../dist/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../dist/css/mota-ds.min.css">
+  <link rel="stylesheet" href="../dist/css/mota-ds-icons.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body class="doc-body">
+  <a class="ds-skip-link" href="#main">Skip to main content</a>
+  <header class="doc-top">
+    <div class="ds-container doc-top__inner">
+      <a class="doc-brand" href="../index.html">
+        <img src="../dist/img/emblem.svg" alt="" width="25" height="40">
+        <span><strong>MoTA Design System</strong><span>v1.0 · DBIM v3.0</span></span>
+      </a>
+      <nav aria-label="Documentation"><ul class="doc-nav"><li><a href="../index.html">Overview</a></li><li><a href="foundations.html">Foundations</a></li><li><a href="components.html">Components</a></li><li><a href="../index.html#templates">Templates</a></li><li><a href="accessibility.html" aria-current="page">Accessibility &amp; GIGW</a></li><li><a href="integration.html">Using it in your app</a></li></ul></nav>
+      <div class="doc-themes" role="group" aria-label="Preview colour theme"><button type="button" data-doc-theme="forest-green" style="background:#0f5757" title="Forest Green"><span class="ds-sr-only">Forest Green</span></button><button type="button" data-doc-theme="classic-blue" style="background:#162f6a" title="Classic Blue"><span class="ds-sr-only">Classic Blue</span></button><button type="button" data-doc-theme="midnight-purple" style="background:#29136c" title="Midnight Purple"><span class="ds-sr-only">Midnight Purple</span></button><button type="button" data-doc-theme="burgundy" style="background:#6c1340" title="Burgundy"><span class="ds-sr-only">Burgundy</span></button><button type="button" data-doc-theme="chrome-yellow" style="background:#5d3e00" title="Chrome Yellow"><span class="ds-sr-only">Chrome Yellow</span></button><button type="button" data-doc-theme="cinnamon-red" style="background:#771d1d" title="Cinnamon Red"><span class="ds-sr-only">Cinnamon Red</span></button></div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="ds-container doc-layout">
+      <nav class="doc-toc" aria-label="On this page"><p>On this page</p><ul></ul></nav>
+      <div class="doc-content">
+        <h1 class="doc-page-title">Accessibility and GIGW 3.0</h1>
+        <p class="doc-page-lead">How the design system meets the Government of India web guidelines, and what each application still has to do.</p>
+
+        <section class="doc-section" id="standards">
+          <h2>Standards</h2>
+          <p>The system is built to the <strong>Guidelines for Indian Government Websites and Apps (GIGW 3.0)</strong>, the <strong>Digital Brand Identity Manual (DBIM v3.0)</strong> and <strong>WCAG 2.1 level AA</strong> (also the basis of IS 17802). Every template passes an automated axe-core scan with no WCAG 2.1 A or AA violations.</p>
+          <div class="ds-alert ds-alert--warning ds-mt-4">
+            <span class="ds-icon ds-i-warning" aria-hidden="true"></span>
+            <div class="ds-alert__body"><p class="ds-alert__title">Components do not make an application compliant by themselves</p><p>Content, images, documents and the application's own code must also comply. Before launch, test with a screen reader (NVDA or JAWS on Windows, TalkBack on Android) and with the keyboard only, and get the STQC / CERT-In empanelled audit GIGW requires.</p></div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="checklist">
+          <h2>GIGW 3.0 checklist</h2>
+          <p>What the system provides, and where. Items marked "write" or "set" need action in each application.</p>
+          <div class="ds-table-wrap">
+            <table class="ds-table doc-check">
+              <caption class="ds-sr-only">GIGW 3.0 requirements and the parts of the design system that meet them</caption>
+              <thead><tr><th scope="col">Area</th><th scope="col">Requirement</th><th scope="col">Provided by</th></tr></thead>
+              <tbody><tr><td>Identity</td><td>State Emblem, Ministry name and Government of India in the header, linked to the home page</td><td>Header (<code>.ds-brand</code>)</td></tr><tr><td>Identity</td><td>Footer with copyright, ownership, "last updated" date and the hosting credit</td><td>Footer (<code>.ds-footer__meta</code>)</td></tr><tr><td>Navigation</td><td>"Skip to main content" as the first focusable element</td><td><code>.ds-skip-link</code></td></tr><tr><td>Navigation</td><td>Consistent menu, breadcrumb and page title on every page</td><td>Header, <code>.ds-pagehead</code></td></tr><tr><td>Navigation</td><td>Sitemap with at least two levels; search on every page</td><td><code>.ds-sitemap</code>, <code>.ds-search</code></td></tr><tr><td>Content</td><td>Format and size shown next to every downloadable file</td><td><code>.ds-docrow__meta</code>, <code>.ds-doc-card__meta</code></td></tr><tr><td>Content</td><td>Links to other websites marked and announced before leaving</td><td><code>.ds-ext</code>, <code>&lt;body data-ds-external-notice&gt;</code></td></tr><tr><td>Content</td><td>Website policies: copyright, hyperlinking, privacy, terms, accessibility, disclaimer, archival, content review, security, monitoring, contingency</td><td>Footer links; write the policy pages</td></tr><tr><td>Accessibility</td><td>Text contrast 4.5:1, controls and icons 3:1 (WCAG 1.4.3, 1.4.11)</td><td>Tokens; checked in every theme</td></tr><tr><td>Accessibility</td><td>Everything works with a keyboard; focus is always visible (2.1.1, 2.4.7)</td><td>Base styles, <code>mota-ds.js</code></td></tr><tr><td>Accessibility</td><td>Labels, errors and status messages for screen readers (1.3.1, 3.3.1, 4.1.3)</td><td>Forms, alerts, toasts</td></tr><tr><td>Accessibility</td><td>Text resize to 200%, high contrast, link highlighting, hidden images</td><td>Accessibility panel</td></tr><tr><td>Accessibility</td><td>Moving content can be paused; reduced motion respected (2.2.2, 2.3.3)</td><td>Carousel, ticker</td></tr><tr><td>Accessibility</td><td>Captcha with a non-visual alternative (1.1.1)</td><td><code>.ds-captcha</code> + text question</td></tr><tr><td>Accessibility</td><td>Reflow at 320px without sideways scrolling (1.4.10)</td><td>Layout, stacked tables</td></tr><tr><td>Multilingual</td><td>Language switcher; <code>lang</code> on the page and on any text in another language (3.1.1, 3.1.2)</td><td>Header popover; set <code>lang</code></td></tr><tr><td>Security</td><td>No third-party scripts, fonts or CDNs; works with a strict Content-Security-Policy</td><td>Self-hosted <code>dist/</code></td></tr></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="doc-section" id="writing">
+          <h2>Writing for everyone</h2>
+          <ul>
+            <li>Use short sentences and everyday words. Explain terms such as "PVTG" or "UC" the first time they appear.</li>
+            <li>Write link text that makes sense on its own: "Download the guidelines (PDF, 1.8 MB)", never "click here".</li>
+            <li>Give every image an <code>alt</code> that says what it shows; use <code>alt=""</code> for decoration.</li>
+            <li>Write error messages that say how to fix the problem.</li>
+            <li>Publish documents as accessible PDFs (tagged, with real text, not scans) or as HTML.</li>
+            <li>Write dates as "7 October 2026" and use Indian number grouping (₹1,24,503).</li>
+          </ul>
+        </section>
+
+        <section class="doc-section" id="testing">
+          <h2>Testing your application</h2>
+          <ol>
+            <li><strong>Keyboard:</strong> unplug the mouse. Reach every control with Tab, use it with Enter or Space, and close menus with Esc. Focus must always be visible.</li>
+            <li><strong>Zoom:</strong> zoom the browser to 200% and to a 320px-wide window. Nothing may be cut off or need sideways scrolling.</li>
+            <li><strong>Screen reader:</strong> with NVDA, list the headings (H) and landmarks (D), and fill in a form, including its errors.</li>
+            <li><strong>Automated scan:</strong> run axe DevTools or Lighthouse on every template of the application; fix every violation.</li>
+            <li><strong>Themes:</strong> select each colour theme and the high-contrast mode; everything must stay readable.</li>
+          </ol>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="doc-footer">
+    <div class="ds-container">
+      <p>MoTA Design System v1.0.0 · Ministry of Tribal Affairs, Government of India</p>
+      <p>Built on DBIM v3.0 · GIGW 3.0 · WCAG 2.1 AA</p>
+    </div>
+  </footer>
+  <script src="docs.js"></script>
+  <script src="../dist/js/mota-ds.js"></script>
+</body>
+</html>

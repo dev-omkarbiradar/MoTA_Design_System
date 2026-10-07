@@ -1,0 +1,371 @@
+/* ==========================================================================
+   Feedback - alerts, notice bar, toasts, dialogs, empty states, loading
+   ========================================================================== */
+
+/* ---- Alert (DBIM status colours, Table 1) ------------------------------------
+   Use role="status" for confirmations and role="alert" for errors that need
+   attention immediately. The icon is decorative; the title carries meaning. */
+.ds-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border: 1px solid var(--ds-line);
+  border-left: 4px solid var(--ds-info);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+  font-size: var(--ds-text-sm);
+  --ds-icon-size: 1.25rem;
+}
+
+.ds-alert > .ds-icon {
+  margin-top: 0.0625rem;
+}
+
+.ds-alert__body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.ds-alert__title {
+  margin: 0 0 0.125rem;
+  font-size: var(--ds-text-md);
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-alert__body > p {
+  margin: 0;
+}
+
+.ds-alert__body > p + p {
+  margin-top: var(--ds-space-1);
+}
+
+.ds-alert--info { border-left-color: var(--ds-info); }
+.ds-alert--info > .ds-icon { color: var(--ds-info-fg); }
+.ds-alert--success { border-left-color: var(--ds-success); }
+.ds-alert--success > .ds-icon { color: var(--ds-success-fg); }
+.ds-alert--warning { border-left-color: var(--ds-warning); }
+.ds-alert--warning > .ds-icon { color: var(--ds-warning-fg); }
+.ds-alert--error { border-left-color: var(--ds-danger); }
+.ds-alert--error > .ds-icon { color: var(--ds-danger-fg); }
+
+/* Tinted variant for prominent messages */
+.ds-alert--filled.ds-alert--info { background: var(--ds-info-bg); }
+.ds-alert--filled.ds-alert--success { background: var(--ds-success-bg); }
+.ds-alert--filled.ds-alert--warning { background: var(--ds-warning-bg); }
+.ds-alert--filled.ds-alert--error { background: var(--ds-danger-bg); }
+
+.ds-alert__close {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: -0.125rem -0.25rem 0 auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--ds-ink-2);
+  --ds-icon-size: 1rem;
+}
+
+.ds-alert__close:hover {
+  background: rgb(0 0 0 / 6%);
+}
+
+/* ---- Notice bar: one line across the top of the page (service status, beta) - */
+.ds-notice-bar {
+  padding-block: var(--ds-space-2);
+  background: var(--ds-key-5);
+  color: var(--ds-ink);
+  font-size: var(--ds-text-sm);
+}
+
+.ds-notice-bar .ds-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-2) var(--ds-space-3);
+}
+
+.ds-notice-bar strong {
+  color: var(--ds-key);
+}
+
+/* ---- Toasts: short confirmations, bottom right ---------------------------------
+   mota-ds.js: MotaDS.toast('Saved', { type: 'success' }). The region is a
+   polite live region, so screen readers announce each message. */
+.ds-toasts {
+  position: fixed;
+  right: var(--ds-space-6);
+  bottom: var(--ds-space-6);
+  z-index: var(--ds-z-toast);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--ds-space-2);
+  width: min(24rem, calc(100% - 2rem));
+  pointer-events: none;
+}
+
+.ds-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-3);
+  width: 100%;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-left: 4px solid var(--ds-key);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-ink);
+  color: var(--ds-white);
+  font-size: var(--ds-text-sm);
+  box-shadow: var(--ds-shadow-modal);
+  pointer-events: auto;
+  animation: ds-toast-in 0.25s var(--ds-ease);
+  --ds-icon-size: 1.25rem;
+}
+
+.ds-toast--success { border-left-color: #3ccf7f; }
+.ds-toast--error { border-left-color: #ff6b6b; }
+.ds-toast--warning { border-left-color: var(--ds-warning); }
+
+.ds-toast p {
+  flex: 1 1 auto;
+  margin: 0;
+  color: inherit;
+}
+
+.ds-toast button {
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ds-key-4);
+  font-weight: var(--ds-weight-semibold);
+  text-decoration: underline;
+}
+
+.ds-toast :focus-visible {
+  outline-color: var(--ds-white);
+}
+
+@keyframes ds-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .ds-toasts {
+    right: var(--ds-space-4);
+    bottom: var(--ds-space-4);
+    left: var(--ds-space-4);
+    width: auto;
+  }
+}
+
+/* ---- Dialog -------------------------------------------------------------------------
+   A native <dialog> opened with showModal(): focus is kept inside, Esc closes
+   it and the page behind becomes inert.
+   <dialog class="ds-dialog" id="confirm" aria-labelledby="confirm-title">
+     <div class="ds-dialog__header"><h2 id="confirm-title">…</h2>
+       <button class="ds-dialog__close" data-ds-close aria-label="Close">…</button></div>
+     <div class="ds-dialog__body">…</div>
+     <div class="ds-dialog__footer">…</div>
+   </dialog> */
+.ds-dialog {
+  width: min(40rem, calc(100% - 2rem));
+  max-height: calc(100vh - 2rem);
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+  box-shadow: var(--ds-shadow-modal);
+}
+
+.ds-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  animation: ds-dialog-in 0.2s var(--ds-ease);
+}
+
+.ds-dialog::backdrop {
+  background: rgb(0 0 0 / 60%);
+}
+
+.ds-dialog--sm { width: min(28rem, calc(100% - 2rem)); }
+.ds-dialog--lg { width: min(62.5rem, calc(100% - 2rem)); }
+
+@keyframes ds-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem) scale(0.98);
+  }
+}
+
+.ds-dialog__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ds-space-4);
+  padding: var(--ds-space-5) var(--ds-space-6);
+  border-bottom: 1px solid var(--ds-line);
+}
+
+.ds-dialog__header h2 {
+  margin: 0;
+  color: var(--ds-key);
+  font-size: var(--ds-text-h3);
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-dialog__close {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: transparent;
+  color: var(--ds-ink-2);
+  --ds-icon-size: 1.25rem;
+}
+
+.ds-dialog__close:hover {
+  background: var(--ds-surface-2);
+  color: var(--ds-ink);
+}
+
+.ds-dialog__body {
+  flex: 1 1 auto;
+  padding: var(--ds-space-6);
+  overflow-y: auto;
+}
+
+.ds-dialog__body > :last-child {
+  margin-bottom: 0;
+}
+
+.ds-dialog__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-4) var(--ds-space-6);
+  border-top: 1px solid var(--ds-line);
+  background: var(--ds-surface);
+}
+
+/* ---- Empty, error and no-results states ---------------------------------------------- */
+.ds-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-9) var(--ds-space-4);
+  border: 1px dashed var(--ds-key-4);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-key-5);
+  color: var(--ds-key);
+  text-align: center;
+  --ds-icon-size: 2.5rem;
+}
+
+.ds-state__title {
+  margin: var(--ds-space-2) 0 0;
+  color: var(--ds-key);
+  font-size: var(--ds-text-h3);
+  font-weight: var(--ds-weight-bold);
+}
+
+.ds-state p {
+  max-width: 36rem;
+  margin: 0;
+  color: var(--ds-ink);
+  text-align: center;
+}
+
+.ds-state .ds-btn {
+  margin-top: var(--ds-space-2);
+}
+
+.ds-state--plain {
+  border: 0;
+  background: transparent;
+}
+
+/* ---- Loading ---------------------------------------------------------------------------- */
+.ds-spinner {
+  display: inline-block;
+  width: var(--ds-spinner-size, 1.5rem);
+  height: var(--ds-spinner-size, 1.5rem);
+  border: 3px solid var(--ds-key-4);
+  border-top-color: var(--ds-key);
+  border-radius: 50%;
+  animation: ds-spin 0.8s linear infinite;
+}
+
+.ds-spinner--lg { --ds-spinner-size: 2.75rem; }
+
+.ds-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-9) var(--ds-space-4);
+  color: var(--ds-muted);
+}
+
+/* Placeholder blocks while content loads */
+.ds-skeleton {
+  display: block;
+  height: var(--ds-skeleton-h, 1rem);
+  border-radius: var(--ds-radius-sm);
+  background: linear-gradient(90deg, var(--ds-line) 0%, var(--ds-surface-2) 50%, var(--ds-line) 100%);
+  background-size: 200% 100%;
+  animation: ds-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes ds-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+/* ---- Progress bar ------------------------------------------------------------------------ */
+.ds-progress {
+  width: 100%;
+  height: 0.5rem;
+  overflow: hidden;
+  border-radius: var(--ds-radius-pill);
+  background: var(--ds-key-5);
+}
+
+.ds-progress__bar {
+  display: block;
+  width: var(--ds-progress, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ds-key);
+  transition: width 0.3s var(--ds-ease);
+}
+
+/* Native <progress class="ds-progress"> */
+progress.ds-progress {
+  border: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+progress.ds-progress::-webkit-progress-bar { background: var(--ds-key-5); }
+progress.ds-progress::-webkit-progress-value { border-radius: 999px; background: var(--ds-key); }
+progress.ds-progress::-moz-progress-bar { border-radius: 999px; background: var(--ds-key); }

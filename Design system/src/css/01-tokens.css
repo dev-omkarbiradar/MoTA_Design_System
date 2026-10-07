@@ -1,0 +1,238 @@
+/* ==========================================================================
+   Design tokens
+   --------------------------------------------------------------------------
+   Every colour, size, radius and shadow used by the components. Change a
+   token here (or override it in your own stylesheet after this one) and every
+   component follows.
+
+   Units: rem on a 16px root, so the system sits beside Bootstrap, Angular
+   Material, Kendo, DevExpress and other libraries without changing their sizes.
+   ========================================================================== */
+
+/* ---- Colour themes (DBIM v3.0 §2.1, Figure 1) ------------------------------
+   Six primary colour groups, five shades each, darkest (the key colour) first.
+   Choose one with <html data-ds-colour="…">; Forest Green is the default.
+
+   Derived tokens are precomputed per group (no color-mix), so the system works
+   in every browser GIGW requires, including older enterprise builds.
+     --ds-key          key colour: headings, links, primary buttons, icons
+     --ds-key-2 … -5   lighter shades (-4: soft buttons, -5: light bands)
+     --ds-key-hover    key colour darkened for hover on filled buttons
+     --ds-key-ink      darkest shade, for text on --ds-key-3
+     --ds-tint-soft    key colour at 5% on white  (row hover)
+     --ds-tint         key colour at 8% on white  (icon wells, menu hover)
+     --ds-tint-strong  key colour at 14% on white (pressed, selected)
+     --ds-key-rgb      key colour channels, for rgb(var(--ds-key-rgb) / 20%)
+   Contrast: --ds-key on white and on --ds-key-4/-5 is at least 4.5:1 in every
+   group. --ds-key-2 and --ds-key-3 are for fills and borders, never text.
+   ------------------------------------------------------------------------- */
+:root,
+:root[data-ds-colour='forest-green'] {
+  --ds-key: #0f5757;
+  --ds-key-2: #2d8686;
+  --ds-key-3: #75bdbd;
+  --ds-key-4: #a6d9d9;
+  --ds-key-5: #d9f2f2;
+  --ds-key-hover: #0c4747;
+  --ds-key-ink: #062323;
+  --ds-tint-soft: #f3f7f7;
+  --ds-tint: #ecf2f2;
+  --ds-tint-strong: #dde7e7;
+  --ds-key-rgb: 15 87 87;
+}
+
+:root[data-ds-colour='burgundy'] {
+  --ds-key: #6c1340;
+  --ds-key-2: #a32966;
+  --ds-key-3: #db70a6;
+  --ds-key-4: #ebadcc;
+  --ds-key-5: #faebf2;
+  --ds-key-hover: #591034;
+  --ds-key-ink: #2b081a;
+  --ds-tint-soft: #f8f3f5;
+  --ds-tint: #f3ecf0;
+  --ds-tint-strong: #eadee4;
+  --ds-key-rgb: 108 19 64;
+}
+
+:root[data-ds-colour='midnight-purple'] {
+  --ds-key: #29136c;
+  --ds-key-2: #4729a3;
+  --ds-key-3: #8b70db;
+  --ds-key-4: #bdadeb;
+  --ds-key-5: #eeebfa;
+  --ds-key-hover: #221059;
+  --ds-key-ink: #10082b;
+  --ds-tint-soft: #f4f3f8;
+  --ds-tint: #eeecf3;
+  --ds-tint-strong: #e1deea;
+  --ds-key-rgb: 41 19 108;
+}
+
+:root[data-ds-colour='classic-blue'] {
+  --ds-key: #162f6a;
+  --ds-key-2: #214aab;
+  --ds-key-3: #5279d7;
+  --ds-key-4: #a3bbf3;
+  --ds-key-5: #d2dfff;
+  --ds-key-hover: #122757;
+  --ds-key-ink: #09132a;
+  --ds-tint-soft: #f3f5f8;
+  --ds-tint: #eceef3;
+  --ds-tint-strong: #dee2ea;
+  --ds-key-rgb: 22 47 106;
+}
+
+:root[data-ds-colour='chrome-yellow'] {
+  --ds-key: #5d3e00;
+  --ds-key-2: #916100;
+  --ds-key-3: #dda73a;
+  --ds-key-4: #f4d390;
+  --ds-key-5: #ffeecc;
+  --ds-key-hover: #4c3300;
+  --ds-key-ink: #251900;
+  --ds-tint-soft: #f7f5f2;
+  --ds-tint: #f2f0eb;
+  --ds-tint-strong: #e8e4db;
+  --ds-key-rgb: 93 62 0;
+}
+
+:root[data-ds-colour='cinnamon-red'] {
+  --ds-key: #771d1d;
+  --ds-key-2: #a72626;
+  --ds-key-3: #d75151;
+  --ds-key-4: #faaaaa;
+  --ds-key-5: #fcdada;
+  --ds-key-hover: #621818;
+  --ds-key-ink: #300c0c;
+  --ds-tint-soft: #f8f4f4;
+  --ds-tint: #f4eded;
+  --ds-tint-strong: #ecdfdf;
+  --ds-key-rgb: 119 29 29;
+}
+
+:root {
+  /* ---- Neutrals (DBIM v3.0 Table 1 functional palette) ------------------ */
+  --ds-ink: #150202;          /* Deep Earthy Brown: body text, headings */
+  --ds-ink-2: #3d4043;        /* secondary text on light surfaces */
+  --ds-muted: #606060;        /* Grey 03: meta text, placeholders (5.9:1 on white) */
+  --ds-grey-2: #8e8e8e;       /* Grey 02: input borders, disabled text */
+  --ds-grey-1: #c6c6c6;       /* Grey 01: control borders, ticker band */
+  --ds-line: #ebeaea;         /* Linen: dividers, card borders */
+  --ds-surface: #ffffff;      /* Inclusive White */
+  --ds-surface-2: #f1f1f1;    /* hover on neutral controls */
+  --ds-surface-3: #f5f7f7;    /* application background (dashboards) */
+  --ds-linen: #ebeaea;        /* light band (quote, footer meta) */
+  --ds-white: #ffffff;
+  --ds-black: #000000;
+
+  /* ---- Status colours (DBIM Table 1) ------------------------------------ */
+  --ds-success: #198754;      /* Liberty Green */
+  --ds-warning: #ffc107;      /* Mustard Yellow: borders and fills only */
+  --ds-danger: #dc3545;       /* Coral Red */
+  --ds-info: #0d6efd;         /* Blue */
+  /* Text-safe pairs for badges and messages (4.5:1 or better) */
+  --ds-success-bg: #e7f5ec;
+  --ds-success-fg: #146c2e;
+  --ds-warning-bg: #fff4e5;
+  --ds-warning-fg: #8a4b00;
+  --ds-danger-bg: #fdecee;
+  --ds-danger-fg: #b02a37;
+  --ds-info-bg: #e7f0ff;
+  --ds-info-fg: #0a58ca;
+  --ds-error-text: #c62828;   /* required marker, field errors */
+
+  /* ---- National colours (scroll progress, footer dashes, app bar) ------- */
+  --ds-saffron: #ff9933;
+  --ds-saffron-deep: #e8740c;
+  --ds-india-green: #138808;
+  --ds-india-green-deep: #0e6b05;
+
+  /* ---- Typography (DBIM v3.0 §4.3) --------------------------------------- */
+  --ds-font-sans: 'Noto Sans', 'Noto Sans Oriya', 'Nirmala UI', 'Mangal', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --ds-font-script: 'Allura', 'Noto Sans', cursive;
+  --ds-font-mono: ui-monospace, 'Cascadia Code', Consolas, 'Liberation Mono', monospace;
+
+  --ds-text-h1: 2.25rem;      /* 36px */
+  --ds-text-h2: 1.5rem;       /* 24px */
+  --ds-text-h3: 1.25rem;      /* 20px */
+  --ds-text-h4: 1.125rem;     /* 18px */
+  --ds-text-lg: 1.125rem;     /* 18px  lead paragraphs */
+  --ds-text-md: 1rem;         /* 16px  P1 body */
+  --ds-text-sm: 0.875rem;     /* 14px  P2 secondary */
+  --ds-text-xs: 0.75rem;      /* 12px  captions, labels; the minimum */
+  --ds-leading: 1.5;          /* DBIM §4.5 iii: 1.2–1.5 × type size */
+  --ds-leading-tight: 1.25;
+
+  --ds-weight-light: 300;
+  --ds-weight-regular: 400;
+  --ds-weight-medium: 500;
+  --ds-weight-semibold: 600;
+  --ds-weight-bold: 700;
+  --ds-weight-black: 800;
+
+  /* ---- Spacing (4px base) ------------------------------------------------ */
+  --ds-space-1: 0.25rem;      /* 4  */
+  --ds-space-2: 0.5rem;       /* 8  */
+  --ds-space-3: 0.75rem;      /* 12 */
+  --ds-space-4: 1rem;         /* 16 */
+  --ds-space-5: 1.25rem;      /* 20 */
+  --ds-space-6: 1.5rem;       /* 24 */
+  --ds-space-7: 2rem;         /* 32 */
+  --ds-space-8: 2.5rem;       /* 40 */
+  --ds-space-9: 3rem;         /* 48 */
+  --ds-space-10: 4rem;        /* 64 */
+
+  /* ---- Radii --------------------------------------------------------------
+     DBIM elements (buttons, alerts, tables, segmented tabs) keep sharp 2–4px
+     corners; the newer surfaces (cards, panels, search, menus) use 8–12px. */
+  --ds-radius-xs: 2px;
+  --ds-radius-sm: 4px;
+  --ds-radius-md: 8px;
+  --ds-radius-lg: 12px;
+  --ds-radius-pill: 999px;
+
+  /* ---- Elevation ----------------------------------------------------------- */
+  --ds-shadow-xs: 0 1px 2px rgb(0 0 0 / 5%);
+  --ds-shadow-card: 0 1px 2px rgb(0 0 0 / 6%), 0 6px 18px -8px rgb(0 0 0 / 16%);
+  --ds-shadow-card-hover: 0 2px 4px rgb(0 0 0 / 6%), 0 14px 32px -12px rgb(0 0 0 / 24%);
+  --ds-shadow-dropdown: 0 4px 4px 0 rgb(0 0 0 / 25%);  /* DBIM ToolKit dropdowns */
+  --ds-shadow-panel: 0 2px 6px -2px rgb(0 0 0 / 10%), 0 28px 56px -28px rgb(0 0 0 / 30%);
+  --ds-shadow-modal: 0 8px 24px rgb(0 0 0 / 30%);
+  --ds-shadow-raised: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px -4px rgb(0 0 0 / 14%);
+
+  /* ---- Controls ------------------------------------------------------------ */
+  --ds-control-h-sm: 2.25rem; /* 36px */
+  --ds-control-h: 2.5rem;     /* 40px  inputs, selects, buttons */
+  --ds-control-h-lg: 2.75rem; /* 44px  full-width primary actions (WCAG 2.5.5 target) */
+  --ds-focus-ring: 0 0 0 3px rgb(var(--ds-key-rgb) / 20%);
+  --ds-focus-outline: 2px solid var(--ds-key);
+
+  /* ---- Layout ---------------------------------------------------------------- */
+  --ds-container-max: 120rem; /* 1920px */
+  --ds-gutter: clamp(1rem, 6vw, 7.5rem);
+  --ds-header-offset: 6rem;   /* in-page anchors stop below the sticky menu */
+
+  /* ---- Motion ------------------------------------------------------------------ */
+  --ds-ease: cubic-bezier(0.2, 0, 0, 1);
+  --ds-duration: 0.15s;
+
+  /* ---- Layers -------------------------------------------------------------------- */
+  --ds-z-sticky: 1030;
+  --ds-z-dropdown: 1050;
+  --ds-z-drawer: 1060;
+  --ds-z-modal: 1070;
+  --ds-z-toast: 1080;
+}
+
+/* DBIM v3.0 §4.3.2: smaller headings on phones */
+@media (max-width: 767.98px) {
+  :root {
+    --ds-text-h1: 1.75rem;    /* 28px */
+    --ds-text-h2: 1.375rem;   /* 22px */
+    --ds-text-h3: 1.125rem;   /* 18px */
+    --ds-text-h4: 1rem;
+    --ds-text-lg: 1rem;
+    --ds-gutter: 1rem;
+  }
+}

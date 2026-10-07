@@ -1,0 +1,473 @@
+/* ==========================================================================
+   Data display - tables, document rows, badges, chips, key–value lists,
+   timeline and sitemap
+   ========================================================================== */
+
+/* ---- Table ---------------------------------------------------------------------
+   DBIM §4.1.1 i: text left-aligned, numbers right-aligned (.ds-num), column
+   names centred. Always give a <caption> (visible or .ds-sr-only) and scope
+   on header cells. Wrap in .ds-table-wrap so wide tables scroll on phones. */
+.ds-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-surface);
+}
+
+.ds-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--ds-text-sm);
+}
+
+.ds-table caption {
+  padding: var(--ds-space-4) var(--ds-space-4) var(--ds-space-3);
+  caption-side: top;
+  color: var(--ds-key);
+  font-size: var(--ds-text-h4);
+  font-weight: var(--ds-weight-semibold);
+  text-align: left;
+}
+
+.ds-table thead th {
+  position: sticky;
+  top: 0;
+  padding: var(--ds-space-3) var(--ds-space-4);
+  background: var(--ds-key-4);
+  color: var(--ds-key);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ds-table td,
+.ds-table tbody th {
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-bottom: 1px solid var(--ds-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.ds-table tbody th {
+  color: var(--ds-ink);
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.ds-table tbody tr:hover {
+  background: var(--ds-key-5);
+}
+
+.ds-table .ds-num,
+.ds-table td.num {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.ds-table .ds-nowrap {
+  white-space: nowrap;
+}
+
+.ds-table--striped tbody tr:nth-child(even) {
+  background: var(--ds-tint-soft);
+}
+
+.ds-table--compact td,
+.ds-table--compact tbody th {
+  padding-block: var(--ds-space-2);
+}
+
+.ds-table tfoot td,
+.ds-table tfoot th {
+  padding: var(--ds-space-3) var(--ds-space-4);
+  border-top: 2px solid var(--ds-key-4);
+  font-weight: var(--ds-weight-bold);
+}
+
+/* Sortable column: <th aria-sort="ascending"><button class="ds-sort">Date</button></th> */
+.ds-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+
+.ds-sort::after {
+  content: '\2195';
+  opacity: 0.55;
+}
+
+[aria-sort='ascending'] .ds-sort::after { content: '\2191'; opacity: 1; }
+[aria-sort='descending'] .ds-sort::after { content: '\2193'; opacity: 1; }
+
+/* Row actions: icon buttons at the end of a row */
+.ds-row-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ds-space-1);
+}
+
+/* Phones: each row becomes a card; td[data-label] shows the column name */
+@media (max-width: 767.98px) {
+  .ds-table--stack thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .ds-table--stack tr {
+    display: block;
+    padding: var(--ds-space-3) 0;
+    border-bottom: 1px solid var(--ds-line);
+  }
+
+  .ds-table--stack td,
+  .ds-table--stack tbody th {
+    display: grid;
+    grid-template-columns: 40% minmax(0, 1fr);
+    gap: var(--ds-space-3);
+    padding: var(--ds-space-1) var(--ds-space-4);
+    border: 0;
+    text-align: left !important;
+  }
+
+  .ds-table--stack td[data-label]::before {
+    content: attr(data-label);
+    color: var(--ds-key);
+    font-size: var(--ds-text-xs);
+    font-weight: var(--ds-weight-semibold);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+}
+
+/* ---- Document rows: numbered list of files ------------------------------------------
+   <ol class="ds-docrows"><li><a class="ds-docrow" href="…">
+     <span class="ds-docrow__num">1</span>
+     <span class="ds-docrow__icon"><span class="ds-icon ds-i-pdf"></span></span>
+     <span class="ds-docrow__text"><span class="ds-docrow__label">Annual Report 2025–26</span>
+       <span class="ds-docrow__meta">PDF · 4.2 MB · 12 March 2026</span></span>
+     <span class="ds-docrow__action"><span class="ds-icon ds-i-download"></span></span>
+   </a></li></ol>
+   Always state the format and size of a file (GIGW 3.0). */
+.ds-docrows {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+  list-style: none;
+}
+
+.ds-docrows li + li {
+  border-top: 1px solid var(--ds-line);
+}
+
+.ds-docrow {
+  display: grid;
+  grid-template-columns: 2rem 2.25rem minmax(0, 1fr) 2rem;
+  align-items: center;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-3) var(--ds-space-4);
+  color: var(--ds-ink);
+  text-decoration: none;
+  transition: background-color var(--ds-duration) ease;
+}
+
+.ds-docrow:hover,
+.ds-docrow:focus-visible {
+  background: var(--ds-tint-soft);
+  color: var(--ds-ink);
+}
+
+.ds-docrow:hover .ds-docrow__label {
+  color: var(--ds-key);
+}
+
+.ds-docrow:hover .ds-docrow__action {
+  background: var(--ds-key);
+  color: var(--ds-white);
+}
+
+.ds-docrow__num {
+  color: var(--ds-muted);
+  font-size: var(--ds-text-sm);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.ds-docrow__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-tint);
+  color: var(--ds-key);
+  --ds-icon-size: 1.25rem;
+}
+
+.ds-docrow__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.ds-docrow__label {
+  font-size: 0.9375rem;
+  font-weight: var(--ds-weight-medium);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.ds-docrow__meta {
+  color: var(--ds-muted);
+  font-size: 0.8125rem;
+}
+
+.ds-docrow__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  color: var(--ds-key);
+  transition: background-color var(--ds-duration) ease, color var(--ds-duration) ease;
+  --ds-icon-size: 1.125rem;
+}
+
+@media (max-width: 767.98px) {
+  .ds-docrow {
+    grid-template-columns: 2.25rem minmax(0, 1fr) 2rem;
+    padding: var(--ds-space-3);
+  }
+
+  .ds-docrow__num { display: none; }
+}
+
+/* ---- Badges (status) -----------------------------------------------------------------------
+   Always pair the colour with a word (and optionally an icon): colour alone
+   must not carry meaning (WCAG 1.4.1). */
+.ds-badge {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.25rem;
+  height: 1.5rem;
+  padding: 0 0.625rem;
+  border-radius: var(--ds-radius-pill);
+  background: var(--ds-line);
+  color: var(--ds-ink-2);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  line-height: 1;
+  white-space: nowrap;
+  --ds-icon-size: 0.875rem;
+}
+
+.ds-badge--key { background: var(--ds-key-5); color: var(--ds-key); }
+.ds-badge--solid { background: var(--ds-key); color: var(--ds-white); }
+.ds-badge--success { background: var(--ds-success-bg); color: var(--ds-success-fg); }
+.ds-badge--warning { background: var(--ds-warning-bg); color: var(--ds-warning-fg); }
+.ds-badge--danger { background: var(--ds-danger-bg); color: var(--ds-danger-fg); }
+.ds-badge--info { background: var(--ds-info-bg); color: var(--ds-info-fg); }
+.ds-badge--new { background: var(--ds-saffron-deep); color: #2a1500; }
+
+/* Dot before the text */
+.ds-badge--dot::before {
+  content: '';
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Square tag for document types (PDF, DOCX) */
+.ds-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 1.375rem;
+  padding: 0 0.375rem;
+  border: 1px solid var(--ds-key-4);
+  border-radius: var(--ds-radius-xs);
+  color: var(--ds-key);
+  font-size: 0.6875rem;
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ---- Chips (removable filters) --------------------------------------------------------------- */
+.ds-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  height: 2rem;
+  padding: 0 0.375rem 0 0.75rem;
+  border: 1px solid var(--ds-key-4);
+  border-radius: var(--ds-radius-pill);
+  background: var(--ds-key-5);
+  color: var(--ds-key);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+}
+
+.ds-chip button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  --ds-icon-size: 0.875rem;
+}
+
+.ds-chip button:hover {
+  background: var(--ds-key-4);
+}
+
+/* ---- Key–value list (application details, profile) ----------------------------------------- */
+.ds-dl {
+  display: grid;
+  grid-template-columns: minmax(10rem, 30%) minmax(0, 1fr);
+  margin: 0;
+}
+
+.ds-dl > dt,
+.ds-dl > dd {
+  margin: 0;
+  padding: var(--ds-space-3) 0;
+  border-bottom: 1px solid var(--ds-line);
+}
+
+.ds-dl > dt {
+  padding-right: var(--ds-space-4);
+  color: var(--ds-muted);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+}
+
+.ds-dl > dd {
+  color: var(--ds-ink);
+  font-weight: var(--ds-weight-medium);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 575.98px) {
+  .ds-dl { grid-template-columns: minmax(0, 1fr); }
+  .ds-dl > dt { padding-bottom: 0; border-bottom: 0; }
+  .ds-dl > dd { padding-top: var(--ds-space-1); }
+}
+
+/* ---- Timeline (application status, file movement) --------------------------------------------- */
+.ds-timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-timeline li {
+  position: relative;
+  padding: 0 0 var(--ds-space-6) var(--ds-space-7);
+}
+
+.ds-timeline li::before {
+  content: '';
+  position: absolute;
+  top: 0.3125rem;
+  left: 0.3125rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 2px solid var(--ds-key);
+  border-radius: 50%;
+  background: var(--ds-surface);
+}
+
+.ds-timeline li::after {
+  content: '';
+  position: absolute;
+  top: 1.375rem;
+  bottom: 0.125rem;
+  left: 0.6875rem;
+  width: 2px;
+  background: var(--ds-key-4);
+}
+
+.ds-timeline li:last-child {
+  padding-bottom: 0;
+}
+
+.ds-timeline li:last-child::after {
+  display: none;
+}
+
+.ds-timeline li.is-done::before {
+  background: var(--ds-key);
+}
+
+.ds-timeline li[aria-current='step']::before {
+  background: var(--ds-saffron-deep);
+  border-color: var(--ds-saffron-deep);
+  box-shadow: 0 0 0 4px rgb(232 116 12 / 20%);
+}
+
+.ds-timeline__title {
+  margin: 0;
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-timeline__meta {
+  margin: 0.125rem 0 0;
+  color: var(--ds-muted);
+  font-size: var(--ds-text-sm);
+}
+
+/* ---- Sitemap (DBIM §5.6: at least two levels) --------------------------------------------------- */
+.ds-sitemap {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--ds-space-6);
+}
+
+.ds-sitemap h2 {
+  margin: 0 0 var(--ds-space-3);
+  font-size: var(--ds-text-h3);
+}
+
+.ds-sitemap h2 a {
+  color: var(--ds-key);
+  text-decoration: none;
+}
+
+.ds-sitemap ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.ds-sitemap li {
+  margin-bottom: 0.375rem;
+}

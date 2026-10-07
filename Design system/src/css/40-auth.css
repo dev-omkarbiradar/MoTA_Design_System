@@ -1,0 +1,281 @@
+/* ==========================================================================
+   Sign-in, registration and password screens
+   --------------------------------------------------------------------------
+   One centred card with Ministry branding over the village artwork.
+   ========================================================================== */
+
+.ds-auth {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 50% at 50% 40%, rgb(255 255 255 / 85%), transparent 75%),
+    var(--ds-tint);
+}
+
+.ds-auth::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ds-key-3);
+  -webkit-mask: var(--ds-footer-art, url('../img/footer-band-art.webp')) center bottom / cover no-repeat;
+  mask: var(--ds-footer-art, url('../img/footer-band-art.webp')) center bottom / cover no-repeat;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.ds-auth__home {
+  position: absolute;
+  top: var(--ds-space-6);
+  right: var(--ds-space-6);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: 0.5625rem var(--ds-space-4);
+  border: 1px solid rgb(21 2 2 / 8%);
+  border-radius: var(--ds-radius-md);
+  background: rgb(255 255 255 / 92%);
+  color: var(--ds-ink);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  text-decoration: none;
+  box-shadow: 0 4px 14px -6px rgb(0 0 0 / 20%);
+  --ds-icon-size: 1.125rem;
+}
+
+.ds-auth__home:hover {
+  border-color: var(--ds-key);
+  color: var(--ds-key);
+}
+
+@media (max-width: 575.98px) {
+  .ds-auth__home {
+    top: var(--ds-space-3);
+    right: var(--ds-space-3);
+  }
+}
+
+.ds-auth__main {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-5);
+  width: 100%;
+  padding: 5rem var(--ds-space-4) var(--ds-space-7);
+}
+
+.ds-auth__card {
+  width: 100%;
+  max-width: 38.75rem;
+  padding: var(--ds-space-8) clamp(1.25rem, 4vw, 2.75rem) 2.25rem;
+  border: 1px solid rgb(255 255 255 / 70%);
+  border-radius: var(--ds-radius-lg);
+  background: rgb(255 255 255 / 96%);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 5%), 0 30px 70px -30px rgb(0 0 0 / 35%);
+  text-align: center;
+}
+
+.ds-auth__card--narrow {
+  max-width: 28rem;
+}
+
+.ds-auth__emblem {
+  display: block;
+  width: auto;
+  height: 4.5rem;
+  margin: 0 auto var(--ds-space-3);
+}
+
+.ds-auth__title {
+  margin: 0;
+  color: var(--ds-ink);
+  font-size: clamp(1.625rem, 2.4vw, 2rem);
+  font-weight: var(--ds-weight-black);
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.ds-auth__sub {
+  margin: var(--ds-space-1) 0 0;
+  color: var(--ds-muted);
+  font-size: var(--ds-text-sm);
+  text-align: center;
+}
+
+/* Divider with a word in the middle ("Official sign in", "or continue with") */
+.ds-divider-text {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin: var(--ds-space-6) 0 var(--ds-space-5);
+  color: var(--ds-muted);
+  font-size: 0.8125rem;
+}
+
+.ds-divider-text::before,
+.ds-divider-text::after {
+  content: '';
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--ds-line);
+}
+
+.ds-divider-text--title {
+  color: var(--ds-key);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ds-auth__form {
+  text-align: left;
+}
+
+.ds-auth__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-2) var(--ds-space-4);
+  font-size: var(--ds-text-sm);
+}
+
+/* Single sign-on buttons (Parichay, Jan Parichay, DigiLocker) */
+.ds-sso {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ds-space-3);
+}
+
+.ds-sso a,
+.ds-sso button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 10rem;
+  height: 3.5rem;
+  padding: var(--ds-space-2) var(--ds-space-5);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-surface);
+  transition: border-color var(--ds-duration) ease, box-shadow var(--ds-duration) ease;
+}
+
+.ds-sso a:hover,
+.ds-sso button:hover {
+  border-color: var(--ds-key-3);
+  box-shadow: var(--ds-shadow-card);
+}
+
+.ds-sso img {
+  max-height: 2.5rem;
+  width: auto;
+}
+
+.ds-auth__credit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-3);
+  margin-top: var(--ds-space-6);
+  padding-top: var(--ds-space-5);
+  border-top: 1px solid var(--ds-line);
+  color: var(--ds-ink-2);
+  font-size: 0.8125rem;
+}
+
+.ds-auth__credit img {
+  height: 1.25rem;
+  width: auto;
+}
+
+.ds-auth__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-1);
+  color: var(--ds-ink-2);
+  font-size: 0.9375rem;
+  text-align: center;
+}
+
+.ds-auth__footer p {
+  margin: 0;
+  text-align: center;
+}
+
+.ds-auth__footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ds-space-1) var(--ds-space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--ds-text-sm);
+}
+
+.ds-auth__footer li + li::before {
+  content: '\00B7';
+  margin-right: var(--ds-space-3);
+  color: var(--ds-key);
+}
+
+.ds-auth__footer a {
+  font-weight: var(--ds-weight-semibold);
+  text-decoration: none;
+}
+
+.ds-auth__footer a:hover {
+  text-decoration: underline;
+}
+
+/* Password strength meter: four bars + a word */
+.ds-strength {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  align-items: center;
+  gap: var(--ds-space-1);
+  font-size: var(--ds-text-xs);
+}
+
+.ds-strength span {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ds-line);
+}
+
+.ds-strength[data-level='1'] span:nth-child(-n + 1) { background: var(--ds-danger); }
+.ds-strength[data-level='2'] span:nth-child(-n + 2) { background: var(--ds-warning); }
+.ds-strength[data-level='3'] span:nth-child(-n + 3) { background: var(--ds-key-2); }
+.ds-strength[data-level='4'] span:nth-child(-n + 4) { background: var(--ds-success); }
+
+.ds-strength output {
+  min-width: 4rem;
+  padding-left: var(--ds-space-2);
+  color: var(--ds-ink-2);
+  font-weight: var(--ds-weight-semibold);
+}
+
+/* One-time password: six boxes */
+.ds-otp {
+  display: flex;
+  gap: var(--ds-space-2);
+}
+
+.ds-otp .ds-input {
+  width: 3rem;
+  height: 3.25rem;
+  padding: 0;
+  font-size: 1.375rem;
+  font-weight: var(--ds-weight-semibold);
+  text-align: center;
+}

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" data-ds-colour="forest-green">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MoTA Design System</title>
+  <meta name="description" content="Framework-free HTML, CSS and JavaScript for every web application of the Ministry of Tribal Affairs: DBIM v3.0, GIGW 3.0 and WCAG 2.1 AA.">
+  <link rel="icon" href="dist/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="dist/css/mota-ds.min.css">
+  <link rel="stylesheet" href="dist/css/mota-ds-icons.css">
+  <link rel="stylesheet" href="docs/docs.css">
+</head>
+<body class="doc-body">
+  <a class="ds-skip-link" href="#main">Skip to main content</a>
+
+  <header class="doc-top">
+    <div class="ds-container doc-top__inner">
+      <a class="doc-brand" href="index.html">
+        <img src="dist/img/emblem.svg" alt="" width="25" height="40">
+        <span><strong>MoTA Design System</strong><span>v1.0 · DBIM v3.0</span></span>
+      </a>
+      <nav aria-label="Documentation">
+        <ul class="doc-nav">
+          <li><a href="index.html" aria-current="page">Overview</a></li>
+          <li><a href="docs/foundations.html">Foundations</a></li>
+          <li><a href="docs/components.html">Components</a></li>
+          <li><a href="index.html#templates">Templates</a></li>
+          <li><a href="docs/accessibility.html">Accessibility &amp; GIGW</a></li>
+          <li><a href="docs/integration.html">Using it in your app</a></li>
+        </ul>
+      </nav>
+      <div class="doc-themes" role="group" aria-label="Preview colour theme">
+        <button type="button" data-doc-theme="forest-green" style="background:#0f5757" title="Forest Green"><span class="ds-sr-only">Forest Green</span></button>
+        <button type="button" data-doc-theme="classic-blue" style="background:#162f6a" title="Classic Blue"><span class="ds-sr-only">Classic Blue</span></button>
+        <button type="button" data-doc-theme="midnight-purple" style="background:#29136c" title="Midnight Purple"><span class="ds-sr-only">Midnight Purple</span></button>
+        <button type="button" data-doc-theme="burgundy" style="background:#6c1340" title="Burgundy"><span class="ds-sr-only">Burgundy</span></button>
+        <button type="button" data-doc-theme="chrome-yellow" style="background:#5d3e00" title="Chrome Yellow"><span class="ds-sr-only">Chrome Yellow</span></button>
+        <button type="button" data-doc-theme="cinnamon-red" style="background:#771d1d" title="Cinnamon Red"><span class="ds-sr-only">Cinnamon Red</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="doc-hero ds-on-dark">
+      <div class="ds-container">
+        <p class="doc-hero__eyebrow">Ministry of Tribal Affairs · Government of India</p>
+        <h1>One look for every Ministry application</h1>
+        <p>The MoTA Design System is the visual language of the Ministry's new website, packaged as plain HTML, CSS and JavaScript. Use it to redesign any web application, whether it is built on ASP.NET, Angular, Java or plain HTML, without adding a framework.</p>
+        <div class="ds-cluster">
+          <a class="ds-btn ds-btn--inverse ds-btn--lg" href="docs/integration.html">Start using it<span class="ds-icon ds-i-arrow-forward" aria-hidden="true"></span></a>
+          <a class="ds-btn ds-btn--lg" style="border-color:#fff" href="docs/components.html">Browse components</a>
+        </div>
+        <ul class="doc-facts">
+          <li><strong>60+</strong><span>components and patterns</span></li>
+          <li><strong>7</strong><span>ready page templates</span></li>
+          <li><strong>229</strong><span>DBIM icons</span></li>
+          <li><strong>6</strong><span>DBIM colour themes</span></li>
+          <li><strong>0</strong><span>dependencies or CDNs</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="ds-container doc-layout">
+      <nav class="doc-toc" aria-label="On this page"><p>On this page</p><ul></ul></nav>
+      <div class="doc-content">
+
+        <section class="doc-section" id="principles">
+          <h2>Principles</h2>
+          <p>Every decision in the system follows from five commitments.</p>
+          <ul class="doc-principles">
+            <li><span class="ds-tile__icon"><span class="ds-icon ds-i-ministry" aria-hidden="true"></span></span><h3>Government identity</h3><p>Built on the Digital Brand Identity Manual (DBIM v3.0): the State Emblem, Noto Sans, the six colour groups, DBIM icons and the Template 1 layout.</p></li>
+            <li><span class="ds-tile__icon"><span class="ds-icon ds-i-accessibility" aria-hidden="true"></span></span><h3>Accessible by default</h3><p>Meets WCAG 2.1 AA and GIGW 3.0: contrast, keyboard use, visible focus, screen reader support, text resizing and an accessibility panel.</p></li>
+            <li><span class="ds-tile__icon"><span class="ds-icon ds-i-list" aria-hidden="true"></span></span><h3>Framework-free</h3><p>Class names and data attributes only. Works in Razor, Web Forms, Blazor, Angular, JSP or static HTML, beside Bootstrap or any component library.</p></li>
+            <li><span class="ds-tile__icon"><span class="ds-icon ds-i-translate" aria-hidden="true"></span></span><h3>Multilingual</h3><p>Self-hosted Noto Sans for Latin, Devanagari and Odia. Layouts allow for longer Hindi text, and every message in the script can be translated.</p></li>
+            <li><span class="ds-tile__icon"><span class="ds-icon ds-i-security" aria-hidden="true"></span></span><h3>Secure to host</h3><p>No CDN, no inline script required and no external requests, so a strict Content-Security-Policy works as is. Passes security audit checks.</p></li>
+          </ul>
+        </section>
+
+        <section class="doc-section" id="quick-start">
+          <h2>Quick start</h2>
+          <p>Copy the <code>dist</code> folder into your application's static files, then add two stylesheets in the <code>&lt;head&gt;</code> and one script before <code>&lt;/body&gt;</code>:</p>
+<pre class="doc-pre"><code>&lt;link rel="stylesheet" href="/lib/mota-ds/css/mota-ds.min.css"&gt;
+&lt;link rel="stylesheet" href="/lib/mota-ds/css/mota-ds-icons.css"&gt;
+…
+&lt;script src="/lib/mota-ds/js/mota-ds.js" defer&gt;&lt;/script&gt;</code></pre>
+          <p>Then start from a <a href="#templates">template</a> or build pages from the <a href="docs/components.html">components</a>. Step-by-step instructions for ASP.NET MVC, Razor Pages, Web Forms, Blazor and Angular are in <a href="docs/integration.html">Using it in your app</a>.</p>
+          <div class="ds-alert ds-alert--info ds-mt-4">
+            <span class="ds-icon ds-i-info" aria-hidden="true"></span>
+            <div class="ds-alert__body"><p class="ds-alert__title">Previewing on your computer</p><p>Browsers block fonts and icon files on pages opened straight from disk. Run <code>node serve.mjs</code> in this folder and open <code>http://localhost:4300</code>, or open the folder in any web server.</p></div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="templates">
+          <h2>Page templates</h2>
+          <p>Complete pages assembled from the components. Open one, view its source and copy the parts you need.</p>
+          <ul class="doc-templates">
+            <li class="doc-template"><div class="doc-template__frame"><iframe src="templates/home.html" title="Preview of the home page template" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="doc-template__body"><h3><a href="templates/home.html">Home page</a></h3><p>Header with mega menus, banner, announcements, service tiles, tabs, What's New, documents and footer.</p></div></li>
+            <li class="doc-template"><div class="doc-template__frame"><iframe src="templates/content.html" title="Preview of the content page template" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="doc-template__body"><h3><a href="templates/content.html">Content page</a></h3><p>Page header with section tabs, readable article with table and FAQ, side column.</p></div></li>
+            <li class="doc-template"><div class="doc-template__frame"><iframe src="templates/listing.html" title="Preview of the listing template" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="doc-template__body"><h3><a href="templates/listing.html">Documents and listings</a></h3><p>Search and filters, document rows with format and size, pagination and a sortable table.</p></div></li>
+            <li class="doc-template"><div class="doc-template__frame"><iframe src="templates/form.html" title="Preview of the form template" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="doc-template__body"><h3><a href="templates/form.html">Application form</a></h3><p>Stepper, form sections, every field type, upload, captcha with a text alternative, and validation.</p></div></li>
+            <li class="doc-template"><div class="doc-template__frame"><iframe src="templates/login.html" title="Preview of the sign-in template" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="doc-template__body"><h3><a href="templates/login.html">Sign in</a></h3><p>Branded sign-in card with password toggle, captcha and single sign-on (Parichay).</p></div></li>
+            <li class="doc-template"><div class="doc-template__frame"><iframe src="templates/dashboard.html" title="Preview of the dashboard template" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="doc-template__body"><h3><a href="templates/dashboard.html">Dashboard and back office</a></h3><p>Collapsible sidebar, top bar, key figures, work queue, chart, details and file movement.</p></div></li>
+            <li class="doc-template"><div class="doc-template__frame"><iframe src="templates/404.html" title="Preview of the error page template" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div><div class="doc-template__body"><h3><a href="templates/404.html">Page not found</a></h3><p>Error page with search and links back into the website.</p></div></li>
+          </ul>
+        </section>
+
+        <section class="doc-section" id="contents">
+          <h2>What is in this folder</h2>
+          <div class="ds-table-wrap">
+            <table class="ds-table">
+              <caption class="ds-sr-only">Folders and files of the design system</caption>
+              <thead><tr><th scope="col">Path</th><th scope="col">What it is</th><th scope="col">Copy into your app?</th></tr></thead>
+              <tbody>
+                <tr><th scope="row"><code>dist/css/mota-ds.min.css</code></th><td>All styles: tokens, base, layout, components, accessibility modes, print</td><td>Yes</td></tr>
+                <tr><th scope="row"><code>dist/css/mota-ds-icons.css</code></th><td>95 core icons embedded in the stylesheet</td><td>Yes</td></tr>
+                <tr><th scope="row"><code>dist/css/mota-ds-icons-all.css</code></th><td>All 229 icons, loaded from <code>dist/icons/</code> (optional)</td><td>If needed</td></tr>
+                <tr><th scope="row"><code>dist/js/mota-ds.js</code></th><td>Behaviour: menus, dialogs, tabs, carousel, validation, accessibility panel, toasts</td><td>Yes</td></tr>
+                <tr><th scope="row"><code>dist/fonts/</code></th><td>Noto Sans (Latin, Devanagari), Noto Sans Oriya, Allura, with their licences</td><td>Yes</td></tr>
+                <tr><th scope="row"><code>dist/img/</code></th><td>State Emblem, partner logos, village artwork, banners and personas</td><td>Yes</td></tr>
+                <tr><th scope="row"><code>templates/</code></th><td>Complete page templates to copy from</td><td>Reference</td></tr>
+                <tr><th scope="row"><code>docs/</code></th><td>This documentation</td><td>No</td></tr>
+                <tr><th scope="row"><code>src/</code>, <code>build.mjs</code></th><td>Source files and the build script (<code>node build.mjs</code>), for the team that maintains the system</td><td>No</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="doc-section" id="governance">
+          <h2>Versions and changes</h2>
+          <p>The system follows semantic versioning. Class names, data attributes and token names are the public interface: a minor version adds to them, and only a major version renames or removes anything. Record the version you use (shown in the first line of <code>mota-ds.min.css</code>) in your application's documentation.</p>
+          <p>Change the design system here, in one place, then rebuild and copy <code>dist/</code> to applications. Do not edit the CSS inside an application; put any application-specific styles in a separate stylesheet loaded after it, using the tokens.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="doc-footer">
+    <div class="ds-container">
+      <p>MoTA Design System v1.0.0 · Ministry of Tribal Affairs, Government of India</p>
+      <p>Built on DBIM v3.0 · GIGW 3.0 · WCAG 2.1 AA</p>
+    </div>
+  </footer>
+
+  <script src="docs/docs.js"></script>
+  <script src="dist/js/mota-ds.js"></script>
+</body>
+</html>

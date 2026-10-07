@@ -1,0 +1,281 @@
+/* ==========================================================================
+   Buttons (DBIM §4.5 i, Figure 19: distinct enabled, hover, focus, disabled)
+   --------------------------------------------------------------------------
+   .ds-btn                 primary: key-colour fill, white text
+   .ds-btn--soft           DBIM "download" button: key text on the light shade
+   .ds-btn--outline        key-colour border on white
+   .ds-btn--ghost          text only, for low-emphasis actions
+   .ds-btn--dark           near-black fill (header Sign in)
+   .ds-btn--danger         destructive actions (delete, withdraw)
+   Sizes: --sm (32px), default (40px), --lg (44px); --block fills the width;
+   --icon is a square icon-only button and needs an aria-label.
+   Use <button> for actions and <a> for navigation; both look the same.
+   ========================================================================== */
+
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+  min-height: var(--ds-control-h);
+  padding: 0 1.125rem;
+  border: 1px solid var(--ds-key);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-key);
+  color: var(--ds-white);
+  font-family: inherit;
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-semibold);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--ds-duration) ease, border-color var(--ds-duration) ease, color var(--ds-duration) ease, box-shadow var(--ds-duration) ease;
+  --ds-icon-size: 1.125rem;
+}
+
+.ds-btn:hover {
+  border-color: var(--ds-key-hover);
+  background: var(--ds-key-hover);
+  color: var(--ds-white);
+  text-decoration: none;
+}
+
+.ds-btn:focus-visible {
+  outline: 2px solid var(--ds-ink);
+  outline-offset: 2px;
+}
+
+.ds-btn:active {
+  transform: translateY(1px);
+}
+
+/* Soft: DBIM ToolKit download-btn */
+.ds-btn--soft {
+  border-color: var(--ds-key-4);
+  background: var(--ds-key-4);
+  color: var(--ds-key);
+}
+
+.ds-btn--soft:hover {
+  border-color: var(--ds-key);
+  background: var(--ds-key);
+  color: var(--ds-white);
+}
+
+/* Outline: DBIM ToolKit download-outline-btn */
+.ds-btn--outline {
+  border-color: var(--ds-key);
+  background: var(--ds-surface);
+  color: var(--ds-key);
+}
+
+.ds-btn--outline:hover {
+  border-color: var(--ds-key);
+  background: var(--ds-key-4);
+  color: var(--ds-key);
+}
+
+.ds-btn--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--ds-key);
+}
+
+.ds-btn--ghost:hover {
+  border-color: transparent;
+  background: var(--ds-tint);
+  color: var(--ds-key);
+}
+
+.ds-btn--neutral {
+  border-color: var(--ds-grey-1);
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+}
+
+.ds-btn--neutral:hover {
+  border-color: var(--ds-grey-2);
+  background: var(--ds-surface-2);
+  color: var(--ds-ink);
+}
+
+.ds-btn--dark {
+  border-color: var(--ds-ink);
+  background: var(--ds-ink);
+  color: var(--ds-white);
+  border-radius: var(--ds-radius-sm);
+}
+
+.ds-btn--dark:hover {
+  border-color: var(--ds-key);
+  background: var(--ds-key);
+}
+
+.ds-btn--danger {
+  border-color: var(--ds-danger-fg);
+  background: var(--ds-danger-fg);
+  color: var(--ds-white);
+}
+
+.ds-btn--danger:hover {
+  border-color: #8f1f2a;
+  background: #8f1f2a;
+  color: var(--ds-white);
+}
+
+/* On a key-colour band */
+.ds-btn--inverse {
+  border-color: var(--ds-white);
+  background: var(--ds-white);
+  color: var(--ds-key);
+}
+
+.ds-btn--inverse:hover {
+  border-color: var(--ds-white);
+  background: var(--ds-key-5);
+  color: var(--ds-key);
+}
+
+/* ---- Sizes ------------------------------------------------------------------------ */
+.ds-btn--sm {
+  min-height: 2rem;
+  padding: 0 0.75rem;
+  font-size: var(--ds-text-xs);
+  --ds-icon-size: 1rem;
+}
+
+.ds-btn--lg {
+  min-height: var(--ds-control-h-lg);
+  padding: 0 1.5rem;
+  font-size: var(--ds-text-md);
+  --ds-icon-size: 1.25rem;
+}
+
+.ds-btn--block {
+  display: flex;
+  width: 100%;
+}
+
+/* DBIM "VIEW MORE" style: small capitals */
+.ds-btn--caps {
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ds-btn--icon {
+  width: var(--ds-control-h);
+  padding: 0;
+}
+
+.ds-btn--icon.ds-btn--sm { width: 2rem; }
+.ds-btn--icon.ds-btn--lg { width: var(--ds-control-h-lg); }
+
+/* Raised primary action (sign in, submit application) */
+.ds-btn--raised {
+  box-shadow: 0 8px 20px -8px rgb(var(--ds-key-rgb) / 60%);
+}
+
+/* ---- Disabled and busy -------------------------------------------------------------- */
+.ds-btn:disabled,
+.ds-btn[aria-disabled='true'],
+.ds-btn.is-disabled {
+  border-color: var(--ds-grey-1) !important;
+  background: var(--ds-line) !important;
+  color: var(--ds-grey-2) !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* <button class="ds-btn" aria-busy="true"> shows a spinner and keeps its width */
+.ds-btn[aria-busy='true'] {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.ds-btn[aria-busy='true']::after {
+  content: '';
+  position: absolute;
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 2px solid var(--ds-white);
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: ds-spin 0.7s linear infinite;
+}
+
+.ds-btn--outline[aria-busy='true']::after,
+.ds-btn--soft[aria-busy='true']::after,
+.ds-btn--ghost[aria-busy='true']::after,
+.ds-btn--neutral[aria-busy='true']::after {
+  border-color: var(--ds-key);
+  border-right-color: transparent;
+}
+
+@keyframes ds-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Button group: segmented actions ------------------------------------------------- */
+.ds-btn-group {
+  display: inline-flex;
+}
+
+.ds-btn-group > .ds-btn + .ds-btn {
+  margin-left: -1px;
+}
+
+.ds-btn-group > .ds-btn:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ds-btn-group > .ds-btn:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* ---- Text link with an arrow ("View all", "Read more") -------------------------------- */
+.ds-link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  color: var(--ds-key);
+  font-weight: var(--ds-weight-semibold);
+  text-decoration: none;
+  --ds-icon-size: 1rem;
+}
+
+.ds-link-arrow:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ds-link-arrow .ds-icon {
+  transition: transform var(--ds-duration) ease;
+}
+
+.ds-link-arrow:hover .ds-icon {
+  transform: translateX(2px);
+}
+
+/* Visible marker after links that open another website (GIGW 3.0) */
+.ds-ext::after {
+  content: '';
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  margin-left: 0.25em;
+  background-color: currentColor;
+  -webkit-mask: var(--ds-icon-ext) center / contain no-repeat;
+  mask: var(--ds-icon-ext) center / contain no-repeat;
+  vertical-align: -0.05em;
+}
+
+:root {
+  --ds-icon-ext: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z'/%3E%3C/svg%3E");
+}

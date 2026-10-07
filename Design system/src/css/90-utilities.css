@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Utilities - small single-purpose helpers. Prefer components; use these
+   for one-off adjustments only.
+   ========================================================================== */
+
+.ds-text-key { color: var(--ds-key) !important; }
+.ds-text-muted { color: var(--ds-muted) !important; }
+.ds-text-ink { color: var(--ds-ink) !important; }
+.ds-text-success { color: var(--ds-success-fg) !important; }
+.ds-text-danger { color: var(--ds-danger-fg) !important; }
+
+.ds-text-sm { font-size: var(--ds-text-sm) !important; }
+.ds-text-xs { font-size: var(--ds-text-xs) !important; }
+.ds-text-lg { font-size: var(--ds-text-lg) !important; }
+.ds-fw-semibold { font-weight: var(--ds-weight-semibold) !important; }
+.ds-fw-bold { font-weight: var(--ds-weight-bold) !important; }
+.ds-text-center { text-align: center !important; }
+.ds-text-end { text-align: right !important; }
+.ds-nums { font-variant-numeric: tabular-nums; }
+.ds-nowrap { white-space: nowrap; }
+.ds-break { overflow-wrap: anywhere; }
+
+.ds-clamp-2,
+.ds-clamp-3 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
+.ds-clamp-2 { -webkit-line-clamp: 2; line-clamp: 2; }
+.ds-clamp-3 { -webkit-line-clamp: 3; line-clamp: 3; }
+
+.ds-bg-surface { background: var(--ds-surface) !important; }
+.ds-bg-tint { background: var(--ds-key-5) !important; }
+.ds-bg-linen { background: var(--ds-linen) !important; }
+
+.ds-m-0 { margin: 0 !important; }
+.ds-mt-0 { margin-top: 0 !important; }
+.ds-mt-2 { margin-top: var(--ds-space-2) !important; }
+.ds-mt-4 { margin-top: var(--ds-space-4) !important; }
+.ds-mt-6 { margin-top: var(--ds-space-6) !important; }
+.ds-mt-8 { margin-top: var(--ds-space-8) !important; }
+.ds-mb-0 { margin-bottom: 0 !important; }
+.ds-mb-2 { margin-bottom: var(--ds-space-2) !important; }
+.ds-mb-4 { margin-bottom: var(--ds-space-4) !important; }
+.ds-mb-6 { margin-bottom: var(--ds-space-6) !important; }
+.ds-mb-8 { margin-bottom: var(--ds-space-8) !important; }
+.ds-ml-auto { margin-left: auto !important; }
+
+.ds-p-0 { padding: 0 !important; }
+.ds-p-4 { padding: var(--ds-space-4) !important; }
+.ds-p-6 { padding: var(--ds-space-6) !important; }
+
+.ds-w-100 { width: 100% !important; }
+.ds-flex { display: flex !important; }
+.ds-items-center { align-items: center !important; }
+.ds-justify-between { justify-content: space-between !important; }
+.ds-gap-2 { gap: var(--ds-space-2) !important; }
+.ds-gap-4 { gap: var(--ds-space-4) !important; }
+.ds-grow { flex: 1 1 auto !important; min-width: 0; }
+
+.ds-rounded { border-radius: var(--ds-radius-md) !important; }
+.ds-border { border: 1px solid var(--ds-line) !important; }
+.ds-shadow { box-shadow: var(--ds-shadow-card) !important; }
+
+.ds-divider {
+  height: 1px;
+  margin: var(--ds-space-6) 0;
+  border: 0;
+  background: var(--ds-line);
+}
+
+/* Show only on phones / only from 768px / only from 992px */
+@media (min-width: 768px) { .ds-only-mobile { display: none !important; } }
+@media (max-width: 767.98px) { .ds-hide-mobile { display: none !important; } }
+@media (max-width: 991.98px) { .ds-only-desktop { display: none !important; } }
+
+/* Unstyled list */
+.ds-list-plain {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Inline list separated by dots */
+.ds-list-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-1) 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-list-dots > li + li::before {
+  content: '\00B7';
+  margin-inline: var(--ds-space-2);
+  color: var(--ds-muted);
+}

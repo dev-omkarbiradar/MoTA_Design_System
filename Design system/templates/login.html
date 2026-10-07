@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" data-ds-colour="forest-green">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | Ministry of Tribal Affairs, Government of India</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="../dist/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../dist/css/mota-ds.min.css">
+  <link rel="stylesheet" href="../dist/css/mota-ds-icons.css">
+</head>
+<body>
+  <a class="ds-skip-link" href="#main">Skip to main content</a>
+  <div class="ds-auth">
+    <a class="ds-auth__home" href="home.html"><span class="ds-icon ds-i-home" aria-hidden="true"></span>Back to Home</a>
+
+    <main class="ds-auth__main" id="main" tabindex="-1">
+      <div class="ds-auth__card">
+        <img class="ds-auth__emblem" src="../dist/img/emblem.svg" alt="State Emblem of India" width="45" height="72">
+        <h1 class="ds-auth__title">Ministry of Tribal Affairs</h1>
+        <p class="ds-auth__sub">Government of India</p>
+
+        <p class="ds-divider-text ds-divider-text--title">Official sign in</p>
+
+        <form class="ds-form ds-auth__form" action="dashboard.html" method="post" data-ds-validate novalidate autocomplete="on">
+          <div class="ds-form-grid">
+            <div class="ds-field">
+              <label class="ds-label" for="username">Username or employee code <span class="ds-req" aria-hidden="true">*</span></label>
+              <input class="ds-input" id="username" name="username" required autocomplete="username" spellcheck="false" placeholder="e.g. rkumar">
+            </div>
+            <div class="ds-field">
+              <label class="ds-label" for="password">Password <span class="ds-req" aria-hidden="true">*</span></label>
+              <div class="ds-input-group">
+                <input class="ds-input" id="password" name="password" type="password" required autocomplete="current-password">
+                <button class="ds-input-group__btn" type="button" aria-controls="password" aria-label="Show password" aria-pressed="false" data-ds-password-toggle><span class="ds-icon ds-i-view" aria-hidden="true"></span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ds-field">
+            <label class="ds-label" for="captcha">Security check <span class="ds-req" aria-hidden="true">*</span></label>
+            <div class="ds-captcha">
+              <span class="ds-captcha__image"><svg viewBox="0 0 120 40" role="img" aria-label="Security code image"><rect width="120" height="40" fill="#fff"/><path d="M4 30 C30 6, 60 38, 116 10" stroke="#8e8e8e" fill="none"/><text x="12" y="28" font-size="22" font-family="serif" fill="#3d4043" transform="rotate(-4 60 20)">R5JVWA</text></svg></span>
+              <button class="ds-btn ds-btn--neutral ds-btn--icon" type="button" aria-label="New security code"><span class="ds-icon ds-i-refresh" aria-hidden="true"></span></button>
+              <input class="ds-input" id="captcha" name="captcha" required autocomplete="off" placeholder="Type the code" data-ds-label="the security code">
+            </div>
+            <button class="ds-captcha__switch" type="button">Cannot see the image? Answer a text question instead</button>
+          </div>
+
+          <div class="ds-auth__row">
+            <label class="ds-check"><input type="checkbox" name="remember"> Remember my username on this device</label>
+            <a href="#" class="ds-fw-semibold">Forgot password?</a>
+          </div>
+
+          <button class="ds-btn ds-btn--lg ds-btn--block ds-btn--raised" type="submit"><span class="ds-icon ds-i-login" aria-hidden="true"></span>Sign in</button>
+        </form>
+
+        <p class="ds-divider-text">or continue with</p>
+        <div class="ds-sso">
+          <a href="#" aria-label="Sign in with Parichay"><img src="../dist/img/parichay.png" alt=""></a>
+        </div>
+
+        <p class="ds-auth__credit">Designed, developed and hosted by <img src="../dist/img/logos/nic.svg" alt="National Informatics Centre"></p>
+      </div>
+
+      <div class="ds-auth__footer">
+        <p>© 2026 Government of India · Ministry of Tribal Affairs</p>
+        <ul>
+          <li><a href="content.html">Privacy Policy</a></li>
+          <li><a href="content.html">Terms of Use</a></li>
+          <li><a href="content.html">Help</a></li>
+        </ul>
+      </div>
+    </main>
+  </div>
+  <script src="../dist/js/mota-ds.js"></script>
+</body>
+</html>

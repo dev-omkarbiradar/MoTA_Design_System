@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="en" data-ds-colour="forest-green">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Components | MoTA Design System</title>
+  <link rel="icon" href="../dist/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../dist/css/mota-ds.min.css">
+  <link rel="stylesheet" href="../dist/css/mota-ds-icons.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body class="doc-body">
+  <a class="ds-skip-link" href="#main">Skip to main content</a>
+  <header class="doc-top">
+    <div class="ds-container doc-top__inner">
+      <a class="doc-brand" href="../index.html">
+        <img src="../dist/img/emblem.svg" alt="" width="25" height="40">
+        <span><strong>MoTA Design System</strong><span>v1.0 · DBIM v3.0</span></span>
+      </a>
+      <nav aria-label="Documentation"><ul class="doc-nav"><li><a href="../index.html">Overview</a></li><li><a href="foundations.html">Foundations</a></li><li><a href="components.html" aria-current="page">Components</a></li><li><a href="../index.html#templates">Templates</a></li><li><a href="accessibility.html">Accessibility &amp; GIGW</a></li><li><a href="integration.html">Using it in your app</a></li></ul></nav>
+      <div class="doc-themes" role="group" aria-label="Preview colour theme"><button type="button" data-doc-theme="forest-green" style="background:#0f5757" title="Forest Green"><span class="ds-sr-only">Forest Green</span></button><button type="button" data-doc-theme="classic-blue" style="background:#162f6a" title="Classic Blue"><span class="ds-sr-only">Classic Blue</span></button><button type="button" data-doc-theme="midnight-purple" style="background:#29136c" title="Midnight Purple"><span class="ds-sr-only">Midnight Purple</span></button><button type="button" data-doc-theme="burgundy" style="background:#6c1340" title="Burgundy"><span class="ds-sr-only">Burgundy</span></button><button type="button" data-doc-theme="chrome-yellow" style="background:#5d3e00" title="Chrome Yellow"><span class="ds-sr-only">Chrome Yellow</span></button><button type="button" data-doc-theme="cinnamon-red" style="background:#771d1d" title="Cinnamon Red"><span class="ds-sr-only">Cinnamon Red</span></button></div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="ds-container doc-layout">
+      <nav class="doc-toc" aria-label="On this page"><p>On this page</p><ul></ul></nav>
+      <div class="doc-content">
+        <h1 class="doc-page-title">Components</h1>
+        <p class="doc-page-lead">Every component with a live example, its markup and guidance. Select "Copy code" under an example to use it.</p>
+
+        <section class="doc-section" id="header">
+          <h2>Header</h2>
+          <p>The DBIM Global Header: emblem and names on the left, then search, up to two co-branding logos, utility controls and Sign in. The menu bar below opens mega menus. Below 992px the menu bar is replaced by a <strong>Menu</strong> button that opens a drawer. On scroll the brand bar moves away and the menu bar stays at the top.</p>
+          <div class="doc-example doc-example--flush">
+<header class="ds-masthead">
+  <div class="ds-brandbar">
+    <div class="ds-container ds-brandbar__inner">
+      <a class="ds-brand" href="#">
+        <img class="ds-brand__emblem" src="../dist/img/emblem.svg" alt="State Emblem of India" width="69" height="112">
+        <span class="ds-brand__text">
+          <span class="ds-brand__gov">Government of India</span>
+          <span class="ds-brand__name">Ministry of Tribal Affairs</span>
+          <span class="ds-sr-only">(home page)</span>
+        </span>
+      </a>
+      <div class="ds-brandbar__search">
+        <form class="ds-search" role="search" action="#">
+          <label class="ds-sr-only" for="hdr-search">Search this website</label>
+          <div class="ds-search__box">
+            <span class="ds-icon ds-i-search ds-search__icon" aria-hidden="true"></span>
+            <input class="ds-search__input" id="hdr-search" name="q" type="search" placeholder="Search services, schemes, documents…">
+          </div>
+        </form>
+      </div>
+      <div class="ds-header-tools">
+        <div class="ds-popover-anchor">
+          <button class="ds-icon-btn" type="button" aria-expanded="false" aria-controls="hdr-lang" data-ds-popover title="Language">
+            <span class="ds-icon ds-i-translate" aria-hidden="true"></span><span class="ds-sr-only">Language: English</span>
+          </button>
+          <div class="ds-popover" id="hdr-lang" hidden>
+            <ul class="ds-popover__list">
+              <li><a class="ds-popover__option" href="#" hreflang="en" lang="en" aria-current="true">English</a></li>
+              <li><a class="ds-popover__option" href="#" hreflang="hi" lang="hi">हिन्दी</a></li>
+            </ul>
+          </div>
+        </div>
+        <span class="ds-header-tools__sep" aria-hidden="true"></span>
+        <a class="ds-btn ds-btn--dark ds-header-signin" href="#">Sign in</a>
+      </div>
+      <button class="ds-menu-btn" type="button" data-ds-open="doc-drawer" aria-haspopup="dialog"><span class="ds-icon ds-i-menu" aria-hidden="true"></span>Menu</button>
+    </div>
+  </div>
+  <nav class="ds-menubar" aria-label="Main">
+    <div class="ds-container">
+      <ul class="ds-menubar__list">
+        <li class="ds-menubar__item"><a class="ds-menubar__link" href="#" aria-current="page">Home</a></li>
+        <li class="ds-menubar__item">
+          <button class="ds-menubar__link" type="button" aria-expanded="false" aria-controls="hdr-mm" data-ds-megamenu>Ministry <span class="ds-icon ds-i-chevron-down" aria-hidden="true"></span></button>
+          <div class="ds-megamenu" id="hdr-mm" hidden>
+            <div class="ds-megamenu__main">
+              <div class="ds-megamenu__group">
+                <p class="ds-megamenu__heading">About</p>
+                <ul class="ds-megamenu__list">
+                  <li><a class="ds-megamenu__link" href="#"><span class="ds-megamenu__icon"><span class="ds-icon ds-i-ministry" aria-hidden="true"></span></span><span class="ds-megamenu__text"><span class="ds-megamenu__title">About the Ministry</span><span class="ds-megamenu__desc">Mandate, history and functions</span></span></a></li>
+                  <li><a class="ds-megamenu__link" href="#"><span class="ds-megamenu__icon"><span class="ds-icon ds-i-users" aria-hidden="true"></span></span><span class="ds-megamenu__text"><span class="ds-megamenu__title">Who's Who</span><span class="ds-megamenu__desc">Ministers and senior officers</span></span></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="ds-megamenu__aside">
+              <p class="ds-megamenu__heading">Quick links</p>
+              <ul class="ds-megamenu__list">
+                <li><a class="ds-megamenu__link" href="#"><span class="ds-megamenu__title">Right to Information</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="ds-menubar__item"><a class="ds-menubar__link" href="#">Documents</a></li>
+        <li class="ds-menubar__item"><a class="ds-menubar__link" href="#">Connect</a></li>
+      </ul>
+    </div>
+  </nav>
+  <span class="ds-scroll-progress" aria-hidden="true"></span>
+</header>
+<dialog class="ds-drawer" id="doc-drawer" aria-labelledby="doc-drawer-title">
+  <div class="ds-drawer__head">
+    <h2 id="doc-drawer-title">Menu</h2>
+    <button class="ds-dialog__close" type="button" data-ds-close aria-label="Close menu"><span class="ds-icon ds-i-close" aria-hidden="true"></span></button>
+  </div>
+  <nav aria-label="Main">
+    <ul class="ds-navlist">
+      <li><a href="#" aria-current="page">Home</a></li>
+      <li><details><summary>Ministry</summary><ul><li><a href="#">About the Ministry</a></li><li><a href="#">Who's Who</a></li></ul></details></li>
+      <li><a href="#">Documents</a></li>
+    </ul>
+  </nav>
+</dialog>
+          </div>
+          <div class="doc-note">
+            <div class="doc-do"><h4>Do</h4><ul><li>Keep the emblem and both names on every page; link them to the home page.</li><li>Put at most two co-branding logos (flagship programmes) beside the search.</li><li>Use the same menu on every page.</li></ul></div>
+            <div class="doc-dont"><h4>Don't</h4><ul><li>Open menus on hover only; they open on click or Enter so keyboard and touch users can reach them.</li><li>Add more than six or seven top-level items.</li></ul></div>
+            <div class="doc-a11y"><h4>Accessibility</h4><ul><li>The brand link's name is its visible text plus (home page) (WCAG 2.5.3).</li><li>Menu buttons report <code>aria-expanded</code>; Esc closes the open menu and returns focus.</li><li>The drawer is a native <code>&lt;dialog&gt;</code>: focus stays inside until it is closed.</li></ul></div>
+          </div>
+
+          <p>The full header, with language, colour theme and accessibility controls, is in the <a href="../templates/home.html">home page template</a>.</p>
+        </section>
+
+        <section class="doc-section" id="page-header">
+          <h2>Page header, breadcrumb and section tabs</h2>
+          <p>Every inner page opens with a light band: breadcrumb, the page title as the only H1, an optional summary and actions, and tabs linking to the other pages of the section.</p>
+          <div class="doc-example doc-example--flush">
+<div class="ds-pagehead">
+  <div class="ds-container">
+    <nav aria-label="Breadcrumb">
+      <ol class="ds-breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Connect</a></li>
+        <li aria-current="page">Feedback</li>
+      </ol>
+    </nav>
+    <div class="ds-pagehead__row">
+      <div>
+        <h1 class="ds-pagehead__title">Feedback</h1>
+        <p class="ds-pagehead__lead">Tell us what works and what we should improve.</p>
+      </div>
+      <div class="ds-pagehead__actions"><a class="ds-btn ds-btn--outline" href="#"><span class="ds-icon ds-i-call" aria-hidden="true"></span>Helpdesk</a></div>
+    </div>
+    <nav aria-label="In this section">
+      <ul class="ds-sectabs">
+        <li><a href="#"><span class="ds-icon ds-i-call" aria-hidden="true"></span>Contact Us</a></li>
+        <li><a href="#"><span class="ds-icon ds-i-directory" aria-hidden="true"></span>Directory</a></li>
+        <li><a href="#" aria-current="page"><span class="ds-icon ds-i-feedback" aria-hidden="true"></span>Feedback</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+          </div>
+          <div class="doc-note">
+            <div class="doc-a11y"><h4>Accessibility</h4><ul><li>The current page is marked with <code>aria-current="page"</code> in the breadcrumb and the tabs, not by colour alone.</li><li>Section tabs are links between pages, so they are not ARIA tabs.</li></ul></div>
+          </div>
+
+        </section>
+
+        <section class="doc-section" id="buttons">
+          <h2>Buttons</h2>
+          <p>One primary action per screen. Use <code>&lt;button&gt;</code> for actions and <code>&lt;a&gt;</code> for navigation; both take the same classes.</p>
+          <div class="doc-example">
+<div class="ds-cluster">
+  <button class="ds-btn" type="button">Submit application</button>
+  <button class="ds-btn ds-btn--soft" type="button"><span class="ds-icon ds-i-download" aria-hidden="true"></span>Download</button>
+  <button class="ds-btn ds-btn--outline" type="button">Save draft</button>
+  <button class="ds-btn ds-btn--neutral" type="button">Export</button>
+  <button class="ds-btn ds-btn--ghost" type="button">Cancel</button>
+  <button class="ds-btn ds-btn--danger" type="button">Delete</button>
+  <button class="ds-btn ds-btn--dark" type="button">Sign in</button>
+</div>
+<div class="ds-cluster ds-mt-4">
+  <button class="ds-btn ds-btn--sm ds-btn--outline ds-btn--caps" type="button">View more <span class="ds-icon ds-i-chevron-right" aria-hidden="true"></span></button>
+  <button class="ds-btn ds-btn--lg ds-btn--raised" type="button">Sign in</button>
+  <button class="ds-btn ds-btn--icon ds-btn--outline" type="button" aria-label="Edit"><span class="ds-icon ds-i-edit" aria-hidden="true"></span></button>
+  <button class="ds-btn" type="button" disabled>Disabled</button>
+  <button class="ds-btn" type="button" aria-busy="true">Saving</button>
+  <a class="ds-link-arrow" href="#">All documents <span class="ds-icon ds-i-arrow-forward" aria-hidden="true"></span></a>
+</div>
+          </div>
+          <div class="doc-note">
+            <div class="doc-do"><h4>Do</h4><ul><li>Label buttons with what they do: "Submit application", not "OK".</li><li>Use <code>--lg --block</code> for the main action of a short form on phones.</li></ul></div>
+            <div class="doc-dont"><h4>Don't</h4><ul><li>Put two primary buttons side by side.</li><li>Use a link styled as a button to submit a form.</li></ul></div>
+            <div class="doc-a11y"><h4>Accessibility</h4><ul><li>Icon-only buttons need an <code>aria-label</code>.</li><li>Set <code>aria-busy="true"</code> while saving; the label stays for screen readers.</li><li>Focus shows a 2px outline in every state.</li></ul></div>
+          </div>
+
+        </section>
+
+        <section class="doc-section" id="forms">
+          <h2>Form fields</h2>
+          <p>Each field is a <code>.ds-field</code> with a visible label, an optional hint and the control. Mark required fields with <code>required</code> and a red asterisk, and tell users at the top of the form what the asterisk means.</p>
+          <div class="doc-example">
+<div class="ds-form-grid">
+  <div class="ds-field">
+    <label class="ds-label" for="ex-name">Full name <span class="ds-req" aria-hidden="true">*</span></label>
+    <input class="ds-input" id="ex-name" required autocomplete="name">
+  </div>
+  <div class="ds-field">
+    <label class="ds-label" for="ex-aadhaar">Last four digits of Aadhaar <span class="ds-optional">(optional)</span></label>
+    <p class="ds-hint" id="ex-aadhaar-hint">We never ask for the full number.</p>
+    <input class="ds-input ds-input--w10" id="ex-aadhaar" inputmode="numeric" maxlength="4" aria-describedby="ex-aadhaar-hint">
+  </div>
+  <div class="ds-field">
+    <label class="ds-label" for="ex-email">Email address <span class="ds-req" aria-hidden="true">*</span></label>
+    <p class="ds-field-error" id="ex-email-error">Enter an email address in the correct format, like name@example.gov.in</p>
+    <input class="ds-input" id="ex-email" type="email" value="rkumar@" aria-invalid="true" aria-describedby="ex-email-error">
+  </div>
+  <div class="ds-field">
+    <label class="ds-label" for="ex-state">State <span class="ds-req" aria-hidden="true">*</span></label>
+    <select class="ds-select" id="ex-state" required><option value="">Select a State</option><option>Jharkhand</option><option>Odisha</option></select>
+  </div>
+  <div class="ds-field">
+    <label class="ds-label" for="ex-mobile">Mobile number</label>
+    <div class="ds-input-group">
+      <span class="ds-input-group__addon ds-input-group__addon--boxed">+91</span>
+      <input class="ds-input" id="ex-mobile" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel-national">
+    </div>
+  </div>
+  <div class="ds-field">
+    <label class="ds-label" for="ex-password">Password</label>
+    <div class="ds-input-group">
+      <input class="ds-input" id="ex-password" type="password" autocomplete="new-password">
+      <button class="ds-input-group__btn" type="button" aria-controls="ex-password" aria-label="Show password" aria-pressed="false" data-ds-password-toggle><span class="ds-icon ds-i-view" aria-hidden="true"></span></button>
+    </div>
+    <div class="ds-strength" data-ds-strength-for="ex-password" data-level="0"><span></span><span></span><span></span><span></span><output></output></div>
+  </div>
+  <div class="ds-field ds-span-all">
+    <label class="ds-label" for="ex-message">Message</label>
+    <textarea class="ds-textarea" id="ex-message" maxlength="300" data-ds-counter></textarea>
+  </div>
+  <div class="ds-field">
+    <label class="ds-label" for="ex-disabled">Application number</label>
+    <input class="ds-input" id="ex-disabled" value="GIA/2026/0431" readonly>
+  </div>
+</div>
+          </div>
+          <div class="doc-note">
+            <div class="doc-do"><h4>Do</h4><ul><li>Write errors that say how to fix the problem: "Enter a 10-digit mobile number".</li><li>Use the right <code>type</code>, <code>inputmode</code> and <code>autocomplete</code>.</li><li>Size short inputs to their content with <code>.ds-input--w4</code>, <code>--w10</code>, <code>--w20</code>.</li></ul></div>
+            <div class="doc-dont"><h4>Don't</h4><ul><li>Use placeholder text instead of a label.</li><li>Disable paste in password or email fields.</li></ul></div>
+            <div class="doc-a11y"><h4>Accessibility</h4><ul><li>Errors are linked with <code>aria-describedby</code> and marked <code>aria-invalid="true"</code>.</li><li>Inputs have a 3:1 border and a visible focus ring (WCAG 1.4.11, 2.4.7).</li></ul></div>
+          </div>
+
+          <h3>Choices</h3>
+          <div class="doc-example">
+<fieldset class="ds-fieldset">
+  <legend>Category <span class="ds-req" aria-hidden="true">*</span></legend>
+  <div class="ds-choices ds-choices--inline">
+    <label class="ds-radio"><input type="radio" name="ex-cat" value="st" checked> Scheduled Tribe</label>
+    <label class="ds-radio"><input type="radio" name="ex-cat" value="pvtg"> PVTG</label>
+    <label class="ds-radio"><input type="radio" name="ex-cat" value="other" disabled> Other (not eligible)</label>
+  </div>
+</fieldset>
+<div class="ds-choices ds-mt-6">
+  <label class="ds-check"><input type="checkbox" checked> Send me SMS updates about my application</label>
+  <label class="ds-switch"><input type="checkbox" role="switch" checked> Email alerts</label>
+</div>
+<div class="ds-grid ds-grid--3 ds-mt-6" style="--ds-grid-gap: .75rem">
+  <label class="ds-choice-card"><input type="radio" name="ex-plan" checked><span><strong>Education</strong><span>Schools, hostels, coaching</span></span></label>
+  <label class="ds-choice-card"><input type="radio" name="ex-plan"><span><strong>Health</strong><span>Mobile clinics, nutrition</span></span></label>
+  <label class="ds-choice-card"><input type="radio" name="ex-plan"><span><strong>Livelihood</strong><span>Skills and enterprise</span></span></label>
+</div>
+          </div>
+          <h3>File upload and captcha</h3>
+          <div class="doc-example">
+<div class="ds-form-grid">
+  <div class="ds-field">
+    <span class="ds-label" id="ex-file-label">Income certificate</span>
+    <label class="ds-file">
+      <input class="ds-sr-only" type="file" accept=".pdf,.jpg,.png" aria-labelledby="ex-file-label">
+      <span class="ds-icon ds-i-upload ds-icon--lg" aria-hidden="true"></span>
+      <span class="ds-file__title">Choose a file or drag it here</span>
+      <span class="ds-file__hint">PDF, JPG or PNG, up to 2 MB</span>
+    </label>
+  </div>
+  <div class="ds-field">
+    <label class="ds-label" for="ex-captcha">Security check <span class="ds-req" aria-hidden="true">*</span></label>
+    <div class="ds-captcha">
+      <span class="ds-captcha__image"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'%3E%3Crect width='120' height='40' fill='%23fff'/%3E%3Ctext x='14' y='28' font-size='22' font-family='serif' fill='%233d4043'%3ER5JVWA%3C/text%3E%3C/svg%3E" alt="Security code image; use the text question if you cannot read it"></span>
+      <button class="ds-btn ds-btn--neutral ds-btn--icon" type="button" aria-label="New security code"><span class="ds-icon ds-i-refresh" aria-hidden="true"></span></button>
+      <input class="ds-input" id="ex-captcha" autocomplete="off" placeholder="Type the code">
+    </div>
+    <button class="ds-captcha__switch" type="button">Cannot see the image? Answer a text question instead</button>
+  </div>
+</div>
+          </div>
+          <div class="doc-note">
+            <div class="doc-a11y"><h4>Accessibility</h4><ul><li>A captcha must have a non-visual alternative (WCAG 1.1.1, GIGW 3.0). Offer a text question, such as "What is seven plus four?", generated on the server.</li><li>State accepted formats and the size limit before upload; the selected file name is announced.</li></ul></div>
+          </div>
+
+          <h3>Validation and error summary</h3>
+          <p>Add <code>data-ds-validate novalidate</code> to a form. On submit, the script checks the browser's built-in rules, writes each error next to its field and shows a summary at the top with links to the fields. Errors clear as soon as a field is corrected. Always validate again on the server.</p>
+          <div class="doc-example">
+<form class="ds-form" action="#" data-ds-validate novalidate style="max-width: 32rem">
+  <div class="ds-field">
+    <label class="ds-label" for="ex-v-name">Name of the organisation <span class="ds-req" aria-hidden="true">*</span></label>
+    <input class="ds-input" id="ex-v-name" required>
+  </div>
+  <div class="ds-field">
+    <label class="ds-label" for="ex-v-pin">PIN code <span class="ds-req" aria-hidden="true">*</span></label>
+    <input class="ds-input ds-input--w10" id="ex-v-pin" inputmode="numeric" pattern="[1-9][0-9]{5}" required data-ds-error-format="Enter a 6-digit PIN code">
+  </div>
+  <div class="ds-form-actions"><button class="ds-btn" type="submit">Check and continue</button></div>
+</form>
+          </div>
+        </section>
+
+        <section class="doc-section" id="search">
+          <h2>Search and filters</h2>
+          <p>The search box takes an optional shortcut badge (<kbd>Ctrl K</kbd> focuses the box marked <code>data-ds-search-shortcut</code>) and a clear button. Above lists, a filter bar puts search on the left and sort, filter and page size on the right.</p>
+          <div class="doc-example">
+<form class="ds-filterbar" role="search" aria-label="Filter tenders">
+  <div class="ds-filterbar__search ds-search">
+    <label class="ds-sr-only" for="ex-q">Search tenders</label>
+    <div class="ds-search__box">
+      <span class="ds-icon ds-i-search ds-search__icon" aria-hidden="true"></span>
+      <input class="ds-search__input" id="ex-q" type="search" placeholder="Search tenders">
+      <button class="ds-search__clear" type="button" aria-label="Clear search" hidden><span class="ds-icon ds-i-close" aria-hidden="true"></span></button>
+    </div>
+  </div>
+  <div class="ds-filterbar__controls">
+    <div class="ds-input-group">
+      <span class="ds-input-group__addon"><span class="ds-icon ds-i-sort-by" aria-hidden="true"></span></span>
+      <label class="ds-sr-only" for="ex-sort">Sort by</label>
+      <select class="ds-select" id="ex-sort"><option>Sort by: Latest</option><option>Sort by: Closing date</option></select>
+    </div>
+    <div class="ds-input-group">
+      <span class="ds-input-group__addon"><span class="ds-icon ds-i-filter" aria-hidden="true"></span></span>
+      <label class="ds-sr-only" for="ex-status">Status</label>
+      <select class="ds-select" id="ex-status"><option>All statuses</option><option>Open</option><option>Closed</option></select>
+    </div>
+  </div>
+</form>
+<div class="ds-cluster">
+  <span class="ds-chip">Year: 2026<button type="button" aria-label="Remove filter Year: 2026"><span class="ds-icon ds-i-close" aria-hidden="true"></span></button></span>
+</div>
+          </div>
+          <h3>A–Z filter</h3>
+          <div class="doc-example">
+<ul class="ds-az" aria-label="Filter by first letter">
+  <li><button type="button" aria-pressed="true">All</button></li>
+  <li><button type="button" aria-pressed="false">A</button></li>
+  <li><button type="button" aria-pressed="false">B</button></li>
+  <li><button type="button" aria-pressed="false" disabled>C</button></li>
+  <li><button type="button" aria-pressed="false">D</button></li>
+  <li><button type="button" aria-pressed="false">E</button></li>
+</ul>
+          </div>
+        </section>
+
+        <section class="doc-section" id="cards">
+          <h2>Cards and tiles</h2>
+          <h3>Service tiles</h3>
+          <p>Entry points by need on home and landing pages. Tiles in a row share one height.</p>
+          <div class="doc-example doc-example--tint">
+<ul class="ds-grid ds-grid--3" style="--ds-grid-gap: 1rem">
+  <li><a class="ds-tile" href="#"><span class="ds-tile__icon"><span class="ds-icon ds-i-scholarship" aria-hidden="true"></span></span><span class="ds-tile__text"><span class="ds-tile__label">Scholarships</span><span class="ds-tile__desc">Pre and post matric, fellowships</span></span></a></li>
+  <li><a class="ds-tile" href="#"><span class="ds-tile__icon"><span class="ds-icon ds-i-group-2" aria-hidden="true"></span></span><span class="ds-tile__text"><span class="ds-tile__label">Grants &amp; NGOs</span><span class="ds-tile__desc">Apply and track grant-in-aid</span></span></a></li>
+  <li><a class="ds-tile" href="#"><span class="ds-tile__icon"><span class="ds-icon ds-i-security" aria-hidden="true"></span></span><span class="ds-tile__text"><span class="ds-tile__label">Forest Rights</span><span class="ds-tile__desc">Claims, status and data</span></span></a></li>
+</ul>
+          </div>
+          <h3>Content cards</h3>
+          <div class="doc-example doc-example--tint">
+<ul class="ds-grid ds-grid--3">
+  <li class="ds-card ds-card--interactive">
+    <div class="ds-card__media"><img src="../dist/img/banners/forest-1920.webp" alt="" width="640" height="360" loading="lazy"></div>
+    <div class="ds-card__body">
+      <p class="ds-card__eyebrow">Event</p>
+      <h3 class="ds-card__title"><a class="ds-stretched" href="#">Regional workshop on community forest resources</a></h3>
+      <p class="ds-card__text">Officials from 12 States shared practices for managing community forest resources.</p>
+      <p class="ds-card__meta"><span><span class="ds-icon ds-i-calendar" aria-hidden="true"></span>8 October 2026</span><span><span class="ds-icon ds-i-location" aria-hidden="true"></span>Bhubaneswar</span></p>
+    </div>
+  </li>
+  <li class="ds-card ds-card--raised">
+    <div class="ds-card__header">Young Professional <span class="ds-badge ds-badge--success">Open</span></div>
+    <div class="ds-card__body">
+      <p class="ds-card__text">Two posts on contract for one year, in the Monitoring and Evaluation Division.</p>
+      <p class="ds-card__meta"><span><span class="ds-icon ds-i-due-date" aria-hidden="true"></span>Last date: 15 November 2026</span></p>
+    </div>
+    <div class="ds-card__footer"><a class="ds-link-arrow" href="#">Details <span class="ds-icon ds-i-arrow-forward" aria-hidden="true"></span></a><a class="ds-btn ds-btn--soft ds-btn--sm" href="#"><span class="ds-icon ds-i-download" aria-hidden="true"></span>PDF, 310 KB</a></div>
+  </li>
+  <li><a class="ds-doc-card" href="#"><p class="ds-doc-card__type">Press Release</p><p class="ds-doc-card__title">Ministry reviews progress of Eklavya Model Residential Schools with States</p><p class="ds-doc-card__meta">PDF · 220 KB · 2 October 2026</p></a></li>
+</ul>
+          </div>
+          <div class="doc-note">
+            <div class="doc-a11y"><h4>Accessibility</h4><ul><li>When a whole card is clickable, put the link on the title and add <code>.ds-stretched</code>; screen readers then hear one short link name.</li><li>Give images an empty <code>alt</code> when they only decorate the card.</li></ul></div>
+          </div>
+
+          <h3>Action tiles, link cards and profiles</h3>
+          <div class="doc-example">
+<div class="ds-grid ds-grid--3" style="--ds-grid-gap: 1rem">
+  <a class="ds-action-tile" href="#"><span class="ds-icon ds-i-users ds-icon--md" aria-hidden="true"></span>Our Team</a>
+  <a class="ds-action-tile" href="#"><span class="ds-icon ds-i-site-map ds-icon--md" aria-hidden="true"></span>Our Organisations</a>
+  <a class="ds-action-tile" href="#"><span class="ds-icon ds-i-directory ds-icon--md" aria-hidden="true"></span>Our Divisions</a>
+</div>
+<div class="ds-grid ds-grid--2 ds-mt-6" style="--ds-grid-gap: .75rem">
+  <a class="ds-link-card" href="https://www.india.gov.in">National Portal of India<span class="ds-icon ds-i-open-in-new" aria-hidden="true"></span></a>
+  <a class="ds-link-card" href="https://scholarships.gov.in">National Scholarship Portal<span class="ds-icon ds-i-open-in-new" aria-hidden="true"></span></a>
+</div>
+<div class="ds-grid ds-grid--4 ds-mt-6">
+  <div class="ds-profile"><img class="ds-profile__photo" src="../dist/img/avatar-placeholder.svg" alt="" width="176" height="185"><p class="ds-profile__name">Name of the Minister</p><p class="ds-profile__role">Hon'ble Minister</p></div>
+</div>
+<div class="ds-person ds-mt-6">
+  <span class="ds-person__avatar" aria-hidden="true">AS</span>
+  <p class="ds-person__role">Joint Secretary</p>
+  <p class="ds-person__name">Anita Sharma</p>
+  <span class="ds-badge ds-badge--key">Scholarships Division</span>
+  <p class="ds-person__contact"><span><span class="ds-icon ds-i-call" aria-hidden="true"></span><a href="tel:+911123381499">011-2338 1499</a></span><span><span class="ds-icon ds-i-email" aria-hidden="true"></span>js-schol[at]tribal[dot]gov[dot]in</span></p>
+</div>
+          </div>
+          <h3>Key figures</h3>
+          <div class="doc-example doc-example--tint">
+<ul class="ds-grid ds-grid--3 ds-list-plain">
+  <li class="ds-stat"><span class="ds-stat__icon"><span class="ds-icon ds-i-scholarship" aria-hidden="true"></span></span><div><p class="ds-stat__label">Scholarships disbursed</p><p class="ds-stat__value">31.4 lakh</p><p class="ds-stat__note"><span class="ds-stat__delta--up">▲ 6%</span> on 2024–25</p></div></li>
+  <li class="ds-stat"><span class="ds-stat__icon"><span class="ds-icon ds-i-schemes" aria-hidden="true"></span></span><div><p class="ds-stat__label">EMRS functional</p><p class="ds-stat__value">479</p><p class="ds-stat__note">of 728 sanctioned</p></div></li>
+  <li class="ds-stat"><span class="ds-stat__icon"><span class="ds-icon ds-i-security" aria-hidden="true"></span></span><div><p class="ds-stat__label">Forest rights titles</p><p class="ds-stat__value">24.6 lakh</p><p class="ds-stat__note">Individual and community</p></div></li>
+</ul>
+          </div>
+        </section>
+
+        <section class="doc-section" id="lists">
+          <h2>Lists</h2>
+          <h3>Document rows</h3>
+          <p>For files. Always state the type, format and size, and the date (GIGW 3.0).</p>
+          <div class="doc-example">
+<ol class="ds-docrows">
+  <li><a class="ds-docrow" href="#">
+    <span class="ds-docrow__num">1</span>
+    <span class="ds-docrow__icon"><span class="ds-icon ds-i-pdf" aria-hidden="true"></span></span>
+    <span class="ds-docrow__text"><span class="ds-docrow__label">Annual Report 2025–26</span><span class="ds-docrow__meta">Report · PDF, 8.4 MB · <time datetime="2026-09-01">1 September 2026</time></span></span>
+    <span class="ds-docrow__action"><span class="ds-icon ds-i-download" aria-hidden="true"></span><span class="ds-sr-only">Download</span></span>
+  </a></li>
+  <li><a class="ds-docrow" href="#">
+    <span class="ds-docrow__num">2</span>
+    <span class="ds-docrow__icon"><span class="ds-icon ds-i-pdf" aria-hidden="true"></span></span>
+    <span class="ds-docrow__text"><span class="ds-docrow__label">Post Matric Scholarship: revised income ceiling</span><span class="ds-docrow__meta">Circular · PDF, 220 KB · <time datetime="2026-09-28">28 September 2026</time></span></span>
+    <span class="ds-docrow__action"><span class="ds-icon ds-i-download" aria-hidden="true"></span><span class="ds-sr-only">Download</span></span>
+  </a></li>
+</ol>
+          </div>
+          <h3>Link list and What's New</h3>
+          <div class="doc-example">
+<div class="ds-grid ds-grid--2">
+  <ul class="ds-linklist">
+    <li><a href="#">Eklavya Model Residential Schools<span class="ds-icon ds-i-chevron-right" aria-hidden="true"></span></a></li>
+    <li><a href="#">Post Matric Scholarship for ST Students<span class="ds-icon ds-i-chevron-right" aria-hidden="true"></span></a></li>
+    <li><a href="#">Venture Capital Fund for Scheduled Tribes<span class="ds-icon ds-i-chevron-right" aria-hidden="true"></span></a></li>
+  </ul>
+  <div class="ds-feed">
+    <ul>
+      <li><a href="#"><span>Janjatiya Gaurav Divas 2026<time datetime="2026-11-15">15 November 2026</time></span><span class="ds-icon ds-i-chevron-right" aria-hidden="true"></span></a></li>
+      <li><a href="#"><span>National tribal crafts festival<time datetime="2026-10-20">20 October 2026</time></span><span class="ds-icon ds-i-chevron-right" aria-hidden="true"></span></a></li>
+    </ul>
+  </div>
+</div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="tables">
+          <h2>Tables</h2>
+          <p>Text left-aligned, numbers right-aligned with <code>.ds-num</code>, column names centred (DBIM §4.1.1). Add <code>data-ds-sortable</code> and <code>.ds-sort</code> buttons for sorting in the browser, and <code>.ds-table--stack</code> with <code>data-label</code> on cells to turn rows into cards on phones.</p>
+          <div class="doc-example">
+<div class="ds-table-wrap">
+  <table class="ds-table ds-table--stack" data-ds-sortable>
+    <caption>Sanctions by State, 2026–27</caption>
+    <thead>
+      <tr>
+        <th scope="col"><button class="ds-sort" type="button">State</button></th>
+        <th scope="col"><button class="ds-sort" type="button">Applications</button></th>
+        <th scope="col"><button class="ds-sort" type="button">Sanctioned (₹)</button></th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">Odisha</th><td class="ds-num" data-label="Applications">212</td><td class="ds-num" data-label="Sanctioned (₹)">9,20,00,000</td><td data-label="Status"><span class="ds-badge ds-badge--success ds-badge--dot">Released</span></td></tr>
+      <tr><th scope="row">Jharkhand</th><td class="ds-num" data-label="Applications">187</td><td class="ds-num" data-label="Sanctioned (₹)">7,80,00,000</td><td data-label="Status"><span class="ds-badge ds-badge--warning ds-badge--dot">Partly released</span></td></tr>
+      <tr><th scope="row">Madhya Pradesh</th><td class="ds-num" data-label="Applications">164</td><td class="ds-num" data-label="Sanctioned (₹)">7,10,00,000</td><td data-label="Status"><span class="ds-badge ds-badge--info ds-badge--dot">With finance</span></td></tr>
+    </tbody>
+    <tfoot><tr><th scope="row">Total</th><td class="ds-num" data-label="Applications">563</td><td class="ds-num" data-label="Sanctioned (₹)">24,10,00,000</td><td></td></tr></tfoot>
+  </table>
+</div>
+          </div>
+          <h3>Key–value list</h3>
+          <div class="doc-example">
+<dl class="ds-dl">
+  <dt>Application number</dt><dd>GIA/2026/0431</dd>
+  <dt>Organisation</dt><dd>Vanvasi Shiksha Samiti, Jharkhand</dd>
+  <dt>Amount requested</dt><dd>₹8,40,000</dd>
+</dl>
+          </div>
+        </section>
+
+        <section class="doc-section" id="tabs">
+          <h2>Tabs</h2>
+          <p>For switching between views of the same content on one page. Arrow keys move between tabs. Use the segmented style on public pages and the line style inside applications.</p>
+          <div class="doc-example">
+<div class="ds-tabs" role="tablist" aria-label="Key offerings">
+  <button type="button" role="tab" id="ex-tab-1" aria-controls="ex-panel-1" aria-selected="true">Schemes</button>
+  <button type="button" role="tab" id="ex-tab-2" aria-controls="ex-panel-2" aria-selected="false">Vacancies</button>
+  <button type="button" role="tab" id="ex-tab-3" aria-controls="ex-panel-3" aria-selected="false">Tenders</button>
+</div>
+<div class="ds-tabpanel" id="ex-panel-1" role="tabpanel" aria-labelledby="ex-tab-1" tabindex="0">Schemes of the Ministry.</div>
+<div class="ds-tabpanel" id="ex-panel-2" role="tabpanel" aria-labelledby="ex-tab-2" tabindex="0" hidden>Current vacancies.</div>
+<div class="ds-tabpanel" id="ex-panel-3" role="tabpanel" aria-labelledby="ex-tab-3" tabindex="0" hidden>Open tenders.</div>
+
+<div class="ds-tabs ds-tabs--line ds-mt-8" role="tablist" aria-label="Application">
+  <button type="button" role="tab" id="ex-tab-4" aria-controls="ex-panel-4" aria-selected="true">Details</button>
+  <button type="button" role="tab" id="ex-tab-5" aria-controls="ex-panel-5" aria-selected="false">Documents<span class="ds-tab-count">4</span></button>
+  <button type="button" role="tab" id="ex-tab-6" aria-controls="ex-panel-6" aria-selected="false">History</button>
+</div>
+<div class="ds-tabpanel" id="ex-panel-4" role="tabpanel" aria-labelledby="ex-tab-4" tabindex="0">Application details.</div>
+<div class="ds-tabpanel" id="ex-panel-5" role="tabpanel" aria-labelledby="ex-tab-5" tabindex="0" hidden>Uploaded documents.</div>
+<div class="ds-tabpanel" id="ex-panel-6" role="tabpanel" aria-labelledby="ex-tab-6" tabindex="0" hidden>File movement.</div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="accordion">
+          <h2>Accordion</h2>
+          <p>Built on <code>&lt;details&gt;</code>, so it works without script and with every assistive technology. Use for FAQs and long optional content.</p>
+          <div class="doc-example">
+<div class="ds-accordion">
+  <details open>
+    <summary>Who can apply for the Post Matric Scholarship?</summary>
+    <div class="ds-accordion__body"><p>Scheduled Tribe students in Class 11 and above whose parents' income is up to ₹2.5 lakh a year.</p></div>
+  </details>
+  <details>
+    <summary>When is the last date?</summary>
+    <div class="ds-accordion__body"><p>The portal shows the dates for each State.</p></div>
+  </details>
+</div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="pagination">
+          <h2>Pagination</h2>
+          <div class="doc-example">
+<nav class="ds-pager" aria-label="Pagination">
+  <p class="ds-pager__status">Showing 11–20 of 134 documents</p>
+  <ul class="ds-pager__list">
+    <li><a class="ds-pager__step" href="#"><span class="ds-icon ds-i-chevron-left" aria-hidden="true"></span>Previous</a></li>
+    <li><a class="ds-pager__page" href="#">1</a></li>
+    <li><a class="ds-pager__page" href="#" aria-current="page">2</a></li>
+    <li><a class="ds-pager__page" href="#">3</a></li>
+    <li><span class="ds-pager__gap">…</span></li>
+    <li><a class="ds-pager__page" href="#">14</a></li>
+    <li><a class="ds-pager__step" href="#">Next<span class="ds-icon ds-i-chevron-right" aria-hidden="true"></span></a></li>
+  </ul>
+</nav>
+          </div>
+        </section>
+
+        <section class="doc-section" id="progress">
+          <h2>Stepper and timeline</h2>
+          <p>The stepper shows where the user is in a multi-step application. The timeline shows the history of a file or application.</p>
+          <div class="doc-example">
+<ol class="ds-steps" aria-label="Application progress">
+  <li class="is-done"><span class="ds-steps__marker" aria-hidden="true"></span><span class="ds-steps__label">Applicant<span class="ds-sr-only"> (completed)</span></span></li>
+  <li aria-current="step"><span class="ds-steps__marker" aria-hidden="true"></span><span class="ds-steps__label">Education<span class="ds-sr-only"> (current step)</span></span></li>
+  <li><span class="ds-steps__marker" aria-hidden="true"></span><span class="ds-steps__label">Bank details</span></li>
+  <li><span class="ds-steps__marker" aria-hidden="true"></span><span class="ds-steps__label">Review</span></li>
+</ol>
+<ol class="ds-timeline">
+  <li class="is-done"><p class="ds-timeline__title">Application submitted</p><p class="ds-timeline__meta">5 Oct 2026, 11:42</p></li>
+  <li aria-current="step"><p class="ds-timeline__title">Verification by the institute</p><p class="ds-timeline__meta">In progress</p></li>
+  <li><p class="ds-timeline__title">Payment</p><p class="ds-timeline__meta">Next</p></li>
+</ol>
+<div class="ds-stack ds-stack--sm ds-mt-6">
+  <label class="ds-label" for="ex-progress">Upload progress</label>
+  <progress class="ds-progress" id="ex-progress" max="100" value="64">64%</progress>
+</div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="badges">
+          <h2>Badges, tags and chips</h2>
+          <div class="doc-example">
+<div class="ds-cluster">
+  <span class="ds-badge ds-badge--success ds-badge--dot">Approved</span>
+  <span class="ds-badge ds-badge--warning ds-badge--dot">Pending</span>
+  <span class="ds-badge ds-badge--danger ds-badge--dot">Rejected</span>
+  <span class="ds-badge ds-badge--info">With finance</span>
+  <span class="ds-badge ds-badge--key">2026–27</span>
+  <span class="ds-badge ds-badge--solid">Featured</span>
+  <span class="ds-badge ds-badge--new">New</span>
+  <span class="ds-badge">Closed</span>
+  <span class="ds-tag">PDF</span>
+  <span class="ds-tag">XLSX</span>
+  <span class="ds-chip">Odisha<button type="button" aria-label="Remove filter Odisha"><span class="ds-icon ds-i-close" aria-hidden="true"></span></button></span>
+</div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="alerts">
+          <h2>Alerts, notices and toasts</h2>
+          <div class="doc-example">
+<div class="ds-stack">
+  <div class="ds-alert ds-alert--info" role="note">
+    <span class="ds-icon ds-i-info" aria-hidden="true"></span>
+    <div class="ds-alert__body"><p class="ds-alert__title">Website maintenance</p><p>Online services will be unavailable on Sunday from 2:00 to 4:00 a.m.</p></div>
+  </div>
+  <div class="ds-alert ds-alert--success ds-alert--filled" role="status">
+    <span class="ds-icon ds-i-check-circle" aria-hidden="true"></span>
+    <div class="ds-alert__body"><p class="ds-alert__title">Application submitted</p><p>Your application number is GIA/2026/0431. We have sent it to your email.</p></div>
+    <button class="ds-alert__close" type="button" aria-label="Dismiss"><span class="ds-icon ds-i-close" aria-hidden="true"></span></button>
+  </div>
+  <div class="ds-alert ds-alert--warning">
+    <span class="ds-icon ds-i-warning" aria-hidden="true"></span>
+    <div class="ds-alert__body"><p class="ds-alert__title">Your session will end in 2 minutes</p><p>Save your work to avoid losing changes.</p></div>
+  </div>
+  <div class="ds-alert ds-alert--error" role="alert">
+    <span class="ds-icon ds-i-error" aria-hidden="true"></span>
+    <div class="ds-alert__body"><p class="ds-alert__title">The file could not be uploaded</p><p>The file is larger than 5 MB. Choose a smaller file.</p></div>
+  </div>
+  <div class="ds-cluster">
+    <button class="ds-btn ds-btn--outline" type="button" onclick="MotaDS.toast('Draft saved', { type: 'success' })">Show a toast</button>
+    <button class="ds-btn ds-btn--outline" type="button" onclick="MotaDS.toast('Application deleted', { action: 'Undo' })">Toast with an action</button>
+  </div>
+</div>
+          </div>
+          <div class="doc-note">
+            <div class="doc-a11y"><h4>Accessibility</h4><ul><li>Use <code>role="alert"</code> only for errors that need attention now; <code>role="status"</code> for confirmations.</li><li>Toasts stay while the pointer or focus is on them, and are announced politely.</li><li>Never put the only copy of important information in a toast.</li></ul></div>
+          </div>
+
+        </section>
+
+        <section class="doc-section" id="dialogs">
+          <h2>Dialogs</h2>
+          <p>A native <code>&lt;dialog&gt;</code>: open it with <code>data-ds-open="id"</code> or <code>MotaDS.openDialog('id')</code>. Focus moves inside, Esc closes it, and focus returns to the button that opened it. Links to other websites show a dialog like this when the page has <code>&lt;body data-ds-external-notice&gt;</code>.</p>
+          <div class="doc-example">
+<button class="ds-btn ds-btn--danger" type="button" data-ds-open="ex-dialog">Withdraw application</button>
+<dialog class="ds-dialog ds-dialog--sm" id="ex-dialog" aria-labelledby="ex-dialog-title">
+  <div class="ds-dialog__header">
+    <h2 id="ex-dialog-title">Withdraw this application?</h2>
+    <button class="ds-dialog__close" type="button" data-ds-close aria-label="Close"><span class="ds-icon ds-i-close" aria-hidden="true"></span></button>
+  </div>
+  <div class="ds-dialog__body"><p>You cannot undo this. You can apply again in the next cycle.</p></div>
+  <div class="ds-dialog__footer">
+    <button class="ds-btn ds-btn--outline" type="button" data-ds-close>Keep application</button>
+    <button class="ds-btn ds-btn--danger" type="button" data-ds-close="confirm">Withdraw</button>
+  </div>
+</dialog>
+          </div>
+        </section>
+
+        <section class="doc-section" id="states">
+          <h2>Empty, loading and error states</h2>
+          <div class="doc-example">
+<div class="ds-grid ds-grid--2">
+  <div class="ds-state">
+    <span class="ds-icon ds-i-search" aria-hidden="true"></span>
+    <p class="ds-state__title">No records found</p>
+    <p>Try clearing the filters or changing your search.</p>
+    <button class="ds-btn ds-btn--outline ds-btn--sm ds-btn--caps" type="button">Clear filters</button>
+  </div>
+  <div class="ds-stack">
+    <div class="ds-loading" role="status"><span class="ds-spinner ds-spinner--lg" aria-hidden="true"></span>Loading documents…</div>
+    <span class="ds-skeleton" style="--ds-skeleton-h: 1.25rem; width: 70%"></span>
+    <span class="ds-skeleton"></span>
+    <span class="ds-skeleton" style="width: 85%"></span>
+  </div>
+</div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="home-bands">
+          <h2>Home page bands</h2>
+          <p>The banner carousel, announcements ticker, quote band, personas and partner logos of DBIM Template 1. Moving content pauses on hover and focus, has a pause button, and stays still for users who prefer reduced motion (WCAG 2.2.2).</p>
+          <div class="doc-example doc-example--flush">
+<section class="ds-carousel" aria-roledescription="carousel" aria-label="Highlights" data-ds-carousel data-interval="6000">
+  <div class="ds-carousel__viewport">
+    <ul class="ds-carousel__track">
+      <li class="ds-carousel__slide" aria-roledescription="slide" aria-label="1 of 2">
+        <img src="../dist/img/banners/forest-1920.webp" alt="A forest village at dawn" width="1920" height="576">
+        <div class="ds-carousel__caption"><h2>Forest Rights Act</h2><p>Know your rights to forest land and community resources.</p></div>
+      </li>
+      <li class="ds-carousel__slide" aria-roledescription="slide" aria-label="2 of 2">
+        <img src="../dist/img/banners/documents-1920.webp" alt="Files and reports on a desk" width="1920" height="576">
+      </li>
+    </ul>
+  </div>
+  <button class="ds-carousel__nav ds-carousel__nav--prev" type="button" aria-label="Previous slide"><span class="ds-icon ds-i-chevron-left" aria-hidden="true"></span></button>
+  <button class="ds-carousel__nav ds-carousel__nav--next" type="button" aria-label="Next slide"><span class="ds-icon ds-i-chevron-right" aria-hidden="true"></span></button>
+  <div class="ds-carousel__controls">
+    <div class="ds-carousel__dots"></div>
+    <button class="ds-carousel__pause" type="button" aria-label="Pause"><span class="ds-icon ds-i-pause" aria-hidden="true"></span></button>
+  </div>
+</section>
+<section class="ds-ticker" aria-label="Announcements">
+  <div class="ds-container ds-ticker__inner">
+    <h2 class="ds-ticker__label"><span class="ds-icon ds-i-announcements" aria-hidden="true"></span><span class="ds-ticker__label-text">Announcements</span></h2>
+    <div class="ds-ticker__viewport">
+      <ul class="ds-ticker__track">
+        <li><a href="#">Applications open for Post Matric Scholarship 2026–27</a></li>
+        <li><a href="#">Results of EMRS staff selection examination published</a></li>
+      </ul>
+    </div>
+    <button class="ds-ticker__toggle" type="button" aria-label="Pause" aria-pressed="false" data-ds-ticker-toggle><span class="ds-icon ds-i-pause" aria-hidden="true"></span></button>
+  </div>
+</section>
+<section class="ds-section ds-section--linen">
+  <div class="ds-container ds-quote">
+    <img class="ds-quote__portrait" src="../dist/img/avatar-placeholder.svg" alt="" width="208" height="208">
+    <div>
+      <blockquote class="ds-quote__text">A quotation of the Hon'ble Prime Minister on tribal welfare, taken verbatim from an official source.</blockquote>
+      <p class="ds-quote__source">Event name · Date</p>
+    </div>
+  </div>
+</section>
+          </div>
+        </section>
+
+        <section class="doc-section" id="footer">
+          <h2>Footer</h2>
+          <p>Village artwork with the tagline, the key-colour band with identity, policy links and social links, and the meta bar with copyright, the last updated date and the NIC credit (GIGW 3.0 requires the last two).</p>
+          <div class="doc-example doc-example--flush">
+<footer class="ds-footer">
+  <div class="ds-footer__band">
+    <span class="ds-footer__art" aria-hidden="true"></span>
+    <p class="ds-footer__tagline">People<span class="ds-footer__tagline-sep" aria-hidden="true">|</span> Land<span class="ds-footer__tagline-sep" aria-hidden="true">|</span> Culture<span class="ds-footer__tagline-sep" aria-hidden="true">|</span> Future</p>
+  </div>
+  <div class="ds-footer__main ds-on-dark">
+    <div class="ds-container ds-footer__main-inner">
+      <a class="ds-footer__identity" href="#">
+        <img src="../dist/img/emblem.svg" alt="State Emblem of India" width="52" height="84">
+        <span class="ds-footer__names">
+          <span class="ds-footer__name-hi" lang="hi">जनजातीय कार्य मंत्रालय</span>
+          <span class="ds-footer__name">Ministry of Tribal Affairs</span>
+          <span class="ds-footer__gov">Government of India</span>
+        </span>
+      </a>
+      <nav class="ds-footer__nav" aria-label="Footer">
+        <ul class="ds-footer__links">
+          <li><a href="#">Sitemap</a></li>
+          <li><a href="#">Help</a></li>
+          <li><a href="#">Feedback</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+        <ul class="ds-footer__links ds-footer__links--minor">
+          <li><a href="#">Website Policies</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </nav>
+      <div class="ds-footer__right">
+        <ul class="ds-footer__social" aria-label="Social media">
+          <li><a href="https://x.com" aria-label="X (Twitter)"><span class="ds-icon ds-i-twitter" aria-hidden="true"></span></a></li>
+          <li><a href="https://www.youtube.com" aria-label="YouTube"><span class="ds-icon ds-i-youtube" aria-hidden="true"></span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="ds-footer__meta">
+    <div class="ds-container ds-footer__meta-inner">
+      <p>© 2026 Ministry of Tribal Affairs, Government of India.<span class="ds-footer__pipe" aria-hidden="true">|</span>Last updated: <time datetime="2026-10-07">7 October 2026</time></p>
+      <p class="ds-footer__mission">Designed, developed and hosted by National Informatics Centre <span class="ds-footer__dashes" aria-hidden="true"><span></span><span></span></span></p>
+    </div>
+  </div>
+</footer>
+          </div>
+          <p>For another Ministry or programme, change the tagline and names; set <code>--ds-footer-art</code> to use different artwork.</p>
+        </section>
+
+        <section class="doc-section" id="accessibility-panel">
+          <h2>Accessibility panel</h2>
+          <p>Text size and display options from the header (GIGW 3.0). Each button carries <code>data-ds-a11y</code>; the script applies the option to the whole page and remembers it. Options: <code>font-down</code>, <code>font-reset</code>, <code>font-up</code>, <code>contrast</code>, <code>invert</code>, <code>saturation</code>, <code>links</code>, <code>hide-images</code>, <code>cursor</code>, <code>spacing</code>, <code>reset</code>.</p>
+          <div class="doc-example" style="min-height: 25rem">
+<div class="ds-popover-anchor">
+  <button class="ds-icon-btn" type="button" aria-expanded="false" aria-controls="ex-a11y" data-ds-popover title="Accessibility options">
+    <span class="ds-icon ds-i-accessibility" aria-hidden="true"></span><span class="ds-sr-only">Accessibility options</span>
+  </button>
+  <div class="ds-popover ds-popover--start ds-a11y-panel" id="ex-a11y" role="group" aria-labelledby="ex-a11y-title" hidden>
+    <h2 class="ds-popover__title" id="ex-a11y-title">Accessibility options</h2>
+    <p class="ds-a11y-panel__label">Text size</p>
+    <div class="ds-a11y-panel__group">
+      <button class="ds-a11y-tile" type="button" data-ds-a11y="font-down"><span class="ds-icon ds-i-text-size-decrease" aria-hidden="true"></span>Smaller</button>
+      <button class="ds-a11y-tile" type="button" data-ds-a11y="font-reset"><span class="ds-icon ds-i-translate" aria-hidden="true"></span>Normal</button>
+      <button class="ds-a11y-tile" type="button" data-ds-a11y="font-up"><span class="ds-icon ds-i-text-size-increase" aria-hidden="true"></span>Larger</button>
+    </div>
+    <p class="ds-a11y-panel__label">Display</p>
+    <div class="ds-a11y-panel__group">
+      <button class="ds-a11y-tile" type="button" data-ds-a11y="contrast" aria-pressed="false"><span class="ds-icon ds-i-dark-contrast" aria-hidden="true"></span>High contrast</button>
+      <button class="ds-a11y-tile" type="button" data-ds-a11y="links" aria-pressed="false"><span class="ds-icon ds-i-highlight-link" aria-hidden="true"></span>Highlight links</button>
+      <button class="ds-a11y-tile" type="button" data-ds-a11y="hide-images" aria-pressed="false"><span class="ds-icon ds-i-hide-image" aria-hidden="true"></span>Hide images</button>
+    </div>
+    <button class="ds-btn ds-btn--outline ds-btn--sm ds-btn--block" type="button" data-ds-a11y="reset">Reset all</button>
+  </div>
+</div>
+          </div>
+        </section>
+
+        <section class="doc-section" id="app-shell">
+          <h2>Application shell</h2>
+          <p>For dashboards, back offices and admin panels: a sidebar that collapses to an icon rail (and becomes a drawer on phones), a top bar with search, notifications and the user menu, and a content area of <code>.ds-panel</code>s arranged in 12-column <code>.ds-row</code>s. A button with <code>data-ds-app-toggle</code> collapses the sidebar; the choice is remembered.</p>
+          <p>See the complete markup in the <a href="../templates/dashboard.html">dashboard template</a>, and the sign-in screen in the <a href="../templates/login.html">sign-in template</a>.</p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="doc-footer">
+    <div class="ds-container">
+      <p>MoTA Design System v1.0.0 · Ministry of Tribal Affairs, Government of India</p>
+      <p>Built on DBIM v3.0 · GIGW 3.0 · WCAG 2.1 AA</p>
+    </div>
+  </footer>
+  <script src="docs.js"></script>
+  <script src="../dist/js/mota-ds.js"></script>
+</body>
+</html>

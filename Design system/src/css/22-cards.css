@@ -1,0 +1,560 @@
+/* ==========================================================================
+   Cards and tiles
+   --------------------------------------------------------------------------
+   .ds-card          general content card (news, schemes, events)
+   .ds-tile          service tile: icon + label ("Browse by Need")
+   .ds-action-tile   outlined icon-over-label link (About: Our Team …)
+   .ds-doc-card      document notice: type heading + title (Recent Documents)
+   .ds-link-card     link to another portal (Related Links, Contact)
+   .ds-profile       person card (Minister, officer)
+   .ds-stat          key figure (dashboards, reports)
+   .ds-linklist      list of links with chevrons and a scroll rail
+   .ds-feed          dated list on the key colour (What's New)
+   When the whole card is a link, put the <a> on the title and stretch it
+   with .ds-stretched, so screen readers announce one short link name.
+   ========================================================================== */
+
+/* ---- Card ------------------------------------------------------------------- */
+.ds-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+}
+
+.ds-card--raised {
+  border-color: rgb(0 0 0 / 6%);
+  box-shadow: var(--ds-shadow-card);
+}
+
+.ds-card--interactive {
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.ds-card--interactive:hover,
+.ds-card--interactive:focus-within {
+  border-color: var(--ds-key-4);
+  box-shadow: var(--ds-shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.ds-card__media {
+  aspect-ratio: var(--ds-media-ratio, 16 / 9);
+  overflow: hidden;
+  background: var(--ds-key-5);
+}
+
+.ds-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ds-card__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-5);
+}
+
+.ds-card__eyebrow {
+  margin: 0;
+  color: var(--ds-key);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ds-card__title {
+  margin: 0;
+  color: var(--ds-ink);
+  font-size: var(--ds-text-h4);
+  font-weight: var(--ds-weight-semibold);
+  line-height: 1.35;
+}
+
+.ds-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ds-card__title a:hover {
+  color: var(--ds-key);
+  text-decoration: underline;
+}
+
+.ds-card__text {
+  margin: 0;
+  color: var(--ds-ink-2);
+  font-size: var(--ds-text-sm);
+}
+
+.ds-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-1) var(--ds-space-4);
+  margin: 0;
+  color: var(--ds-muted);
+  font-size: var(--ds-text-sm);
+  --ds-icon-size: 1rem;
+}
+
+.ds-card__meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.ds-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-3) var(--ds-space-5);
+  border-top: 1px solid var(--ds-line);
+}
+
+/* Header strip in the key colour (vacancy, scheme cards) */
+.ds-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  min-height: 3rem;
+  padding: var(--ds-space-2) var(--ds-space-5);
+  background: var(--ds-key);
+  color: var(--ds-white);
+  font-weight: var(--ds-weight-semibold);
+}
+
+/* Makes the title link cover the whole card */
+.ds-stretched::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Media overlay for videos */
+.ds-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 65%);
+  color: var(--ds-white);
+  transform: translate(-50%, -50%);
+  --ds-icon-size: 1.75rem;
+}
+
+/* ---- Service tile ------------------------------------------------------------- */
+.ds-tile {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  height: 100%;
+  padding: var(--ds-space-4) 1.125rem;
+  border: 1px solid rgb(0 0 0 / 6%);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+  text-decoration: none;
+  box-shadow: var(--ds-shadow-card);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.ds-tile:hover,
+.ds-tile:focus-visible {
+  border-color: var(--ds-key-4);
+  box-shadow: var(--ds-shadow-card-hover);
+  color: var(--ds-ink);
+  transform: translateY(-2px);
+}
+
+.ds-tile:hover .ds-tile__label {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ds-tile__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 3rem;
+  aspect-ratio: 1;
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-key-4);
+  color: var(--ds-key);
+  --ds-icon-size: 1.75rem;
+}
+
+.ds-tile__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.ds-tile__label {
+  font-size: 1.125rem;
+  font-weight: var(--ds-weight-medium);
+  line-height: 1.2;
+}
+
+.ds-tile__desc {
+  color: var(--ds-muted);
+  font-size: var(--ds-text-sm);
+  line-height: 1.4;
+}
+
+/* ---- Action tile: outlined, icon above label ------------------------------------- */
+.ds-action-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+  min-height: 5.25rem;
+  padding: var(--ds-space-3);
+  border: 1px solid var(--ds-key);
+  border-radius: var(--ds-radius-xs);
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+  font-size: 1.125rem;
+  font-weight: var(--ds-weight-semibold);
+  text-align: center;
+  text-decoration: none;
+  transition: background-color var(--ds-duration) ease;
+}
+
+.ds-action-tile .ds-icon {
+  color: var(--ds-key);
+}
+
+.ds-action-tile:hover {
+  background: var(--ds-key-5);
+  color: var(--ds-ink);
+}
+
+/* ---- Document card -------------------------------------------------------------------- */
+.ds-doc-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  height: 100%;
+  padding: var(--ds-space-4) var(--ds-space-5);
+  border: 1px solid var(--ds-grey-1);
+  border-radius: var(--ds-radius-xs);
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+  text-decoration: none;
+  transition: border-color var(--ds-duration) ease, box-shadow var(--ds-duration) ease;
+}
+
+.ds-doc-card:hover {
+  border-color: var(--ds-key);
+  box-shadow: var(--ds-shadow-card);
+  color: var(--ds-ink);
+}
+
+.ds-doc-card__type {
+  margin: 0;
+  color: var(--ds-key);
+  font-size: var(--ds-text-md);
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-doc-card__title {
+  margin: 0;
+  font-size: var(--ds-text-sm);
+  line-height: 1.5;
+}
+
+.ds-doc-card__meta {
+  margin-top: auto;
+  color: var(--ds-muted);
+  font-size: var(--ds-text-xs);
+}
+
+/* ---- Link card (another portal) ----------------------------------------------------------- */
+.ds-link-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  min-height: 2.875rem;
+  padding: var(--ds-space-2) var(--ds-space-4);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-key-4);
+  color: var(--ds-key);
+  font-weight: var(--ds-weight-semibold);
+  text-decoration: none;
+  transition: background-color var(--ds-duration) ease, color var(--ds-duration) ease;
+  --ds-icon-size: 1.25rem;
+}
+
+.ds-link-card:hover {
+  background: var(--ds-key);
+  color: var(--ds-white);
+}
+
+/* ---- Profile (person) ---------------------------------------------------------------------- */
+.ds-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-1);
+  text-align: center;
+}
+
+.ds-profile__photo {
+  width: 100%;
+  max-width: 11rem;
+  aspect-ratio: 1 / 1.05;
+  margin-bottom: var(--ds-space-2);
+  border-bottom: 4px solid var(--ds-key);
+  background: var(--ds-key-5);
+  object-fit: cover;
+  object-position: top;
+}
+
+.ds-profile__name {
+  margin: 0;
+  font-size: var(--ds-text-md);
+  font-weight: var(--ds-weight-bold);
+  text-align: center;
+}
+
+.ds-profile__role {
+  margin: 0;
+  color: var(--ds-ink-2);
+  font-size: var(--ds-text-xs);
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Directory entry (officers, contacts) */
+.ds-person {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--ds-space-1) var(--ds-space-4);
+  padding: var(--ds-space-5) var(--ds-space-4);
+  border-bottom: 1px solid var(--ds-key-4);
+}
+
+.ds-person__avatar {
+  grid-row: span 4;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--ds-key-5);
+  color: var(--ds-key);
+  font-weight: var(--ds-weight-bold);
+}
+
+.ds-person__role {
+  margin: 0;
+  color: var(--ds-key);
+  font-size: var(--ds-text-xs);
+  font-weight: var(--ds-weight-bold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.ds-person__name {
+  margin: 0;
+  font-size: var(--ds-text-md);
+  font-weight: var(--ds-weight-semibold);
+}
+
+.ds-person__contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-1) var(--ds-space-5);
+  margin: var(--ds-space-1) 0 0;
+  font-size: var(--ds-text-sm);
+  --ds-icon-size: 1rem;
+}
+
+.ds-person__contact > * {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.ds-person__contact .ds-icon {
+  color: var(--ds-key);
+}
+
+.ds-person__contact a {
+  color: var(--ds-ink);
+}
+
+/* ---- Stat (key figure) ------------------------------------------------------------------------ */
+.ds-stat {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-4);
+  padding: var(--ds-space-5);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-surface);
+}
+
+.ds-stat__icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-tint);
+  color: var(--ds-key);
+  --ds-icon-size: 1.375rem;
+}
+
+.ds-stat__label {
+  margin: 0;
+  color: var(--ds-muted);
+  font-size: var(--ds-text-sm);
+  font-weight: var(--ds-weight-medium);
+}
+
+.ds-stat__value {
+  margin: 0.125rem 0 0;
+  color: var(--ds-ink);
+  font-size: 1.75rem;
+  font-weight: var(--ds-weight-bold);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.ds-stat__note {
+  margin: var(--ds-space-1) 0 0;
+  color: var(--ds-muted);
+  font-size: var(--ds-text-xs);
+}
+
+.ds-stat__delta--up { color: var(--ds-success-fg); font-weight: var(--ds-weight-semibold); }
+.ds-stat__delta--down { color: var(--ds-danger-fg); font-weight: var(--ds-weight-semibold); }
+
+/* ---- Link list with chevrons and a scroll rail (Key Offerings) ------------------------------- */
+.ds-linklist {
+  max-height: var(--ds-linklist-height, 16.25rem);
+  margin: 0;
+  padding: 0 1rem;
+  overflow-y: auto;
+  border-right: 4px solid var(--ds-key-2);
+  background: var(--ds-surface);
+  list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ds-key-2) transparent;
+}
+
+.ds-linklist li + li {
+  border-top: 1px solid var(--ds-key-4);
+}
+
+.ds-linklist a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-4);
+  min-height: 3.5rem;
+  padding: var(--ds-space-3) var(--ds-space-5);
+  color: var(--ds-ink);
+  font-size: var(--ds-text-sm);
+  text-decoration: none;
+  --ds-icon-size: 1rem;
+}
+
+.ds-linklist a .ds-icon {
+  color: var(--ds-key);
+}
+
+.ds-linklist a:hover,
+.ds-linklist a:focus-visible {
+  background: var(--ds-key-5);
+  color: var(--ds-key);
+}
+
+@media (max-width: 767.98px) {
+  .ds-linklist a { padding-inline: var(--ds-space-2); }
+}
+
+/* ---- Feed on the key colour (What's New) ------------------------------------------------------- */
+.ds-feed {
+  padding: var(--ds-space-3) var(--ds-space-6);
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-key);
+  color: var(--ds-white);
+}
+
+.ds-feed ul {
+  max-height: var(--ds-feed-height, 20rem);
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ds-key-3) transparent;
+}
+
+.ds-feed li + li {
+  border-top: 1px solid rgb(255 255 255 / 70%);
+}
+
+.ds-feed a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-4);
+  padding: var(--ds-space-4) 0;
+  color: var(--ds-white);
+  font-size: var(--ds-text-sm);
+  text-decoration: none;
+  --ds-icon-size: 1rem;
+}
+
+.ds-feed a:hover {
+  color: var(--ds-white);
+  text-decoration: underline;
+}
+
+.ds-feed a:focus-visible {
+  outline-color: var(--ds-white);
+}
+
+.ds-feed time,
+.ds-feed small {
+  display: block;
+  margin-top: var(--ds-space-1);
+  color: var(--ds-key-4);
+  font-size: var(--ds-text-xs);
+  letter-spacing: 0.04em;
+}
+
+/* Footer row under a list: "View more" aligned right */
+.ds-more {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--ds-space-3);
+}
